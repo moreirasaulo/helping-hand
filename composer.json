@@ -1,5 +1,5 @@
 {
-    "name": "user/day04slimfirst",
+    "name": "user/helpinghand",
     "require": {
         "slim/slim": "3.12.3",
         "sergeytsalkov/meekrodb": "^2.3",
