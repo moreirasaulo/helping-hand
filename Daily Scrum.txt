@@ -23,4 +23,4 @@ DAILY SCRUM
 - setup Trello and create user stories
 - create login page route
 3.Need assistance/figure things out:
-- clarify how to create wizard
+- clarify how to create wizard on registration page
