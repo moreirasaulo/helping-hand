@@ -7,6 +7,9 @@
 node_modules/
 dist/
 
+tmplcache/
+vendor/
+
 # Compiled Java class files
 *.class
 
@@ -22,6 +25,7 @@ dist/
 # Maven
 target/
 dist/
+
 
 # JetBrains IDE
 .idea/
