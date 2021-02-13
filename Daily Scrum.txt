@@ -1,0 +1,26 @@
+DAILY SCRUM
+
+2021/02/12 Ksenia
+1. Done/ not done since last scrum:
+- created project plan
+- created examples of website pages
+- planned database tables
+2.To do until next scrum:
+- finalize website layout pages
+- reserch technologies to be used
+- start setting up database
+3.Need assistance/figure things out:
+- find out where to store payment information
+
+2021/02/12 Saulo
+1. Done/ not done since last scrum:
+- created project plan
+- wrote program description
+- created database mockup
+- planned database tables
+2.To do until next scrum:
+- finalize and perfect database tables and data types
+- setup Trello and create user stories
+- create login page route
+3.Need assistance/figure things out:
+- clarify how to create wizard
