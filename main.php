@@ -1,5 +1,5 @@
 <?php
-require_once '_setup.php';
+require_once 'init.php';
 $app->get('/internalerror', function ($request, $response, $args) {
     return $this->view->render($response, 'error_internal.html.twig');
 });
@@ -7,10 +7,9 @@ $app->get('/internalerror', function ($request, $response, $args) {
 
 
 // Define app routes
-// index
+// index ( home page)
 $app->get('/', function ($request, $response, $args) {
     return $this->view->render($response, 'index.html.twig');
-    //return $response->write("this is index");
 });
 
 $app->get('/session', function ($request, $response, $args) {
