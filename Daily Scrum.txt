@@ -24,3 +24,24 @@ DAILY SCRUM
 - create login page route
 3.Need assistance/figure things out:
 - clarify how to create wizard on registration page
+
+
+2021/02/12 Ksenia
+1. Done/ not done since last scrum:
+- finalized website layout pages
+- reserched technologies to be used
+- started setting up database
+2.To do until next scrum:
+- create database
+3.Need assistance/figure things out:
+- find out where to store payment information
+
+2021/02/12 Saulo
+1. Done/ not done since last scrum:
+- finalized and perfected database tables and data types
+- setup Trello and created user stories
+- created login page route
+2.To do until next scrum:
+- start working on registration page
+3.Need assistance/figure things out:
+- clarify how to create wizard on registration page
