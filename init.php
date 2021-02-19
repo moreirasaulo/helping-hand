@@ -19,22 +19,22 @@ $log->pushProcessor(function ($record) {
     return $record;
 });
 
-/* SAULO */ //FIX ME
+
 if (strpos($_SERVER['HTTP_HOST'], "ipd23.com") !== false) {
     DB::$dbName = 'cp4976_helpinghand';
     DB::$user = 'cp4976_helpinghand';
-    DB::$password = 'awUgtu7uebgq';
+    DB::$password = 'mHMnToqkLNc8c5LI';
 }
 else {
     DB::$dbName = 'helpinghand';
     DB::$user = 'helpinghand';
-    DB::$password = 'awUgtu7uebgq';   
+    DB::$password = 'mHMnToqkLNc8c5LI';   
     DB::$host = 'localhost';
     DB::$port = 3333;
 }
 
-DB::$error_handler = 'db_error_handler'; // runs on mysql query errors
-DB::$nonsql_error_handler = 'db_error_handler'; // runs on library errors (bad syntax, etc)
+DB::$error_handler = 'db_error_handler'; 
+DB::$nonsql_error_handler = 'db_error_handler';
 
 
 function db_error_handler($params) {
@@ -48,10 +48,10 @@ function db_error_handler($params) {
     die;
 }
 
-// getting access to twig rendering directly, without PHP Slim
+/* getting access to twig rendering directly, without PHP Slim
 http_response_code(500); // internal server error
 $twig = $container['view']->getEnvironment();
-die($twig->render('error_internal.html.twig'));
+die($twig->render('error_internal.html.twig')); */
 
 
 // Create and configure Slim app

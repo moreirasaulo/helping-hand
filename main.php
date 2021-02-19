@@ -7,7 +7,7 @@ $app->get('/internalerror', function ($request, $response, $args) {
 
 
 // Define app routes
-// index ( home page)
+// index (home page)
 $app->get('/', function ($request, $response, $args) {
     return $this->view->render($response, 'index.html.twig');
 });

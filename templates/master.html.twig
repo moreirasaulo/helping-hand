@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!--Custom CSS-->
-    <link rel="stylesheet" href="#">
+    <link rel="stylesheet" href="/styles.css">
       <!-- Favicon-->
       <link rel="icon" type="image/png" href="images/favicon.png">
     <!--Font-->
@@ -20,58 +20,19 @@
      {% endblock %}
   </head>
   <body>
-    <header>
-        <!--Navigation-->
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <a class="navbar-brand" href="index.html">
-                <img src="images/logo.png" alt="dog icon">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-            <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <!--ml auto is to align list(menu) to left, mr would be to right-->
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#aboutUs" class="nav-link">About us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="training.html" class="nav-link">Our caregivers</a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="assessment.html" class="nav-link">Find caregiver near you</a>
-                  </li>
-                    <li class="nav-item">
-                        <a href="trainers.html" class="nav-link">Account</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#contact-info" class="nav-link">Contact</a>
-                    </li>
-                    <li class="nav-item">  
-                      <a href="index-fr.html" class="nav-link language"><img src="images/french_small.png" alt=""></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <!--end of navigation-->
-    </header>
+  {% include ('navbar.html.twig') %}
+    {% include ('carousel.html.twig') %}
+     <br>
+     <br>
   
-    <main>
-        <!--main content area starts-->
-        <div id="centeredContainer">
+    <div class='container'>
+
+
             {% block content %}{% endblock %}
-        </div>  
-      <!--end of showcase-->
-
-    <!--main content area ends-->
-      <div class="container">	 
-
     
-</main>
+    </div>
+
 
 
 <footer class="footer mt-auto py-3" id="footer">

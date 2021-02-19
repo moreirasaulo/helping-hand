@@ -2,7 +2,7 @@
 
 {% block title %}Registration page{% endblock %}
 
-{% block head %}
+{#{% block head %}
     <link rel="stylesheet" href="./css/loginregister.css" />
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -25,20 +25,11 @@
             });
         });
     </script>
-{% endblock %}
+{% endblock %} #}
 
 {% block content %} 
-<div class="container contact_container">
-    <div class="row">
-        <div class="col">
-            <div class="breadcrumbs d<h5>-flex flex<h5>-row align<h5>-items<h5>-center">
-                <ul>
-                    <a href="/">Home</a>
-                    <li class="active"><a href="/register"><i class="fa fa-angle-right" aria-hidden="true"></i>register</a>
-                </ul>
-            </div>
-        </div>
-    </div>
+<br>
+<br>
     {% if errorList %}
         <ul class="errorMessage">
         {% for error in errorList %}
@@ -49,39 +40,41 @@
     <div class="wrap">
         <form method="POST">
             <h2>User Registration</h2> 
-            <h4>Are you a caregiver or senior? </h4>
-            Caregiver<input type="radio" name="ans" value="Caregiver" /><br />
-            Senior<input type="radio" name="ans" value="Senior"  /><br />
+            <br>
+            <h5>Are you a caregiver or senior? </h5>
+            Caregiver   <input type="radio" name="ans" value="Caregiver" />
+            Senior   <input type="radio" name="ans" value="Senior"  /> <br>
 
-            $answer = $_POST['ans']; 
-            {% if $_POST['ans'] %}
+            
+         {#   {% if $_POST['ans'] == "Caregiver" %}
             <h4>What services do you offer?</h4>
             {% else %}
             <h4>What services do you need?</h4>
-            {% endif %}
+            {% endif %} #}
+            <br>
+            <h5>What services do you offer/require?</h5>
 
+            Grocery shopping   <input type="checkbox" id="groceries" name="shopping" value="Grocery shopping">
+            Companionship   <input type="checkbox" id="companionship" name="companionship" value="Companionship">
+            Cooking   <input type="checkbox" id="coocking" name="coocking" value="Cooking"><br><br>
 
-            <input type="checkbox" id="groceries" name="shopping" value="Grocery shopping">
-            <input type="checkbox" id="companionship" name="companionship" value="Companionship">
-            <input type="checkbox" id="coocking" name="coocking" value="Coocking">
+            <h5>Location </h5>
+            Your address:
+            <input type="text" name="address" value="{{ v.address }}"></input>
+            Postal code:
+            <input type="text" name="postal"  value="{{ v.postal }}"></input><br><br>
 
-            <h4>Location </h4>
-            <label >Your address:</label>
-            <input type="text" name="address" class="form-control" value="{{ v.address }}"></input>
-            <label >Postal code:</label>
-            <input type="text" name="postal" class="form-control" value="{{ v.postal }}"></input>
-
-            <h4>Tell us more about yourself:</h4>
+            <h5>Tell us more about yourself:</h5>
             <textarea name="body" cols="60" rows="10" value = "{{v.description}}"></textarea><br>
 
             <label>Email:</label>
-            <input type="text" name="email" class="form-control" value="{{ v.email }}"></input>
+            <input type="text" name="email" value="{{ v.email }}"></input>
             <span class="errorMessage" id="emailTaken"></span>
             <br>
             <label>Password:</label>
-            <input type="password" name="pass1"></input>
+            <input type="password" name="pass1"></input><br>
             <label>Password (repeat):</label>
-            <input type="password" name="pass2" class="form-control"></input>
+            <input type="password" name="pass2"></input>
             <div class="g-recaptcha" data-sitekey="6Lde2rsZAAAAAA_mSTwg1hdXZiSLbt3avb0I48jf"></div>
             <span id="captcha_error"></span>
             <input type="submit" name="register"  id="form" class="btn btn-secondary" style="width: 100px;"></input>                                
