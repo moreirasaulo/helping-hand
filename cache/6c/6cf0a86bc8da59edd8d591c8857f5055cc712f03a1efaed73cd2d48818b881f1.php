@@ -34,7 +34,8 @@ class __TwigTemplate_36abc88da642dda508e581e14e66738b17efa829eff2125a7393d0de711
     {
         $macros = $this->macros;
         // line 1
-        echo "<div id=\"carousel\" class=\"carousel slide\" data-bs-ride=\"carousel\">
+        echo "
+<div id=\"carousel\" class=\"carousel slide\" data-bs-ride=\"carousel\">
   <div class=\"carousel-inner\">
     <div class=\"carousel-item active\">
       <img src=\"images/carousel2.jpg\" class=\"d-block w-100 myImg\" alt=\"...\">
@@ -44,7 +45,8 @@ class __TwigTemplate_36abc88da642dda508e581e14e66738b17efa829eff2125a7393d0de711
       </div>
     </div>
   </div>
-</div>";
+</div>
+";
     }
 
     public function getTemplateName()
@@ -59,7 +61,8 @@ class __TwigTemplate_36abc88da642dda508e581e14e66738b17efa829eff2125a7393d0de711
 
     public function getSourceContext()
     {
-        return new Source("<div id=\"carousel\" class=\"carousel slide\" data-bs-ride=\"carousel\">
+        return new Source("
+<div id=\"carousel\" class=\"carousel slide\" data-bs-ride=\"carousel\">
   <div class=\"carousel-inner\">
     <div class=\"carousel-item active\">
       <img src=\"images/carousel2.jpg\" class=\"d-block w-100 myImg\" alt=\"...\">
@@ -69,6 +72,7 @@ class __TwigTemplate_36abc88da642dda508e581e14e66738b17efa829eff2125a7393d0de711
       </div>
     </div>
   </div>
-</div>", "carousel.html.twig", "C:\\xampp\\htdocs\\helpinghand\\templates\\carousel.html.twig");
+</div>
+", "carousel.html.twig", "C:\\xampp\\htdocs\\helpinghand\\templates\\carousel.html.twig");
     }
 }

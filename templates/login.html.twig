@@ -27,6 +27,10 @@ $(document).ready(function() {
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
     {% if errorList %}
             <ul class="errorMessage">
             {% for error in errorList %}
@@ -35,6 +39,7 @@ $(document).ready(function() {
             </ul>
         {% endif %}
     <div class="wrap">
+    <h4> Log in </h4>
         <form method="POST" id="myForm">
             <label>Email: </label>
             <input type="text" name="email" id="email" value="" required="required"></input>

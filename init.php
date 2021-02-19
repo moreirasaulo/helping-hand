@@ -14,7 +14,7 @@ $log->pushHandler(new StreamHandler(dirname(__FILE__) . '/logs/errors.log', Logg
 
 // authentication info and client's IP address in the log
 $log->pushProcessor(function ($record) {
-    $record['extra']['user'] = isset($_SESSION['user']) ? $_SESSION['user']['username'] : '=anonymous=';
+    $record['extra']['user'] = isset($_SESSION['user']) ? $_SESSION['user']['email'] : '=anonymous=';
     $record['extra']['ip'] = $_SERVER['REMOTE_ADDR'];
     return $record;
 });

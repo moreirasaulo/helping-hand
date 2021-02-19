@@ -29,6 +29,7 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
         $this->blocks = [
             'head' => [$this, 'block_head'],
             'title' => [$this, 'block_title'],
+            'banner' => [$this, 'block_banner'],
             'content' => [$this, 'block_content'],
             'footer' => [$this, 'block_footer'],
         ];
@@ -52,19 +53,19 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
         // line 24
         $this->loadTemplate("navbar.html.twig", "master.html.twig", 24)->display($context);
         // line 25
-        echo "    ";
-        $this->loadTemplate("carousel.html.twig", "master.html.twig", 25)->display($context);
+        echo "   
+  ";
         // line 26
-        echo "     <br>
-     <br>
-  
+        $this->displayBlock('banner', $context, $blocks);
+        // line 27
+        echo "  
     <div class='container'>
 
 
             ";
-        // line 32
+        // line 31
         $this->displayBlock('content', $context, $blocks);
-        // line 33
+        // line 32
         echo "    
     </div>
 
@@ -72,9 +73,9 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
 
 <footer class=\"footer mt-auto py-3\" id=\"footer\">
  ";
-        // line 39
+        // line 38
         $this->displayBlock('footer', $context, $blocks);
-        // line 57
+        // line 56
         echo "</footer>
 
     
@@ -121,17 +122,24 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
         $macros = $this->macros;
     }
 
-    // line 32
+    // line 26
+    public function block_banner($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        echo " ";
+    }
+
+    // line 31
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
     }
 
-    // line 39
+    // line 38
     public function block_footer($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 40
+        // line 39
         echo "  <div class=\"container container-footer\">
     <div class=\"row footer-text justify-content-md-center align-items-center\">
       <div class=\"col footer-left\"> 
@@ -163,7 +171,7 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
 
     public function getDebugInfo()
     {
-        return array (  135 => 40,  131 => 39,  125 => 32,  114 => 19,  98 => 5,  94 => 4,  78 => 57,  76 => 39,  68 => 33,  66 => 32,  58 => 26,  55 => 25,  53 => 24,  48 => 21,  46 => 4,  41 => 1,);
+        return array (  143 => 39,  139 => 38,  133 => 31,  126 => 26,  115 => 19,  99 => 5,  95 => 4,  79 => 56,  77 => 38,  69 => 32,  67 => 31,  61 => 27,  59 => 26,  56 => 25,  54 => 24,  49 => 21,  47 => 4,  42 => 1,);
     }
 
     public function getSourceContext()
@@ -192,9 +200,8 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
   <body>
 
   {% include ('navbar.html.twig') %}
-    {% include ('carousel.html.twig') %}
-     <br>
-     <br>
+   
+  {% block banner %} {% endblock %}
   
     <div class='container'>
 

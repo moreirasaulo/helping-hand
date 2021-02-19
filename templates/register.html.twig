@@ -30,6 +30,8 @@
 {% block content %} 
 <br>
 <br>
+<br>
+<br>
     {% if errorList %}
         <ul class="errorMessage">
         {% for error in errorList %}
@@ -42,7 +44,7 @@
             <h2>User Registration</h2> 
             <br>
             <h5>Are you a caregiver or senior? </h5>
-            Caregiver   <input type="radio" name="ans" value="Caregiver" />
+            Caregiver   <input type="radio" checked name="ans" value="Caregiver" />
             Senior   <input type="radio" name="ans" value="Senior"  /> <br>
 
             
@@ -66,6 +68,9 @@
 
             <h5>Tell us more about yourself:</h5>
             <textarea name="body" cols="60" rows="10" value = "{{v.description}}"></textarea><br>
+
+            <h5>Please upload your photo:</h5>
+            <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
 
             <label>Email:</label>
             <input type="text" name="email" value="{{ v.email }}"></input>

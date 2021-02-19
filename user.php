@@ -93,7 +93,7 @@ $app->post('/register', function ($request, $response, $args) {
     }
    
     if ($errorList) {                  
-        return $this->view->render($response, 'register.html.twig', ['errorList' => $errorList, 'v'=> [ 'userName' => $userName, 'email' => $email] ]);
+        return $this->view->render($response, 'register.html.twig', ['errorList' => $errorList, 'v'=> [ 'userName' => $password, 'email' => $email] ]);
     }
     else {
         DB::insert('users', [ 'email' => $email, 'password' => $password ]);    

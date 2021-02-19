@@ -57,17 +57,19 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
         echo " 
 <br>
 <br>
+<br>
+<br>
     ";
-        // line 33
+        // line 35
         if (($context["errorList"] ?? null)) {
-            // line 34
+            // line 36
             echo "        <ul class=\"errorMessage\">
         ";
-            // line 35
+            // line 37
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["errorList"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-                // line 36
+                // line 38
                 echo "            <li>";
                 echo twig_escape_filter($this->env, $context["error"], "html", null, true);
                 echo "<li>
@@ -76,22 +78,22 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 38
+            // line 40
             echo "        </ul>
     ";
         }
-        // line 40
+        // line 42
         echo "    <div class=\"wrap\">
         <form method=\"POST\">
             <h2>User Registration</h2> 
             <br>
             <h5>Are you a caregiver or senior? </h5>
-            Caregiver   <input type=\"radio\" name=\"ans\" value=\"Caregiver\" />
+            Caregiver   <input type=\"radio\" checked name=\"ans\" value=\"Caregiver\" />
             Senior   <input type=\"radio\" name=\"ans\" value=\"Senior\"  /> <br>
 
             
          ";
-        // line 54
+        // line 56
         echo "            <br>
             <h5>What services do you offer/require?</h5>
 
@@ -102,25 +104,28 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
             <h5>Location </h5>
             Your address:
             <input type=\"text\" name=\"address\" value=\"";
-        // line 63
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "address", [], "any", false, false, false, 63), "html", null, true);
+        // line 65
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "address", [], "any", false, false, false, 65), "html", null, true);
         echo "\"></input>
             Postal code:
             <input type=\"text\" name=\"postal\"  value=\"";
-        // line 65
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "postal", [], "any", false, false, false, 65), "html", null, true);
+        // line 67
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "postal", [], "any", false, false, false, 67), "html", null, true);
         echo "\"></input><br><br>
 
             <h5>Tell us more about yourself:</h5>
             <textarea name=\"body\" cols=\"60\" rows=\"10\" value = \"";
-        // line 68
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "description", [], "any", false, false, false, 68), "html", null, true);
+        // line 70
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "description", [], "any", false, false, false, 70), "html", null, true);
         echo "\"></textarea><br>
+
+            <h5>Please upload your photo:</h5>
+            <input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\"><br><br>
 
             <label>Email:</label>
             <input type=\"text\" name=\"email\" value=\"";
-        // line 71
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "email", [], "any", false, false, false, 71), "html", null, true);
+        // line 76
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "email", [], "any", false, false, false, 76), "html", null, true);
         echo "\"></input>
             <span class=\"errorMessage\" id=\"emailTaken\"></span>
             <br>
@@ -152,7 +157,7 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
 
     public function getDebugInfo()
     {
-        return array (  123 => 71,  117 => 68,  111 => 65,  106 => 63,  95 => 54,  84 => 40,  80 => 38,  71 => 36,  67 => 35,  64 => 34,  62 => 33,  54 => 30,  47 => 3,  36 => 1,);
+        return array (  128 => 76,  119 => 70,  113 => 67,  108 => 65,  97 => 56,  86 => 42,  82 => 40,  73 => 38,  69 => 37,  66 => 36,  64 => 35,  54 => 30,  47 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -189,6 +194,8 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
 {% block content %} 
 <br>
 <br>
+<br>
+<br>
     {% if errorList %}
         <ul class=\"errorMessage\">
         {% for error in errorList %}
@@ -201,7 +208,7 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
             <h2>User Registration</h2> 
             <br>
             <h5>Are you a caregiver or senior? </h5>
-            Caregiver   <input type=\"radio\" name=\"ans\" value=\"Caregiver\" />
+            Caregiver   <input type=\"radio\" checked name=\"ans\" value=\"Caregiver\" />
             Senior   <input type=\"radio\" name=\"ans\" value=\"Senior\"  /> <br>
 
             
@@ -225,6 +232,9 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
 
             <h5>Tell us more about yourself:</h5>
             <textarea name=\"body\" cols=\"60\" rows=\"10\" value = \"{{v.description}}\"></textarea><br>
+
+            <h5>Please upload your photo:</h5>
+            <input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\"><br><br>
 
             <label>Email:</label>
             <input type=\"text\" name=\"email\" value=\"{{ v.email }}\"></input>

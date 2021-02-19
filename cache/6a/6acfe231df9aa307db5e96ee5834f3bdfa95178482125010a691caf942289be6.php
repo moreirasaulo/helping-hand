@@ -26,6 +26,7 @@ class __TwigTemplate_4ad0082fd0e9affa197ad374bd53ffea799889a64c1afeee209716407e1
 
         $this->blocks = [
             'title' => [$this, 'block_title'],
+            'banner' => [$this, 'block_banner'],
             'content' => [$this, 'block_content'],
         ];
     }
@@ -51,17 +52,25 @@ class __TwigTemplate_4ad0082fd0e9affa197ad374bd53ffea799889a64c1afeee209716407e1
     }
 
     // line 12
-    public function block_content($context, array $blocks = [])
+    public function block_banner($context, array $blocks = [])
     {
         $macros = $this->macros;
         // line 13
+        $this->loadTemplate("carousel.html.twig", "index.html.twig", 13)->display($context);
+    }
+
+    // line 16
+    public function block_content($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        // line 17
         echo "<!--start of showcase-->
 
-
+ 
 
 <div id=\"mainCont\">
 \t<!-- Caregivers -->
-    <h1 class=\"top-page-title text-center\">Our caregivers</h1>
+    <h1 class=\"top-page-title text-center\">Featured caregivers</h1>
 
 
   <div class=\"container\">
@@ -100,7 +109,7 @@ class __TwigTemplate_4ad0082fd0e9affa197ad374bd53ffea799889a64c1afeee209716407e1
 
     public function getDebugInfo()
     {
-        return array (  58 => 13,  54 => 12,  47 => 3,  36 => 1,);
+        return array (  67 => 17,  63 => 16,  59 => 13,  55 => 12,  48 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -116,14 +125,18 @@ class __TwigTemplate_4ad0082fd0e9affa197ad374bd53ffea799889a64c1afeee209716407e1
 \t
 {% endblock %} #}
 
+{% block banner %}
+{% include ('carousel.html.twig') %}
+{% endblock %}
+
 {% block content %}
 <!--start of showcase-->
 
-
+ 
 
 <div id=\"mainCont\">
 \t<!-- Caregivers -->
-    <h1 class=\"top-page-title text-center\">Our caregivers</h1>
+    <h1 class=\"top-page-title text-center\">Featured caregivers</h1>
 
 
   <div class=\"container\">

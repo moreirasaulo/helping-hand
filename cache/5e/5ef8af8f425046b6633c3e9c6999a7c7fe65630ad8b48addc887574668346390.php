@@ -58,17 +58,21 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
         echo "<br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
     ";
-        // line 30
+        // line 34
         if (($context["errorList"] ?? null)) {
-            // line 31
+            // line 35
             echo "            <ul class=\"errorMessage\">
             ";
-            // line 32
+            // line 36
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["errorList"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-                // line 33
+                // line 37
                 echo "                <li>";
                 echo twig_escape_filter($this->env, $context["error"], "html", null, true);
                 echo "<li>
@@ -77,12 +81,13 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 35
+            // line 39
             echo "            </ul>
         ";
         }
-        // line 37
+        // line 41
         echo "    <div class=\"wrap\">
+    <h4> Log in </h4>
         <form method=\"POST\" id=\"myForm\">
             <label>Email: </label>
             <input type=\"text\" name=\"email\" id=\"email\" value=\"\" required=\"required\"></input>
@@ -113,7 +118,7 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
 
     public function getDebugInfo()
     {
-        return array (  85 => 37,  81 => 35,  72 => 33,  68 => 32,  65 => 31,  63 => 30,  58 => 27,  54 => 26,  47 => 3,  36 => 1,);
+        return array (  89 => 41,  85 => 39,  76 => 37,  72 => 36,  69 => 35,  67 => 34,  58 => 27,  54 => 26,  47 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -147,6 +152,10 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
     {% if errorList %}
             <ul class=\"errorMessage\">
             {% for error in errorList %}
@@ -155,6 +164,7 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
             </ul>
         {% endif %}
     <div class=\"wrap\">
+    <h4> Log in </h4>
         <form method=\"POST\" id=\"myForm\">
             <label>Email: </label>
             <input type=\"text\" name=\"email\" id=\"email\" value=\"\" required=\"required\"></input>
