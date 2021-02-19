@@ -26,7 +26,7 @@ DAILY SCRUM
 - clarify how to create wizard on registration page
 
 
-2021/02/12 Ksenia
+2021/02/15 Ksenia
 1. Done/ not done since last scrum:
 - finalized website layout pages
 - reserched technologies to be used
@@ -36,7 +36,7 @@ DAILY SCRUM
 3.Need assistance/figure things out:
 - find out where to store payment information
 
-2021/02/12 Saulo
+2021/02/15 Saulo
 1. Done/ not done since last scrum:
 - finalized and perfected database tables and data types
 - setup Trello and created user stories

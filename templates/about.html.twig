@@ -1,0 +1,119 @@
+{% extends "master.html.twig" %}
+
+{% block title %}About us{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="../css/admin.css">
+{% endblock %}
+
+{% block content %}
+    <div class="container contact_container">
+		<div class="row">
+			<div class="col">
+				<div class="breadcrumbs d<h5>-flex flex<h5>-row align<h5>-items<h5>-center">
+					<ul>
+						<a href="/">Home</a>
+						<li class="active"><a href="/aboutus"><i class="fa fa-angle-right" aria-hidden="true"></i>aboutus</a>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="searchrentalplace">
+			<form method="POST">
+			<input type="hidden" id="lat" name="" value="{{latitude}}">
+			<input type="hidden" id="log" name="" value="{{longitude}}">
+			<label>Search nearest rental place by postalcode or address</label>
+			<input type="text" name="postalcode" placeholder="Postal code or address">
+			<input type="submit" name="search" value="search">
+			</form>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div id="google_map">
+					<div class="map_container">
+						<div id="map"></div>											
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div id="google_map">
+					<div class="contact_contents">
+						<h5>At Helping Hand, we connect people to people. Those in need have a chance to get help from someone who’s willing to collaborate with the ones who contributed to the arise of the new generation. This initiative generates meaningful moments that touch the lives of our clients and our caregivers. Plus, they guide the way we run our business. These moments inspire, change and encourage us. They are what we call the Helping Hand difference. </h5>		
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		function initMap() {
+			var latitude = document.getElementById("lat").value;
+			var longitude = document.getElementById("log").value;
+			//var latitude = {{latitude}};
+			//var longitude = {{longitude}};
+			lat = parseFloat(latitude);
+			long = parseFloat(longitude);			
+			//alert("lat is: " + latitude + "long is: " + longitude);
+			if(isNaN(lat) == true || isNaN(long) == true) {
+				//set montreal is default center
+				var location = {lat: 45.508888, lng: -73.561668};
+			} else {
+				var location = {lat: lat, lng: long};
+			}			
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 12,
+				center: location		
+			});
+			setMarkers(map);
+		}
+		// Data for the markers consisting of a name, a LatLng and a zIndex for the
+		// order in which these markers should display on top of each other.
+		var beaches = [
+			{% for rentalPlace in rentalPlaceList %}
+				['{{rentalPlace.locationName}}', '{{rentalPlace.street}}', {{rentalPlace.Latitude}}, {{rentalPlace.Longitude}}, {{rentalPlace.id}}, '{{rentalPlace.city}}', '{{rentalPlace.postalCode}}'],
+			{% endfor %} 
+		];
+
+		function setMarkers(map) {
+			// Adds markers to the map.
+
+			// Marker sizes are expressed as a Size of X,Y where the origin of the image
+			// (0,0) is located in the top left of the image.
+
+			// Origins, anchor positions and coordinates of the marker increase in the X
+			// direction to the right and in the Y direction down.
+			var image = {
+				url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+				// This marker is 20 pixels wide by 32 pixels high.
+				size: new google.maps.Size(20, 32),
+				// The origin for this image is (0, 0).
+				origin: new google.maps.Point(0, 0),
+				// The anchor for this image is the base of the flagpole at (0, 32).
+				anchor: new google.maps.Point(0, 32)
+			};
+			// Shapes define the clickable region of the icon. The type defines an HTML
+			// <area> element 'poly' which traces out a polygon as a series of X,Y points.
+			// The final coordinate closes the poly by connecting to the first coordinate.
+			var shape = {
+				coords: [1, 1, 1, 20, 18, 20, 18, 1],
+				type: 'poly'
+			};
+			
+			for (var i = 0; i < beaches.length; i++) {
+				var beach = beaches[i];
+				var marker = new google.maps.Marker({
+					position: {lat: beach[2], lng: beach[3]},
+					map: map,
+					icon: image,
+					shape: shape,
+					title: beach[0] + "\n" + beach[1] + "  " + beach[5] + "  " + beach[6],
+					zIndex: beach[3]
+				});
+			}
+		}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBON6db-E8cIzVii1TuqKult0KLq9zvrDE&callback=initMap">
+    </script>
+{% endblock %}
