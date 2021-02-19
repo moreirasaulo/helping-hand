@@ -1,17 +1,107 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        {% block head %}
-            <link rel="stylesheet" href="/styles.css"/>
-            <title>{% block title %}{% endblock %} - My Webpage</title>
-        {% endblock %}
-    </head>
-    <body>
-        <div id="centeredContent">{% block content %}{% endblock %}</div>
-        <div id="footer">
-            {% block footer %}
-                &copy; Copyright 2021 by <a href="http://domain.invalid/">you</a>.
-            {% endblock %}
+<html lang="en">
+  <head>
+      {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="#">
+      <!-- Favicon-->
+      <link rel="icon" type="image/png" href="images/favicon.png">
+    <!--Font-->
+    <link href="https://fonts.googleapis.com/css2?family=Salsa&display=swap" rel="stylesheet">
+    <!--Font awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/v4-shims.css">
+    <title>{% block title %}{% endblock %} Helping hand</title>
+     {% endblock %}
+  </head>
+  <body>
+    <header>
+        <!--Navigation-->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.png" alt="dog icon">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <!--ml auto is to align list(menu) to left, mr would be to right-->
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#aboutUs" class="nav-link">About us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="training.html" class="nav-link">Our caregivers</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="assessment.html" class="nav-link">Find caregiver near you</a>
+                  </li>
+                    <li class="nav-item">
+                        <a href="trainers.html" class="nav-link">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact-info" class="nav-link">Contact</a>
+                    </li>
+                    <li class="nav-item">  
+                      <a href="index-fr.html" class="nav-link language"><img src="images/french_small.png" alt=""></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--end of navigation-->
+    </header>
+  
+    <main>
+        <!--main content area starts-->
+        <div id="centeredContainer">
+            {% block content %}{% endblock %}
+        </div>  
+      <!--end of showcase-->
+
+    <!--main content area ends-->
+      <div class="container">	 
+
+    
+</main>
+
+
+<footer class="footer mt-auto py-3" id="footer">
+ {% block footer %}
+  <div class="container container-footer">
+    <div class="row footer-text justify-content-md-center align-items-center">
+      <div class="col footer-left"> 
+        <p class="footer-line"><small>&copy;2021</small>
+          <span class="company-name">Helping hand</span></p>
+       <a class= "custom-link"href="#"> <span class="fab fa-instagram fa-2x"></span></a>
+       <a class= "custom-link"href="#"> <span class="fab fa-facebook-square fa-2x"></span></a> 
+       <a class= "custom-link"href="#"> <span class="fab fa-twitter fa-2x"></span></a> 
+       <a class= "custom-link"href="#"> <span class="fab fa-youtube fa-2x"></span></a>
+       <p class="created">Created by Saulo Moreira da Silva and Ksenia Studilina</p>
+      </div>
+        <span class="fas fa-envelope fa-2x custom-link-text"></span>
+        <span class="footer-line">info@helping-hand.com</span><br>
         </div>
-    </body>
+    </div>
+  </div>
+   {% endblock %}
+</footer>
+
+    
+    
+    
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
 </html>
+
