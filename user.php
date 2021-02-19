@@ -50,7 +50,6 @@ $app->get('/register', function ($request, $response, $args) {
 });
 
 
-
 $app->post('/register', function ($request, $response, $args) {
     $role = $request->getParam('ans');
     $descrip = $_POST['body'];
@@ -89,11 +88,11 @@ $app->post('/register', function ($request, $response, $args) {
     }
     if(!$responseData->success)
     {
-        array_push($errorList,  "Robot verification failed, please try again.");  
+        array_push($errorList,  "Automatic verification failed, please try again.");  
     }
    
     if ($errorList) {                  
-        return $this->view->render($response, 'register.html.twig', ['errorList' => $errorList, 'v'=> [ 'userName' => $userName, 'email' => $email] ]);
+        return $this->view->render($response, 'register.html.twig', ['errorList' => $errorList, 'v'=> [ 'password' => $password, 'email' => $email] ]);
     }
     else {
         DB::insert('users', [ 'email' => $email, 'password' => $password ]);    
