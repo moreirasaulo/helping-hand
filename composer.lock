@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e6741cd22916a89e2383903efeb9945",
+    "content-hash": "eaf288f1497b7713fa2f1148fbe471f1",
     "packages": [
         {
             "name": "monolog/monolog",
@@ -775,6 +775,56 @@
                 }
             ],
             "time": "2021-01-22T09:19:47+00:00"
+        },
+        {
+            "name": "techlab/smartwizard",
+            "version": "v5.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/techlab/jquery-smartwizard.git",
+                "reference": "14806a79eb4db75ad71723cb6cb5ccfd7e2f585f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/techlab/jquery-smartwizard/zipball/14806a79eb4db75ad71723cb6cb5ccfd7e2f585f",
+                "reference": "14806a79eb4db75ad71723cb6cb5ccfd7e2f585f",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dipu Raj",
+                    "email": "hello.techlab@gmail.com",
+                    "homepage": "http://dipu.me"
+                }
+            ],
+            "description": "The awesome jQuery step wizard plugin",
+            "homepage": "http://techlaboratory.net/jquery-smartwizard",
+            "keywords": [
+                "bootstrap",
+                "jquery",
+                "jquery-plugin",
+                "step",
+                "ui",
+                "wizard",
+                "wizard plugin"
+            ],
+            "support": {
+                "docs": "http://techlaboratory.net/jquery-smartwizard#documentation",
+                "issues": "https://github.com/techlab/jquery-smartwizard/issues",
+                "source": "https://github.com/techlab/jquery-smartwizard"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/dipuraj",
+                    "type": "custom"
+                }
+            ],
+            "time": "2020-07-10T15:40:42+00:00"
         },
         {
             "name": "twig/twig",

@@ -11,9 +11,11 @@ $app->get('/login', function ($request, $response, $args) {
 $app->post('/login', function ($request, $response, $args) use ($log) {
     $email = $request->getParam('email');
     $password = $request->getParam('password'); 
-    $user = DB::queryFirstRow("SELECT * FROM users WHERE email = %s LIMIT 1", $email);
+
+    //get user from db by email
+    $user = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
     $loginSuccess = false;
-    $errorList = array();
+    $errorList = [];
     if ($user) {
          if ($password==$user['password']) {
             $loginSuccess = true;
@@ -22,8 +24,10 @@ $app->post('/login', function ($request, $response, $args) use ($log) {
             $errorList[] =  "Password is not valid";
         }    
     } else {
-        $errorList[] =  "Email is not correct";
+        $errorList[] =  "This email is not registered";
     }
+
+    //if email or password dont match
     if ($errorList) {                  
         return $this->view->render($response, 'login.html.twig', ['errorList' => $errorList]);
     } else if(!$loginSuccess) {
@@ -99,7 +103,7 @@ $app->post('/register', function ($request, $response, $args) {
         DB::insert('users', [ 'email' => $email, 'password' => $password ]);    
         return $this->view->render($response, 'login.html.twig');            
     }
-});
+});  
 
 //is email uqnique
 

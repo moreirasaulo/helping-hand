@@ -45,44 +45,45 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
       ";
         // line 4
         $this->displayBlock('head', $context, $blocks);
-        // line 21
+        // line 22
         echo "  </head>
   <body>
 
   ";
-        // line 24
-        $this->loadTemplate("navbar.html.twig", "master.html.twig", 24)->display($context);
         // line 25
+        $this->loadTemplate("navbar.html.twig", "master.html.twig", 25)->display($context);
+        // line 26
         echo "
   ";
-        // line 26
-        $this->displayBlock('banner', $context, $blocks);
         // line 27
+        $this->displayBlock('banner', $context, $blocks);
+        // line 28
         echo "   
   
     <div class='container'>
       ";
-        // line 30
-        $this->displayBlock('content', $context, $blocks);
         // line 31
+        $this->displayBlock('content', $context, $blocks);
+        // line 32
         echo "    </div>
 
 
 
 <footer class=\"footer mt-auto py-3\" id=\"footer\">
  ";
-        // line 36
+        // line 37
         $this->displayBlock('footer', $context, $blocks);
-        // line 54
+        // line 55
         echo "</footer>
 
     
     
     
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src=\"https://code.jquery.com/jquery-3.5.1.slim.min.js\" integrity=\"sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj\" crossorigin=\"anonymous\"></script>
+    <!--JQuery, Popper, Bootstrap JS, Smart Wizard-->
+    <script src=\"https://code.jquery.com/jquery-3.5.1.min.js\" integrity=\"sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=\" crossorigin=\"anonymous\"></script>
     <script src=\"https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js\" integrity=\"sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN\" crossorigin=\"anonymous\"></script>
     <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js\" integrity=\"sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV\" crossorigin=\"anonymous\"></script>
+    <script src=\"https://cdn.jsdelivr.net/npm/smartwizard@5/dist/js/jquery.smartWizard.min.js\" type=\"text/javascript\"></script>
   </body>
 </html>
 
@@ -98,8 +99,8 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">
 
     <!-- Bootstrap CSS -->
-    <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" integrity=\"sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z\" crossorigin=\"anonymous\">
-    <!--Custom CSS-->
+    <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl\" crossorigin=\"anonymous\">
+       <!--Custom CSS-->
     <link rel=\"stylesheet\" href=\"styles.css\">
       <!-- Favicon-->
       <link rel=\"icon\" type=\"image/png\" href=\"images/favicon.png\">
@@ -108,8 +109,9 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
     <!--Font awesome-->
     <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.15.0/css/all.css\">
     <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.15.0/css/v4-shims.css\">
+      
     <title>";
-        // line 19
+        // line 20
         $this->displayBlock('title', $context, $blocks);
         echo " Helping hand</title>
      ";
@@ -120,23 +122,23 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
         $macros = $this->macros;
     }
 
-    // line 26
+    // line 27
     public function block_banner($context, array $blocks = [])
     {
         $macros = $this->macros;
     }
 
-    // line 30
+    // line 31
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
     }
 
-    // line 36
+    // line 37
     public function block_footer($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 37
+        // line 38
         echo "  <div class=\"container container-footer\">
     <div class=\"row footer-text justify-content-md-center align-items-center\">
       <div class=\"col footer-left\"> 
@@ -168,7 +170,7 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
 
     public function getDebugInfo()
     {
-        return array (  140 => 37,  136 => 36,  130 => 30,  124 => 26,  113 => 19,  97 => 5,  93 => 4,  77 => 54,  75 => 36,  68 => 31,  66 => 30,  61 => 27,  59 => 26,  56 => 25,  54 => 24,  49 => 21,  47 => 4,  42 => 1,);
+        return array (  142 => 38,  138 => 37,  132 => 31,  126 => 27,  115 => 20,  98 => 5,  94 => 4,  77 => 55,  75 => 37,  68 => 32,  66 => 31,  61 => 28,  59 => 27,  56 => 26,  54 => 25,  49 => 22,  47 => 4,  42 => 1,);
     }
 
     public function getSourceContext()
@@ -181,8 +183,8 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">
 
     <!-- Bootstrap CSS -->
-    <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" integrity=\"sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z\" crossorigin=\"anonymous\">
-    <!--Custom CSS-->
+    <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl\" crossorigin=\"anonymous\">
+       <!--Custom CSS-->
     <link rel=\"stylesheet\" href=\"styles.css\">
       <!-- Favicon-->
       <link rel=\"icon\" type=\"image/png\" href=\"images/favicon.png\">
@@ -191,6 +193,7 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
     <!--Font awesome-->
     <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.15.0/css/all.css\">
     <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.15.0/css/v4-shims.css\">
+      
     <title>{% block title %}{% endblock %} Helping hand</title>
      {% endblock %}
   </head>
@@ -231,10 +234,11 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
     
     
     
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src=\"https://code.jquery.com/jquery-3.5.1.slim.min.js\" integrity=\"sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj\" crossorigin=\"anonymous\"></script>
+    <!--JQuery, Popper, Bootstrap JS, Smart Wizard-->
+    <script src=\"https://code.jquery.com/jquery-3.5.1.min.js\" integrity=\"sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=\" crossorigin=\"anonymous\"></script>
     <script src=\"https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js\" integrity=\"sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN\" crossorigin=\"anonymous\"></script>
     <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js\" integrity=\"sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV\" crossorigin=\"anonymous\"></script>
+    <script src=\"https://cdn.jsdelivr.net/npm/smartwizard@5/dist/js/jquery.smartWizard.min.js\" type=\"text/javascript\"></script>
   </body>
 </html>
 

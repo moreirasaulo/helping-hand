@@ -40,19 +40,23 @@ $(document).ready(function() {
         {% endif %}
     <div class="wrap">
     <h4> Log in </h4>
-        <form method="POST" id="myForm">
-            <label>Email: </label>
-            <input type="text" name="email" id="email" value="" required="required"></input>
-            <span class="errorMessage" id="nothisemail"></span><br />
-            <label>Password: </label>
-            <input type="password" name="password" autocomplete="new-password" id="password" required="required" value=""></input><br />
-            <input type="submit" name="login" id="login" value="Login" class="button"><br><br>		
-            <button class="loginBtn loginBtn--google" onclick="window.location='/logingoogle.php'" type="button" name="logingmail"  class="btn btn-danger">Login with Google</button><br>
-            <button class="loginBtn loginBtn--facebook" onclick="window.location='/loginfacebook.php'" type="button" name="loginfacebook" class="btn btn-danger">Login with Facebook</button><br>      
-            <h5><a href="/forgotpassword">Forgot Password?</a></h5>
+    <div class="row">
+            <div class="col-md-4">
+            <form method="POST" id="myForm">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name = "email" placeholder="name@example.com">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name = "password">
+            <input type="submit" name="login" id="login" value="Log in" class="btn btn-primary"/> <br><br>
+            <button type="button" onclick="window.location='/logingoogle.php'" name="logingmail" class="btn btn-primary">Log in with Google</button><br><br>
+            <button type="button" onclick="window.location='/loginfacebook.php'" name="loginfacebook" class="btn btn-primary">Log in with Facebook</button><br><br>
+
+		    <h5><a href="/forgotpassword">Forgot Password?</a></h5>
             <h5><a>Not a member yet?<a href="register"> Register now!</a></h5>      
-        </form>   
-        </div>
+            </form>
+            </div>
+            </div>
+
     </div>
 </div>
 {% endblock %}

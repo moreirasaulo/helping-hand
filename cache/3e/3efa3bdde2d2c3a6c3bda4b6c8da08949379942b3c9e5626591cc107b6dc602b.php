@@ -59,179 +59,279 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
         echo "    ";
         $this->displayParentBlock("head", $context, $blocks);
         echo "
-     <script src=\"jquery.js\"></script> 
-    <script src=\"jquery.steps.js\"></script>
+     <link href=\"https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+     <link href=\"styles/smart_wizard_dots.css\" rel=\"stylesheet\" type=\"text/css\" /> 
+     <script src=\"https://cdn.jsdelivr.net/npm/smartwizard@5/dist/js/jquery.smartWizard.min.js\" type=\"text/javascript\"></script>
+     <script type=\"text/javascript\" src=\"https://code.jquery.com/jquery-3.3.1.min.js\"></script>
+     <script>
+    
+
+
+
+     \$(document).ready(function(){
+ 
+        // SmartWizard initialize
+        \$('#smartwizard').smartWizard({
+            theme: 'dots',
+           
+            
+        }); 
+
+        \$(\"#smartwizard\").on(\"leaveStep\", function(e, anchorObject, currentStepIndex, nextStepIndex, stepDirection) {
+            \$stepIndex = \$('#smartwizard').smartWizard(\"getStepIndex\");
+            
+
+        if ((\$stepIndex == 0) && \$(\"input:checked\").length < 2)
+        {
+            \$(\"#roleErr\").html(\"Please select between caregiver and senior\");
+            return false;
+        }
+        else {
+            \$(\"#roleErr\").html(\"\");
+        }
+        if((\$stepIndex == 1) && \$(\"input[type=checkbox]:checked\").length < 1)
+        {
+            \$(\"#serviceErr\").html(\"Please select at least one service\");
+            return false;
+        }
+        else {
+            \$(\"#serviceErr\").html(\"\");
+        } 
+
+
+
+        if((\$stepIndex == 2) && (\$('input[name=address').val().length == 0))
+        {
+            \$(\"#addressErr\").html(\"Please enter address\");
+            return false;
+        }
+        else {
+            \$(\"#addressErr\").html(\"\");
+        }
+        if((\$stepIndex == 2) && (\$('input[name=postal').val().length == 0))
+        {
+            \$(\"#postalErr\").html(\"Please enter postal code\");
+            return false;
+        }
+        else {
+            \$(\"#postalErr\").html(\"\");
+        }
+        if((\$stepIndex == 2) && (\$('input[name=phone').val().length == 0))
+        {
+            \$(\"#phoneErr\").html(\"Please enter phone number\");
+            return false;
+        }
+        else {
+            \$(\"#phoneErr\").html(\"\");
+        }
+});
+    });
+
+//validation
+
+
+
+
+
+</script>
 ";
     }
 
-    // line 38
+    // line 111
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
         echo " 
+<img src=\"images/register.jpg\" class=\"d-block w-100 myImg\" alt=\"...\">
 <br>
 <br>
 <br>
 <br>
-<script>
-      \$(\"#wizard\").steps();
-    </script>
-<div id=\"wizard\">
-  <form id=\"form-3\" action=\"#\">
-  <h1>Account</h1>
-  <fieldset>
-    <legend>Account Information</legend>
-    <label for=\"userName\">User name *</label>
-    <input id=\"userName\" name=\"userName\" type=\"text\" class=\"required\" />
-    <label for=\"password\">Password *</label>
-    <input id=\"password\" name=\"password\" type=\"text\" class=\"required\" />
-    <label for=\"confirm\">Confirm Password *</label>
-    <input id=\"confirm\" name=\"confirm\" type=\"text\" class=\"required\" />
-    <p>(*) Mandatory</p>
-  </fieldset>
-  <h1>Profile</h1>
-  <fieldset>
-    <legend>Profile Information</legend>
-    <label for=\"name\">First name *</label>
-    <input id=\"name\" name=\"name\" type=\"text\" class=\"required\" />
-    <label for=\"surname\">Last name *</label>
-    <input id=\"surname\" name=\"surname\" type=\"text\" class=\"required\" />
-    <label for=\"email\">Email *</label>
-    <input id=\"email\" name=\"email\" type=\"text\" class=\"required email\" />
-    <label for=\"address\">Address</label>
-    <input id=\"address\" name=\"address\" type=\"text\" />
-    <label for=\"age\"
-      >Age (The warning step will show up if age is less than 18) *</label
-    >
-    <input id=\"age\" name=\"age\" type=\"text\" class=\"required number\" />
-    <p>(*) Mandatory</p>
-  </fieldset>
-  <h1>Warning</h1>
-  <fieldset>
-    <legend>You are to young</legend>
-    <p>Please go away ;-)</p>
-  </fieldset>
-  <h1>Finish</h1>
-  <fieldset>
-    <legend>Terms and Conditions</legend>
-    <input
-      id=\"acceptTerms\"
-      name=\"acceptTerms\"
-      type=\"checkbox\"
-      class=\"required\"
-    />
-    <label for=\"acceptTerms\">I agree with the Terms and Conditions.</label>
-  </fieldset>
-</form>
-</div>
+<h2> Registration </h2>
+<!-- SmartWizard html -->
+ <form method='POST'>
+    <div id=\"smartwizard\">
+   
+        <ul class=\"nav\">
+            <li class=\"nav-item\">
+              <a class=\"nav-link\" href=\"#step-1\">
+                <strong>Step 1</strong> <br>Caregiver/Senior
+              </a>
+            </li>
+            <li class=\"nav-item\">
+              <a class=\"nav-link\" href=\"#step-2\">
+                <strong>Step 2</strong> <br>Services
+              </a>
+            </li>
+            <li class=\"nav-item\">
+              <a class=\"nav-link\" href=\"#step-3\">
+                <strong>Step 3</strong> <br>Location
+              </a>
+            </li>
+            <li class=\"nav-item\">
+              <a class=\"nav-link \" href=\"#step-4\">
+                <strong>Step 4</strong> <br>About you
+              </a>
+            </li>
+            <li class=\"nav-item\">
+              <a class=\"nav-link \" href=\"#step-5\">
+                <strong>Step 5</strong> <br>Image
+              </a>
+            </li>
+            <li class=\"nav-item\">
+              <a class=\"nav-link \" href=\"#step-6\">
+                <strong>Step 6</strong> <br>Email/Password
+              </a>
+            </li>
+        </ul>
 
+        <!--Caregiver or Senior-->
+        <div class=\"tab-content\">
+            <div id=\"step-1\" class=\"tab-pane\" role=\"tabpanel\" aria-labelledby=\"step-1\">
+                <h5>Are you a caregiver or a senior? </h5>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"radio\" name=\"role\" id=\"caregiverRadio\" checked>
+                <label class=\"form-check-label\" for=\"caregiverRadio\">
+                    Caregiver
+                </label>
+                </div>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"radio\" name=\"role\" id=\"seniorRadio\">
+                <label class=\"form-check-label\" for=\"seniorRadio\">
+                    Senior
+                </label>
+                </div>
+                <p id=\"roleErr\" class=\"errorMsg\"></p>
+        </div>
+        <!--Services -->
+            <div id=\"step-2\" class=\"tab-pane\" role=\"tabpanel\" aria-labelledby=\"step-2\">
+                <h5>What services do you offer/require?</h5>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"checkbox\" value=\"\" id=\"groceries\" name=\"shopping\">
+                <label class=\"form-check-label\" for=\"groceries\">
+                    Grocery shopping
+                </label>
+                </div>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"checkbox\" value=\"\" id=\"companionship\" name=\"companionship\">
+                <label class=\"form-check-label\" for=\"companionship\">
+                    Companionship
+                </label>
+                </div>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"checkbox\" value=\"\" id=\"cooking\" name=\"cooking\">
+                <label class=\"form-check-label\" for=\"cooking\">
+                    Cooking
+                </label>
+                </div>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"checkbox\" value=\"\" id=\"cleaning\" name=\"cleaning\">
+                <label class=\"form-check-label\" for=\"cleaning\">
+                    Cleaning
+                </label>
+                </div>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"checkbox\" value=\"\" id=\"medcare\" name=\"medcare\">
+                <label class=\"form-check-label\" for=\"medcare\">
+                    Basic medical care
+                </label>
+                </div>
+                <p id=\"serviceErr\" class=\"errorMsg\"></p>
+            </div>
 
-    ";
-        // line 96
-        if (($context["errorList"] ?? null)) {
-            // line 97
-            echo "        <ul class=\"errorMessage\">
-        ";
-            // line 98
-            $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable(($context["errorList"] ?? null));
-            foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-                // line 99
-                echo "            <li>";
-                echo twig_escape_filter($this->env, $context["error"], "html", null, true);
-                echo "<li>
-        ";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 101
-            echo "        </ul>
-    ";
-        }
-        // line 103
-        echo "
-
-
-
-    <div id=\"example-basic\">
-    <h3>Keyboard</h3>
-    <section>
-        <p>Try the keyboard navigation by clicking arrow left or right!</p>
-    </section>
-    <h3>Effects</h3>
-    <section>
-        <p>Wonderful transition effects.</p>
-    </section>
-    <h3>Pager</h3>
-    <section>
-        <p>The next and previous buttons help you to navigate through your content.</p>
-    </section>
-</div>
-
-
-
-
-
-    <div class=\"wrap\">
-        <form method=\"POST\">
-            <h2>User Registration</h2> 
-            <br>
-            <h5>Are you a caregiver or senior? </h5>
-            Caregiver   <input type=\"radio\" checked name=\"ans\" value=\"Caregiver\" />
-            Senior   <input type=\"radio\" name=\"ans\" value=\"Senior\"  /> <br>
-
-            
-         ";
-        // line 140
-        echo "            <br>
-            <h5>What services do you offer/require?</h5>
-
-            Grocery shopping   <input type=\"checkbox\" id=\"groceries\" name=\"shopping\" value=\"Grocery shopping\">
-            Companionship   <input type=\"checkbox\" id=\"companionship\" name=\"companionship\" value=\"Companionship\">
-            Cooking   <input type=\"checkbox\" id=\"coocking\" name=\"coocking\" value=\"Cooking\"><br><br>
-
+            <!--LOcation + contact -->
+            <div id=\"step-3\" class=\"tab-pane\" role=\"tabpanel\" aria-labelledby=\"step-3\">
             <h5>Location </h5>
-            Your address:
-            <input type=\"text\" name=\"address\" value=\"";
-        // line 149
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "address", [], "any", false, false, false, 149), "html", null, true);
-        echo "\"></input>
-            Postal code:
-            <input type=\"text\" name=\"postal\"  value=\"";
-        // line 151
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "postal", [], "any", false, false, false, 151), "html", null, true);
-        echo "\"></input><br><br>
-
-            <h5>Tell us more about yourself:</h5>
-            <textarea name=\"body\" cols=\"60\" rows=\"10\" value = \"";
-        // line 154
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "description", [], "any", false, false, false, 154), "html", null, true);
-        echo "\"></textarea><br>
-
+            <div class=\"row\">
+            <div class=\"col-md-5\">
+                <label for=\"address\" class=\"form-label\">Address</label>
+                <input type=\"text\" class=\"form-control\" name=\"address\" id=\"address\">
+                <label for=\"postal\" class=\"form-label\">Postal code</label>
+                <input type=\"text\" class=\"form-control\" name=\"postal\" id=\"postal\" placeholder=\"H1A1H1\">
+                <label for=\"phone\" class=\"form-label\">Phone number</label>
+                <input type=\"text\" class=\"form-control\" name=\"phone\" id=\"phone\" placeholder=\"000-000-00-00\">  
+            </div>
+            <div class=\"col-md-5\">
+                    <br><br>
+                 <p id=\"addressErr\" class=\"errorMsg\"></p>
+                  <br><br>
+                 <p id=\"postalErr\" class=\"errorMsg\"></p>
+                  <br><br>
+                 <p id=\"phoneErr\" class=\"errorMsg\"></p>
+            </div>
+            </div>
+            </div>
+            <!--Personal info-->
+            <div id=\"step-4\" class=\"tab-pane\" role=\"tabpanel\" aria-labelledby=\"step-4\">
+            <h5>Tell us a little more about yourself </h5>
+            <div class=\"row\">
+            <div class=\"col-md-3\">
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"radio\" name=\"gender\" id=\"male\" checked>
+                <label class=\"form-check-label\" for=\"male\">
+                    Male
+                </label>
+                </div>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"radio\" name=\"gender\" id=\"female\">
+                <label class=\"form-check-label\" for=\"female\">
+                    Female
+                </label>
+                </div>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"radio\" name=\"gender\" id=\"other\">
+                <label class=\"form-check-label\" for=\"other\">
+                    Other
+                </label>
+                </div>
+                 <label for=\"DOB\" class=\"form-label\">Date of birth</label>
+                <input type=\"text\" class=\"form-control\" name=\"DOB\" id=\"DOB\">
+            </div>
+            <div class=\"col-md-3\">
+                <label for=\"firstName\" class=\"form-label\">First name</label>
+                <input type=\"text\" class=\"form-control\" name=\"firstName\" id=\"firstName\">
+                <label for=\"lastName\" class=\"form-label\">Last name</label>
+                <input type=\"text\" class=\"form-control\" name=\"lastName\" id=\"lastName\">
+            </div>
+            <div class=\"col-md-3\">
+                <label for=\"description\" class=\"form-label\">Share something about yourself</label>
+                <textarea class=\"form-control\" id=\"description\" name=\"description\" rows=\"3\"></textarea>
+            </div>
+            </div>
+            </div>
+            <!--Image-->
+            <div id=\"step-5\" class=\"tab-pane\" role=\"tabpanel\" aria-labelledby=\"step-3\">
             <h5>Please upload your photo:</h5>
-            <input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\"><br><br>
+            <div class=\"input-group mb-3\">
+            <input type=\"file\" class=\"form-control\" name=\"image\" id=\"image\">
+            </div>
+            </div>
+            <!--Email/Password-->
+            <div id=\"step-6\" class=\"tab-pane\" role=\"tabpanel\" aria-labelledby=\"step-3\">
+            <div class=\"row\">
+            <div class=\"col-md-4\">
+            <label for=\"email\" class=\"form-label\">Email address</label>
+            <input type=\"email\" class=\"form-control\" id=\"email\" name = \"email\" placeholder=\"name@example.com\">
+            <label for=\"pass1\" class=\"form-label\">Password</label>
+            <input type=\"password\" class=\"form-control\" id=\"pass1\" name = \"pass1\">
+            <label for=\"pass2\" class=\"form-label\">Password(repeat)</label>
+            <input type=\"pass2\" class=\"form-control\" id=\"pass2\" name = \"pass2\">
+            </div>
+            <div class=\"col-md-4 align-self-center\">
+                 <input type=\"submit\" name=\"register\" id=\"form\" value=\"Register\" class=\"btn btn-primary\"/> 
+            </div>
+            </div>
 
-            <label>Email:</label>
-            <input type=\"text\" name=\"email\" value=\"";
-        // line 160
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "email", [], "any", false, false, false, 160), "html", null, true);
-        echo "\"></input>
-            <span class=\"errorMessage\" id=\"emailTaken\"></span>
-            <br>
-            <label>Password:</label>
-            <input type=\"password\" name=\"pass1\"></input><br>
-            <label>Password (repeat):</label>
-            <input type=\"password\" name=\"pass2\"></input>
-            <div class=\"g-recaptcha\" data-sitekey=\"6Lde2rsZAAAAAA_mSTwg1hdXZiSLbt3avb0I48jf\"></div>
-            <span id=\"captcha_error\"></span>
-            <input type=\"submit\" name=\"register\"  id=\"form\" class=\"btn btn-secondary\" style=\"width: 100px;\"></input>                                
-        </form>
+
 
             
-            
+           
+            </div>
+        </div>
+        
     </div>
-</div>
+    </form>
+
 ";
     }
 
@@ -247,7 +347,7 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
 
     public function getDebugInfo()
     {
-        return array (  218 => 160,  209 => 154,  203 => 151,  198 => 149,  187 => 140,  153 => 103,  149 => 101,  140 => 99,  136 => 98,  133 => 97,  131 => 96,  68 => 38,  59 => 32,  55 => 31,  48 => 3,  37 => 1,);
+        return array (  141 => 111,  59 => 32,  55 => 31,  48 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -284,149 +384,275 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
 
 {% block head %}
     {{ parent() }}
-     <script src=\"jquery.js\"></script> 
-    <script src=\"jquery.steps.js\"></script>
-{% endblock %}
+     <link href=\"https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+     <link href=\"styles/smart_wizard_dots.css\" rel=\"stylesheet\" type=\"text/css\" /> 
+     <script src=\"https://cdn.jsdelivr.net/npm/smartwizard@5/dist/js/jquery.smartWizard.min.js\" type=\"text/javascript\"></script>
+     <script type=\"text/javascript\" src=\"https://code.jquery.com/jquery-3.3.1.min.js\"></script>
+     <script>
+    
+
+
+
+     \$(document).ready(function(){
+ 
+        // SmartWizard initialize
+        \$('#smartwizard').smartWizard({
+            theme: 'dots',
+           
+            
+        }); 
+
+        \$(\"#smartwizard\").on(\"leaveStep\", function(e, anchorObject, currentStepIndex, nextStepIndex, stepDirection) {
+            \$stepIndex = \$('#smartwizard').smartWizard(\"getStepIndex\");
+            
+
+        if ((\$stepIndex == 0) && \$(\"input:checked\").length < 2)
+        {
+            \$(\"#roleErr\").html(\"Please select between caregiver and senior\");
+            return false;
+        }
+        else {
+            \$(\"#roleErr\").html(\"\");
+        }
+        if((\$stepIndex == 1) && \$(\"input[type=checkbox]:checked\").length < 1)
+        {
+            \$(\"#serviceErr\").html(\"Please select at least one service\");
+            return false;
+        }
+        else {
+            \$(\"#serviceErr\").html(\"\");
+        } 
+
+
+
+        if((\$stepIndex == 2) && (\$('input[name=address').val().length == 0))
+        {
+            \$(\"#addressErr\").html(\"Please enter address\");
+            return false;
+        }
+        else {
+            \$(\"#addressErr\").html(\"\");
+        }
+        if((\$stepIndex == 2) && (\$('input[name=postal').val().length == 0))
+        {
+            \$(\"#postalErr\").html(\"Please enter postal code\");
+            return false;
+        }
+        else {
+            \$(\"#postalErr\").html(\"\");
+        }
+        if((\$stepIndex == 2) && (\$('input[name=phone').val().length == 0))
+        {
+            \$(\"#phoneErr\").html(\"Please enter phone number\");
+            return false;
+        }
+        else {
+            \$(\"#phoneErr\").html(\"\");
+        }
+});
+    });
+
+//validation
+
+
+
+
+
+</script>
+{% endblock %}  
 
 
 {% block content %} 
+<img src=\"images/register.jpg\" class=\"d-block w-100 myImg\" alt=\"...\">
 <br>
 <br>
 <br>
 <br>
-<script>
-      \$(\"#wizard\").steps();
-    </script>
-<div id=\"wizard\">
-  <form id=\"form-3\" action=\"#\">
-  <h1>Account</h1>
-  <fieldset>
-    <legend>Account Information</legend>
-    <label for=\"userName\">User name *</label>
-    <input id=\"userName\" name=\"userName\" type=\"text\" class=\"required\" />
-    <label for=\"password\">Password *</label>
-    <input id=\"password\" name=\"password\" type=\"text\" class=\"required\" />
-    <label for=\"confirm\">Confirm Password *</label>
-    <input id=\"confirm\" name=\"confirm\" type=\"text\" class=\"required\" />
-    <p>(*) Mandatory</p>
-  </fieldset>
-  <h1>Profile</h1>
-  <fieldset>
-    <legend>Profile Information</legend>
-    <label for=\"name\">First name *</label>
-    <input id=\"name\" name=\"name\" type=\"text\" class=\"required\" />
-    <label for=\"surname\">Last name *</label>
-    <input id=\"surname\" name=\"surname\" type=\"text\" class=\"required\" />
-    <label for=\"email\">Email *</label>
-    <input id=\"email\" name=\"email\" type=\"text\" class=\"required email\" />
-    <label for=\"address\">Address</label>
-    <input id=\"address\" name=\"address\" type=\"text\" />
-    <label for=\"age\"
-      >Age (The warning step will show up if age is less than 18) *</label
-    >
-    <input id=\"age\" name=\"age\" type=\"text\" class=\"required number\" />
-    <p>(*) Mandatory</p>
-  </fieldset>
-  <h1>Warning</h1>
-  <fieldset>
-    <legend>You are to young</legend>
-    <p>Please go away ;-)</p>
-  </fieldset>
-  <h1>Finish</h1>
-  <fieldset>
-    <legend>Terms and Conditions</legend>
-    <input
-      id=\"acceptTerms\"
-      name=\"acceptTerms\"
-      type=\"checkbox\"
-      class=\"required\"
-    />
-    <label for=\"acceptTerms\">I agree with the Terms and Conditions.</label>
-  </fieldset>
-</form>
-</div>
-
-
-    {% if errorList %}
-        <ul class=\"errorMessage\">
-        {% for error in errorList %}
-            <li>{{error}}<li>
-        {% endfor %}
+<h2> Registration </h2>
+<!-- SmartWizard html -->
+ <form method='POST'>
+    <div id=\"smartwizard\">
+   
+        <ul class=\"nav\">
+            <li class=\"nav-item\">
+              <a class=\"nav-link\" href=\"#step-1\">
+                <strong>Step 1</strong> <br>Caregiver/Senior
+              </a>
+            </li>
+            <li class=\"nav-item\">
+              <a class=\"nav-link\" href=\"#step-2\">
+                <strong>Step 2</strong> <br>Services
+              </a>
+            </li>
+            <li class=\"nav-item\">
+              <a class=\"nav-link\" href=\"#step-3\">
+                <strong>Step 3</strong> <br>Location
+              </a>
+            </li>
+            <li class=\"nav-item\">
+              <a class=\"nav-link \" href=\"#step-4\">
+                <strong>Step 4</strong> <br>About you
+              </a>
+            </li>
+            <li class=\"nav-item\">
+              <a class=\"nav-link \" href=\"#step-5\">
+                <strong>Step 5</strong> <br>Image
+              </a>
+            </li>
+            <li class=\"nav-item\">
+              <a class=\"nav-link \" href=\"#step-6\">
+                <strong>Step 6</strong> <br>Email/Password
+              </a>
+            </li>
         </ul>
-    {% endif %}
 
+        <!--Caregiver or Senior-->
+        <div class=\"tab-content\">
+            <div id=\"step-1\" class=\"tab-pane\" role=\"tabpanel\" aria-labelledby=\"step-1\">
+                <h5>Are you a caregiver or a senior? </h5>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"radio\" name=\"role\" id=\"caregiverRadio\" checked>
+                <label class=\"form-check-label\" for=\"caregiverRadio\">
+                    Caregiver
+                </label>
+                </div>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"radio\" name=\"role\" id=\"seniorRadio\">
+                <label class=\"form-check-label\" for=\"seniorRadio\">
+                    Senior
+                </label>
+                </div>
+                <p id=\"roleErr\" class=\"errorMsg\"></p>
+        </div>
+        <!--Services -->
+            <div id=\"step-2\" class=\"tab-pane\" role=\"tabpanel\" aria-labelledby=\"step-2\">
+                <h5>What services do you offer/require?</h5>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"checkbox\" value=\"\" id=\"groceries\" name=\"shopping\">
+                <label class=\"form-check-label\" for=\"groceries\">
+                    Grocery shopping
+                </label>
+                </div>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"checkbox\" value=\"\" id=\"companionship\" name=\"companionship\">
+                <label class=\"form-check-label\" for=\"companionship\">
+                    Companionship
+                </label>
+                </div>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"checkbox\" value=\"\" id=\"cooking\" name=\"cooking\">
+                <label class=\"form-check-label\" for=\"cooking\">
+                    Cooking
+                </label>
+                </div>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"checkbox\" value=\"\" id=\"cleaning\" name=\"cleaning\">
+                <label class=\"form-check-label\" for=\"cleaning\">
+                    Cleaning
+                </label>
+                </div>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"checkbox\" value=\"\" id=\"medcare\" name=\"medcare\">
+                <label class=\"form-check-label\" for=\"medcare\">
+                    Basic medical care
+                </label>
+                </div>
+                <p id=\"serviceErr\" class=\"errorMsg\"></p>
+            </div>
 
-
-
-    <div id=\"example-basic\">
-    <h3>Keyboard</h3>
-    <section>
-        <p>Try the keyboard navigation by clicking arrow left or right!</p>
-    </section>
-    <h3>Effects</h3>
-    <section>
-        <p>Wonderful transition effects.</p>
-    </section>
-    <h3>Pager</h3>
-    <section>
-        <p>The next and previous buttons help you to navigate through your content.</p>
-    </section>
-</div>
-
-
-
-
-
-    <div class=\"wrap\">
-        <form method=\"POST\">
-            <h2>User Registration</h2> 
-            <br>
-            <h5>Are you a caregiver or senior? </h5>
-            Caregiver   <input type=\"radio\" checked name=\"ans\" value=\"Caregiver\" />
-            Senior   <input type=\"radio\" name=\"ans\" value=\"Senior\"  /> <br>
-
-            
-         {#   {% if \$_POST['ans'] == \"Caregiver\" %}
-            <h4>What services do you offer?</h4>
-            {% else %}
-            <h4>What services do you need?</h4>
-            {% endif %} #}
-            <br>
-            <h5>What services do you offer/require?</h5>
-
-            Grocery shopping   <input type=\"checkbox\" id=\"groceries\" name=\"shopping\" value=\"Grocery shopping\">
-            Companionship   <input type=\"checkbox\" id=\"companionship\" name=\"companionship\" value=\"Companionship\">
-            Cooking   <input type=\"checkbox\" id=\"coocking\" name=\"coocking\" value=\"Cooking\"><br><br>
-
+            <!--LOcation + contact -->
+            <div id=\"step-3\" class=\"tab-pane\" role=\"tabpanel\" aria-labelledby=\"step-3\">
             <h5>Location </h5>
-            Your address:
-            <input type=\"text\" name=\"address\" value=\"{{ v.address }}\"></input>
-            Postal code:
-            <input type=\"text\" name=\"postal\"  value=\"{{ v.postal }}\"></input><br><br>
-
-            <h5>Tell us more about yourself:</h5>
-            <textarea name=\"body\" cols=\"60\" rows=\"10\" value = \"{{v.description}}\"></textarea><br>
-
+            <div class=\"row\">
+            <div class=\"col-md-5\">
+                <label for=\"address\" class=\"form-label\">Address</label>
+                <input type=\"text\" class=\"form-control\" name=\"address\" id=\"address\">
+                <label for=\"postal\" class=\"form-label\">Postal code</label>
+                <input type=\"text\" class=\"form-control\" name=\"postal\" id=\"postal\" placeholder=\"H1A1H1\">
+                <label for=\"phone\" class=\"form-label\">Phone number</label>
+                <input type=\"text\" class=\"form-control\" name=\"phone\" id=\"phone\" placeholder=\"000-000-00-00\">  
+            </div>
+            <div class=\"col-md-5\">
+                    <br><br>
+                 <p id=\"addressErr\" class=\"errorMsg\"></p>
+                  <br><br>
+                 <p id=\"postalErr\" class=\"errorMsg\"></p>
+                  <br><br>
+                 <p id=\"phoneErr\" class=\"errorMsg\"></p>
+            </div>
+            </div>
+            </div>
+            <!--Personal info-->
+            <div id=\"step-4\" class=\"tab-pane\" role=\"tabpanel\" aria-labelledby=\"step-4\">
+            <h5>Tell us a little more about yourself </h5>
+            <div class=\"row\">
+            <div class=\"col-md-3\">
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"radio\" name=\"gender\" id=\"male\" checked>
+                <label class=\"form-check-label\" for=\"male\">
+                    Male
+                </label>
+                </div>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"radio\" name=\"gender\" id=\"female\">
+                <label class=\"form-check-label\" for=\"female\">
+                    Female
+                </label>
+                </div>
+                <div class=\"form-check\">
+                <input class=\"form-check-input\" type=\"radio\" name=\"gender\" id=\"other\">
+                <label class=\"form-check-label\" for=\"other\">
+                    Other
+                </label>
+                </div>
+                 <label for=\"DOB\" class=\"form-label\">Date of birth</label>
+                <input type=\"text\" class=\"form-control\" name=\"DOB\" id=\"DOB\">
+            </div>
+            <div class=\"col-md-3\">
+                <label for=\"firstName\" class=\"form-label\">First name</label>
+                <input type=\"text\" class=\"form-control\" name=\"firstName\" id=\"firstName\">
+                <label for=\"lastName\" class=\"form-label\">Last name</label>
+                <input type=\"text\" class=\"form-control\" name=\"lastName\" id=\"lastName\">
+            </div>
+            <div class=\"col-md-3\">
+                <label for=\"description\" class=\"form-label\">Share something about yourself</label>
+                <textarea class=\"form-control\" id=\"description\" name=\"description\" rows=\"3\"></textarea>
+            </div>
+            </div>
+            </div>
+            <!--Image-->
+            <div id=\"step-5\" class=\"tab-pane\" role=\"tabpanel\" aria-labelledby=\"step-3\">
             <h5>Please upload your photo:</h5>
-            <input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\"><br><br>
+            <div class=\"input-group mb-3\">
+            <input type=\"file\" class=\"form-control\" name=\"image\" id=\"image\">
+            </div>
+            </div>
+            <!--Email/Password-->
+            <div id=\"step-6\" class=\"tab-pane\" role=\"tabpanel\" aria-labelledby=\"step-3\">
+            <div class=\"row\">
+            <div class=\"col-md-4\">
+            <label for=\"email\" class=\"form-label\">Email address</label>
+            <input type=\"email\" class=\"form-control\" id=\"email\" name = \"email\" placeholder=\"name@example.com\">
+            <label for=\"pass1\" class=\"form-label\">Password</label>
+            <input type=\"password\" class=\"form-control\" id=\"pass1\" name = \"pass1\">
+            <label for=\"pass2\" class=\"form-label\">Password(repeat)</label>
+            <input type=\"pass2\" class=\"form-control\" id=\"pass2\" name = \"pass2\">
+            </div>
+            <div class=\"col-md-4 align-self-center\">
+                 <input type=\"submit\" name=\"register\" id=\"form\" value=\"Register\" class=\"btn btn-primary\"/> 
+            </div>
+            </div>
 
-            <label>Email:</label>
-            <input type=\"text\" name=\"email\" value=\"{{ v.email }}\"></input>
-            <span class=\"errorMessage\" id=\"emailTaken\"></span>
-            <br>
-            <label>Password:</label>
-            <input type=\"password\" name=\"pass1\"></input><br>
-            <label>Password (repeat):</label>
-            <input type=\"password\" name=\"pass2\"></input>
-            <div class=\"g-recaptcha\" data-sitekey=\"6Lde2rsZAAAAAA_mSTwg1hdXZiSLbt3avb0I48jf\"></div>
-            <span id=\"captcha_error\"></span>
-            <input type=\"submit\" name=\"register\"  id=\"form\" class=\"btn btn-secondary\" style=\"width: 100px;\"></input>                                
-        </form>
+
 
             
-            
+           
+            </div>
+        </div>
+        
     </div>
-</div>
+    </form>
+
 {% endblock %}
 ", "register.html.twig", "C:\\xampp\\htdocs\\helpinghand\\templates\\register.html.twig");
     }
