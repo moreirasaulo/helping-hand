@@ -45,3 +45,27 @@ DAILY SCRUM
 - start working on registration page
 3.Need assistance/figure things out:
 - clarify how to create wizard on registration page
+
+2021/02/19 Ksenia
+1. Done since last scrum:
+- index page (+list of caregivers)
+- login page
+2. To do until next Scrum:
+- finalize wizard in register page;
+- implement google and facebook login
+- implement caregivers page
+- implement 'rating' for caregivers
+3. Need assistance / figure things out
+- find out how email recovery link to user
+
+2021/02/19 Saulo
+1. Done since last scrum:
+- registration page
+- google verification
+- about us section
+2. To do until next Scrum:
+- implement 'my account' section
+- implement 'schedule' section for caregivers
+- implement 'book caregiver' section
+3. Need assistance / figure things out
+
