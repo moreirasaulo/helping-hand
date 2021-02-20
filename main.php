@@ -1,5 +1,7 @@
 <?php
 require_once 'init.php';
+
+
 $app->get('/internalerror', function ($request, $response, $args) {
     return $this->view->render($response, 'error_internal.html.twig');
 });

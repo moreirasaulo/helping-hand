@@ -51,7 +51,7 @@ class __TwigTemplate_71ed29176bf365557879fd6ee542ebd5aa43b662b47867c07cc44c80dd4
                         <a href=\"/helpinghand\" class=\"nav-link\">Home</a>
                     </li>
                     <li class=\"nav-item\">
-                        <a href=\"#\" class=\"nav-link\">About us</a>
+                        <a href=\"/helpinghand#aboutUs\" class=\"nav-link\">About us</a>
                     </li>
                     <li class=\"nav-item\">
                         <a href=\"#\" class=\"nav-link\">Our caregivers</a>
@@ -104,7 +104,7 @@ class __TwigTemplate_71ed29176bf365557879fd6ee542ebd5aa43b662b47867c07cc44c80dd4
                         <a href=\"/helpinghand\" class=\"nav-link\">Home</a>
                     </li>
                     <li class=\"nav-item\">
-                        <a href=\"#\" class=\"nav-link\">About us</a>
+                        <a href=\"/helpinghand#aboutUs\" class=\"nav-link\">About us</a>
                     </li>
                     <li class=\"nav-item\">
                         <a href=\"#\" class=\"nav-link\">Our caregivers</a>

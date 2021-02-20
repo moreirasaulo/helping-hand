@@ -12,7 +12,7 @@ $log = new Logger('main');
 $log->pushHandler(new StreamHandler(dirname(__FILE__) . '/logs/everything.log', Logger::DEBUG));
 $log->pushHandler(new StreamHandler(dirname(__FILE__) . '/logs/errors.log', Logger::ERROR));
 
-// authentication info and client's IP address in the log
+// always include authentication info and client's IP address in the log
 $log->pushProcessor(function ($record) {
     $record['extra']['user'] = isset($_SESSION['user']) ? $_SESSION['user']['email'] : '=anonymous=';
     $record['extra']['ip'] = $_SERVER['REMOTE_ADDR'];

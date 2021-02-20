@@ -1,14 +1,24 @@
-#mainCont {
-    margin: 30px auto;
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* banner base class */
+.banner {
+    margin-bottom: 4rem;
+  }
+  /* Since positioning the image, we need to help out the caption */
+  .carousel-caption {
+    bottom: 8rem;
+    z-index: 10;
+  }
   
-   
-}
-
-.carousel-caption {
-    padding-bottom: 100px;
-}
-
-.myImg {
-    height: 300px;
-}
-
+  /* Declare heights because of positioning of img element */
+  .carousel-item {
+    height: 33rem;
+  }
+  .carousel-item > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 32rem;
+  }

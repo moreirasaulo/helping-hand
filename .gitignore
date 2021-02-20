@@ -9,6 +9,10 @@ dist/
 
 tmplcache/
 vendor/
+/.vscode
+sftp.json
+/logs
+/uploads
 
 # Compiled Java class files
 *.class

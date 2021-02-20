@@ -56,7 +56,7 @@ class __TwigTemplate_4ad0082fd0e9affa197ad374bd53ffea799889a64c1afeee209716407e1
     {
         $macros = $this->macros;
         // line 13
-        $this->loadTemplate("carousel.html.twig", "index.html.twig", 13)->display($context);
+        $this->loadTemplate("banner.html.twig", "index.html.twig", 13)->display($context);
     }
 
     // line 16
@@ -69,6 +69,24 @@ class __TwigTemplate_4ad0082fd0e9affa197ad374bd53ffea799889a64c1afeee209716407e1
  
 
 <div id=\"mainCont\">
+<!--About us -->
+<div id=\"aboutUs\">
+<hr class=\"featurette-divider\">
+
+    <div class=\"row featurette\">
+      <div class=\"col-md-7\">
+        <h1 class=\"featurette-heading\">About us</h1>
+        <p class=\"lead\">At Helping Hand we welcome and celebrate all people, and deliver personalised and professional services to meet the needs of older 
+        people from all backgrounds. Our core values of compassion, respect, excellence and community show in everything we do.</p>
+      </div>
+      <div class=\"col-md-5\">
+        <img src=\"images/about.jpg\" class=\"d-block w-100 myImg\" alt=\"...\">
+      </div>
+    </div>
+  </div>
+
+    <hr class=\"featurette-divider\">
+
 \t<!-- Caregivers -->
     <h1 class=\"top-page-title text-center\">Featured caregivers</h1>
 
@@ -126,7 +144,7 @@ class __TwigTemplate_4ad0082fd0e9affa197ad374bd53ffea799889a64c1afeee209716407e1
 {% endblock %} #}
 
 {% block banner %}
-{% include ('carousel.html.twig') %}
+{% include ('banner.html.twig') %}
 {% endblock %}
 
 {% block content %}
@@ -135,6 +153,24 @@ class __TwigTemplate_4ad0082fd0e9affa197ad374bd53ffea799889a64c1afeee209716407e1
  
 
 <div id=\"mainCont\">
+<!--About us -->
+<div id=\"aboutUs\">
+<hr class=\"featurette-divider\">
+
+    <div class=\"row featurette\">
+      <div class=\"col-md-7\">
+        <h1 class=\"featurette-heading\">About us</h1>
+        <p class=\"lead\">At Helping Hand we welcome and celebrate all people, and deliver personalised and professional services to meet the needs of older 
+        people from all backgrounds. Our core values of compassion, respect, excellence and community show in everything we do.</p>
+      </div>
+      <div class=\"col-md-5\">
+        <img src=\"images/about.jpg\" class=\"d-block w-100 myImg\" alt=\"...\">
+      </div>
+    </div>
+  </div>
+
+    <hr class=\"featurette-divider\">
+
 \t<!-- Caregivers -->
     <h1 class=\"top-page-title text-center\">Featured caregivers</h1>
 

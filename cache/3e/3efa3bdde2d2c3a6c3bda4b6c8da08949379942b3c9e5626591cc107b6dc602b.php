@@ -26,6 +26,7 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
 
         $this->blocks = [
             'title' => [$this, 'block_title'],
+            'head' => [$this, 'block_head'],
             'content' => [$this, 'block_content'],
         ];
     }
@@ -50,7 +51,20 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
         echo "Registration page";
     }
 
-    // line 30
+    // line 31
+    public function block_head($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        // line 32
+        echo "    ";
+        $this->displayParentBlock("head", $context, $blocks);
+        echo "
+     <script src=\"jquery.js\"></script> 
+    <script src=\"jquery.steps.js\"></script>
+";
+    }
+
+    // line 38
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -59,17 +73,70 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
 <br>
 <br>
 <br>
+<script>
+      \$(\"#wizard\").steps();
+    </script>
+<div id=\"wizard\">
+  <form id=\"form-3\" action=\"#\">
+  <h1>Account</h1>
+  <fieldset>
+    <legend>Account Information</legend>
+    <label for=\"userName\">User name *</label>
+    <input id=\"userName\" name=\"userName\" type=\"text\" class=\"required\" />
+    <label for=\"password\">Password *</label>
+    <input id=\"password\" name=\"password\" type=\"text\" class=\"required\" />
+    <label for=\"confirm\">Confirm Password *</label>
+    <input id=\"confirm\" name=\"confirm\" type=\"text\" class=\"required\" />
+    <p>(*) Mandatory</p>
+  </fieldset>
+  <h1>Profile</h1>
+  <fieldset>
+    <legend>Profile Information</legend>
+    <label for=\"name\">First name *</label>
+    <input id=\"name\" name=\"name\" type=\"text\" class=\"required\" />
+    <label for=\"surname\">Last name *</label>
+    <input id=\"surname\" name=\"surname\" type=\"text\" class=\"required\" />
+    <label for=\"email\">Email *</label>
+    <input id=\"email\" name=\"email\" type=\"text\" class=\"required email\" />
+    <label for=\"address\">Address</label>
+    <input id=\"address\" name=\"address\" type=\"text\" />
+    <label for=\"age\"
+      >Age (The warning step will show up if age is less than 18) *</label
+    >
+    <input id=\"age\" name=\"age\" type=\"text\" class=\"required number\" />
+    <p>(*) Mandatory</p>
+  </fieldset>
+  <h1>Warning</h1>
+  <fieldset>
+    <legend>You are to young</legend>
+    <p>Please go away ;-)</p>
+  </fieldset>
+  <h1>Finish</h1>
+  <fieldset>
+    <legend>Terms and Conditions</legend>
+    <input
+      id=\"acceptTerms\"
+      name=\"acceptTerms\"
+      type=\"checkbox\"
+      class=\"required\"
+    />
+    <label for=\"acceptTerms\">I agree with the Terms and Conditions.</label>
+  </fieldset>
+</form>
+</div>
+
+
     ";
-        // line 35
+        // line 96
         if (($context["errorList"] ?? null)) {
-            // line 36
+            // line 97
             echo "        <ul class=\"errorMessage\">
         ";
-            // line 37
+            // line 98
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["errorList"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-                // line 38
+                // line 99
                 echo "            <li>";
                 echo twig_escape_filter($this->env, $context["error"], "html", null, true);
                 echo "<li>
@@ -78,12 +145,35 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 40
+            // line 101
             echo "        </ul>
     ";
         }
-        // line 42
-        echo "    <div class=\"wrap\">
+        // line 103
+        echo "
+
+
+
+    <div id=\"example-basic\">
+    <h3>Keyboard</h3>
+    <section>
+        <p>Try the keyboard navigation by clicking arrow left or right!</p>
+    </section>
+    <h3>Effects</h3>
+    <section>
+        <p>Wonderful transition effects.</p>
+    </section>
+    <h3>Pager</h3>
+    <section>
+        <p>The next and previous buttons help you to navigate through your content.</p>
+    </section>
+</div>
+
+
+
+
+
+    <div class=\"wrap\">
         <form method=\"POST\">
             <h2>User Registration</h2> 
             <br>
@@ -93,7 +183,7 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
 
             
          ";
-        // line 56
+        // line 140
         echo "            <br>
             <h5>What services do you offer/require?</h5>
 
@@ -104,19 +194,19 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
             <h5>Location </h5>
             Your address:
             <input type=\"text\" name=\"address\" value=\"";
-        // line 65
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "address", [], "any", false, false, false, 65), "html", null, true);
+        // line 149
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "address", [], "any", false, false, false, 149), "html", null, true);
         echo "\"></input>
             Postal code:
             <input type=\"text\" name=\"postal\"  value=\"";
-        // line 67
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "postal", [], "any", false, false, false, 67), "html", null, true);
+        // line 151
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "postal", [], "any", false, false, false, 151), "html", null, true);
         echo "\"></input><br><br>
 
             <h5>Tell us more about yourself:</h5>
             <textarea name=\"body\" cols=\"60\" rows=\"10\" value = \"";
-        // line 70
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "description", [], "any", false, false, false, 70), "html", null, true);
+        // line 154
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "description", [], "any", false, false, false, 154), "html", null, true);
         echo "\"></textarea><br>
 
             <h5>Please upload your photo:</h5>
@@ -124,8 +214,8 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
 
             <label>Email:</label>
             <input type=\"text\" name=\"email\" value=\"";
-        // line 76
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "email", [], "any", false, false, false, 76), "html", null, true);
+        // line 160
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["v"] ?? null), "email", [], "any", false, false, false, 160), "html", null, true);
         echo "\"></input>
             <span class=\"errorMessage\" id=\"emailTaken\"></span>
             <br>
@@ -157,7 +247,7 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
 
     public function getDebugInfo()
     {
-        return array (  128 => 76,  119 => 70,  113 => 67,  108 => 65,  97 => 56,  86 => 42,  82 => 40,  73 => 38,  69 => 37,  66 => 36,  64 => 35,  54 => 30,  47 => 3,  36 => 1,);
+        return array (  218 => 160,  209 => 154,  203 => 151,  198 => 149,  187 => 140,  153 => 103,  149 => 101,  140 => 99,  136 => 98,  133 => 97,  131 => 96,  68 => 38,  59 => 32,  55 => 31,  48 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -191,11 +281,72 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
     </script>
 {% endblock %} #}
 
+
+{% block head %}
+    {{ parent() }}
+     <script src=\"jquery.js\"></script> 
+    <script src=\"jquery.steps.js\"></script>
+{% endblock %}
+
+
 {% block content %} 
 <br>
 <br>
 <br>
 <br>
+<script>
+      \$(\"#wizard\").steps();
+    </script>
+<div id=\"wizard\">
+  <form id=\"form-3\" action=\"#\">
+  <h1>Account</h1>
+  <fieldset>
+    <legend>Account Information</legend>
+    <label for=\"userName\">User name *</label>
+    <input id=\"userName\" name=\"userName\" type=\"text\" class=\"required\" />
+    <label for=\"password\">Password *</label>
+    <input id=\"password\" name=\"password\" type=\"text\" class=\"required\" />
+    <label for=\"confirm\">Confirm Password *</label>
+    <input id=\"confirm\" name=\"confirm\" type=\"text\" class=\"required\" />
+    <p>(*) Mandatory</p>
+  </fieldset>
+  <h1>Profile</h1>
+  <fieldset>
+    <legend>Profile Information</legend>
+    <label for=\"name\">First name *</label>
+    <input id=\"name\" name=\"name\" type=\"text\" class=\"required\" />
+    <label for=\"surname\">Last name *</label>
+    <input id=\"surname\" name=\"surname\" type=\"text\" class=\"required\" />
+    <label for=\"email\">Email *</label>
+    <input id=\"email\" name=\"email\" type=\"text\" class=\"required email\" />
+    <label for=\"address\">Address</label>
+    <input id=\"address\" name=\"address\" type=\"text\" />
+    <label for=\"age\"
+      >Age (The warning step will show up if age is less than 18) *</label
+    >
+    <input id=\"age\" name=\"age\" type=\"text\" class=\"required number\" />
+    <p>(*) Mandatory</p>
+  </fieldset>
+  <h1>Warning</h1>
+  <fieldset>
+    <legend>You are to young</legend>
+    <p>Please go away ;-)</p>
+  </fieldset>
+  <h1>Finish</h1>
+  <fieldset>
+    <legend>Terms and Conditions</legend>
+    <input
+      id=\"acceptTerms\"
+      name=\"acceptTerms\"
+      type=\"checkbox\"
+      class=\"required\"
+    />
+    <label for=\"acceptTerms\">I agree with the Terms and Conditions.</label>
+  </fieldset>
+</form>
+</div>
+
+
     {% if errorList %}
         <ul class=\"errorMessage\">
         {% for error in errorList %}
@@ -203,6 +354,29 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
         {% endfor %}
         </ul>
     {% endif %}
+
+
+
+
+    <div id=\"example-basic\">
+    <h3>Keyboard</h3>
+    <section>
+        <p>Try the keyboard navigation by clicking arrow left or right!</p>
+    </section>
+    <h3>Effects</h3>
+    <section>
+        <p>Wonderful transition effects.</p>
+    </section>
+    <h3>Pager</h3>
+    <section>
+        <p>The next and previous buttons help you to navigate through your content.</p>
+    </section>
+</div>
+
+
+
+
+
     <div class=\"wrap\">
         <form method=\"POST\">
             <h2>User Registration</h2> 

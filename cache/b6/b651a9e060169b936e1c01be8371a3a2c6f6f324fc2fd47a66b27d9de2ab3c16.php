@@ -53,29 +53,27 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
         // line 24
         $this->loadTemplate("navbar.html.twig", "master.html.twig", 24)->display($context);
         // line 25
-        echo "   
+        echo "
   ";
         // line 26
         $this->displayBlock('banner', $context, $blocks);
         // line 27
-        echo "  
+        echo "   
+  
     <div class='container'>
-
-
-            ";
-        // line 31
+      ";
+        // line 30
         $this->displayBlock('content', $context, $blocks);
-        // line 32
-        echo "    
-    </div>
+        // line 31
+        echo "    </div>
 
 
 
 <footer class=\"footer mt-auto py-3\" id=\"footer\">
  ";
-        // line 38
+        // line 36
         $this->displayBlock('footer', $context, $blocks);
-        // line 56
+        // line 54
         echo "</footer>
 
     
@@ -102,7 +100,7 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
     <!-- Bootstrap CSS -->
     <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" integrity=\"sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z\" crossorigin=\"anonymous\">
     <!--Custom CSS-->
-    <link rel=\"stylesheet\" href=\"/styles.css\">
+    <link rel=\"stylesheet\" href=\"styles.css\">
       <!-- Favicon-->
       <link rel=\"icon\" type=\"image/png\" href=\"images/favicon.png\">
     <!--Font-->
@@ -126,20 +124,19 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
     public function block_banner($context, array $blocks = [])
     {
         $macros = $this->macros;
-        echo " ";
     }
 
-    // line 31
+    // line 30
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
     }
 
-    // line 38
+    // line 36
     public function block_footer($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 39
+        // line 37
         echo "  <div class=\"container container-footer\">
     <div class=\"row footer-text justify-content-md-center align-items-center\">
       <div class=\"col footer-left\"> 
@@ -171,7 +168,7 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
 
     public function getDebugInfo()
     {
-        return array (  143 => 39,  139 => 38,  133 => 31,  126 => 26,  115 => 19,  99 => 5,  95 => 4,  79 => 56,  77 => 38,  69 => 32,  67 => 31,  61 => 27,  59 => 26,  56 => 25,  54 => 24,  49 => 21,  47 => 4,  42 => 1,);
+        return array (  140 => 37,  136 => 36,  130 => 30,  124 => 26,  113 => 19,  97 => 5,  93 => 4,  77 => 54,  75 => 36,  68 => 31,  66 => 30,  61 => 27,  59 => 26,  56 => 25,  54 => 24,  49 => 21,  47 => 4,  42 => 1,);
     }
 
     public function getSourceContext()
@@ -186,7 +183,7 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
     <!-- Bootstrap CSS -->
     <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" integrity=\"sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z\" crossorigin=\"anonymous\">
     <!--Custom CSS-->
-    <link rel=\"stylesheet\" href=\"/styles.css\">
+    <link rel=\"stylesheet\" href=\"styles.css\">
       <!-- Favicon-->
       <link rel=\"icon\" type=\"image/png\" href=\"images/favicon.png\">
     <!--Font-->
@@ -200,14 +197,12 @@ class __TwigTemplate_c1a79f92a2c94b35c181e08e8c1f22355dcaa51c3b5da018ee91cdf78d4
   <body>
 
   {% include ('navbar.html.twig') %}
+
+  {% block banner %}{% endblock %}
    
-  {% block banner %} {% endblock %}
   
     <div class='container'>
-
-
-            {% block content %}{% endblock %}
-    
+      {% block content %}{% endblock %}
     </div>
 
 

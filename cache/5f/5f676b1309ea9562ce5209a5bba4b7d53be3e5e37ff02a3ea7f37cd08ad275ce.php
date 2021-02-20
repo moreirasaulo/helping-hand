@@ -34,7 +34,28 @@ class __TwigTemplate_9d3fd082fe49b3f824ee45fa7a5642c078f9b8a750b056f4e97cc6572d9
     {
         $macros = $this->macros;
         // line 1
-        echo "<img src=\"/images.caregiver1\" class=\"img-fluid\" alt=\"...\">";
+        echo "
+
+<div id=\"banner\" class=\"carousel slide\" data-bs-ride=\"carousel\">
+  <div class=\"carousel-inner\">
+    <div class=\"carousel-item active\">
+      <img src=\"images/carousel2.jpg\" class=\"d-block w-100 myImg\" alt=\"...\">
+      <div class=\"carousel-caption d-none d-md-block\">
+      <h1>Helping hand care</h1>
+            <p>Some representative placeholder content for the third slide of this carousel</p>
+                <p><a class=\"btn btn-lg btn-primary\" href=\"register\">Register now</a></p>
+      </div>
+
+        
+    </div>
+
+  </div>
+</div>
+
+
+
+
+";
     }
 
     public function getTemplateName()
@@ -49,6 +70,27 @@ class __TwigTemplate_9d3fd082fe49b3f824ee45fa7a5642c078f9b8a750b056f4e97cc6572d9
 
     public function getSourceContext()
     {
-        return new Source("<img src=\"/images.caregiver1\" class=\"img-fluid\" alt=\"...\">", "banner.html.twig", "C:\\xampp\\htdocs\\helpinghand\\templates\\banner.html.twig");
+        return new Source("
+
+<div id=\"banner\" class=\"carousel slide\" data-bs-ride=\"carousel\">
+  <div class=\"carousel-inner\">
+    <div class=\"carousel-item active\">
+      <img src=\"images/carousel2.jpg\" class=\"d-block w-100 myImg\" alt=\"...\">
+      <div class=\"carousel-caption d-none d-md-block\">
+      <h1>Helping hand care</h1>
+            <p>Some representative placeholder content for the third slide of this carousel</p>
+                <p><a class=\"btn btn-lg btn-primary\" href=\"register\">Register now</a></p>
+      </div>
+
+        
+    </div>
+
+  </div>
+</div>
+
+
+
+
+", "banner.html.twig", "C:\\xampp\\htdocs\\helpinghand\\templates\\banner.html.twig");
     }
 }
