@@ -59,6 +59,7 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
         echo "    ";
         $this->displayParentBlock("head", $context, $blocks);
         echo "
+    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>
      <link href=\"https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css\" rel=\"stylesheet\" type=\"text/css\" />
      <link href=\"styles/smart_wizard_dots.css\" rel=\"stylesheet\" type=\"text/css\" /> 
      <script src=\"https://cdn.jsdelivr.net/npm/smartwizard@5/dist/js/jquery.smartWizard.min.js\" type=\"text/javascript\"></script>
@@ -76,6 +77,22 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
            
             
         }); 
+
+
+        \$('input[name=email]').on('paste blur change input', function() {
+                var email = \$('input[name=email]').val();
+                \$(\"#emailTaken\").load(\"/isemailtaken/\" + email);
+            });
+
+            \$('input[name=userName]').on('paste blur change input', function() {
+                var userName = \$('input[name=userName]').val();
+                \$(\"#userNameTaken\").load(\"/isuserNametaken/\" + userName);
+            });
+           
+            \$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+                console.log(\"Ajax error occured on \" + settings.url);
+                alert(\"Ajax error occured\");
+            });
 
         \$(\"#smartwizard\").on(\"leaveStep\", function(e, anchorObject, currentStepIndex, nextStepIndex, stepDirection) {
             \$stepIndex = \$('#smartwizard').smartWizard(\"getStepIndex\");
@@ -137,7 +154,7 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
 ";
     }
 
-    // line 111
+    // line 128
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -311,6 +328,7 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
             <div class=\"row\">
             <div class=\"col-md-4\">
             <label for=\"email\" class=\"form-label\">Email address</label>
+            <p class=\"errorMsg\" id=\"nothisemail\"></span><br />
             <input type=\"email\" class=\"form-control\" id=\"email\" name = \"email\" placeholder=\"name@example.com\">
             <label for=\"pass1\" class=\"form-label\">Password</label>
             <input type=\"password\" class=\"form-control\" id=\"pass1\" name = \"pass1\">
@@ -347,7 +365,7 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
 
     public function getDebugInfo()
     {
-        return array (  141 => 111,  59 => 32,  55 => 31,  48 => 3,  37 => 1,);
+        return array (  158 => 128,  59 => 32,  55 => 31,  48 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -384,6 +402,7 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
 
 {% block head %}
     {{ parent() }}
+    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>
      <link href=\"https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css\" rel=\"stylesheet\" type=\"text/css\" />
      <link href=\"styles/smart_wizard_dots.css\" rel=\"stylesheet\" type=\"text/css\" /> 
      <script src=\"https://cdn.jsdelivr.net/npm/smartwizard@5/dist/js/jquery.smartWizard.min.js\" type=\"text/javascript\"></script>
@@ -401,6 +420,22 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
            
             
         }); 
+
+
+        \$('input[name=email]').on('paste blur change input', function() {
+                var email = \$('input[name=email]').val();
+                \$(\"#emailTaken\").load(\"/isemailtaken/\" + email);
+            });
+
+            \$('input[name=userName]').on('paste blur change input', function() {
+                var userName = \$('input[name=userName]').val();
+                \$(\"#userNameTaken\").load(\"/isuserNametaken/\" + userName);
+            });
+           
+            \$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+                console.log(\"Ajax error occured on \" + settings.url);
+                alert(\"Ajax error occured\");
+            });
 
         \$(\"#smartwizard\").on(\"leaveStep\", function(e, anchorObject, currentStepIndex, nextStepIndex, stepDirection) {
             \$stepIndex = \$('#smartwizard').smartWizard(\"getStepIndex\");
@@ -632,6 +667,7 @@ class __TwigTemplate_9910336860b50e5682cc2bde9d9858cee42485523b871b38360c19d64c5
             <div class=\"row\">
             <div class=\"col-md-4\">
             <label for=\"email\" class=\"form-label\">Email address</label>
+            <p class=\"errorMsg\" id=\"nothisemail\"></span><br />
             <input type=\"email\" class=\"form-control\" id=\"email\" name = \"email\" placeholder=\"name@example.com\">
             <label for=\"pass1\" class=\"form-label\">Password</label>
             <input type=\"password\" class=\"form-control\" id=\"pass1\" name = \"pass1\">

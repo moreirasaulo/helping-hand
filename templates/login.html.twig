@@ -2,16 +2,16 @@
 
 {% block title %}Login{% endblock %}
 
-{#{% block head %}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-<link rel="stylesheet" href="../css/loginregister.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="js/jquery-2.2.0.min.js"></script>
-<script>
+
+
+{% block head %}
+    {{ parent() }}
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  <!-- include jquery -->
+    <script>
 $(document).ready(function() {
     $('input[name=email]').on('paste, blur change', function() {
         var email = $('input[name=email]').val();
-        $("#emaildoesnotexist").load("/emaildoesnotexist/" + email);
+        $("#nothisemail").load("/nothisemail/" + email);
     });
     
     $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
@@ -21,7 +21,9 @@ $(document).ready(function() {
 });
 
 </script>
-{% endblock %} #}
+
+{% endblock %}
+
 
 {% block content %}
 <br>
@@ -32,7 +34,7 @@ $(document).ready(function() {
 <br>
 <br>
     {% if errorList %}
-            <ul class="errorMessage">
+            <ul class="errorMsg">
             {% for error in errorList %}
                 <li>{{error}}<li>
             {% endfor %}
@@ -42,9 +44,10 @@ $(document).ready(function() {
     <h4> Log in </h4>
     <div class="row">
             <div class="col-md-4">
-            <form method="POST" id="myForm">
+            <form method="POST">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" name = "email" placeholder="name@example.com">
+            <input type="email" name="email" id="email" value="" required="required"></input>
+            <span class="errorMsg" id="nothisemail"></span><br>
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name = "password">
             <input type="submit" name="login" id="login" value="Log in" class="btn btn-primary"/> <br><br>

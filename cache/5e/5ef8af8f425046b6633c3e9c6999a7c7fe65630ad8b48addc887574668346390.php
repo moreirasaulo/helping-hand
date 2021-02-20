@@ -26,6 +26,7 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
 
         $this->blocks = [
             'title' => [$this, 'block_title'],
+            'head' => [$this, 'block_head'],
             'content' => [$this, 'block_content'],
         ];
     }
@@ -50,11 +51,38 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
         echo "Login";
     }
 
-    // line 26
+    // line 7
+    public function block_head($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        // line 8
+        echo "    ";
+        $this->displayParentBlock("head", $context, $blocks);
+        echo "
+ <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>  <!-- include jquery -->
+    <script>
+\$(document).ready(function() {
+    \$('input[name=email]').on('paste, blur change', function() {
+        var email = \$('input[name=email]').val();
+        \$(\"#nothisemail\").load(\"/nothisemail/\" + email);
+    });
+    
+    \$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+        console.log(\"Ajax error occured on \" + settings.url);
+        alert(\"Ajax error occured\");
+    });
+});
+
+</script>
+
+";
+    }
+
+    // line 28
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 27
+        // line 29
         echo "<br>
 <br>
 <br>
@@ -63,16 +91,16 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
 <br>
 <br>
     ";
-        // line 34
+        // line 36
         if (($context["errorList"] ?? null)) {
-            // line 35
-            echo "            <ul class=\"errorMessage\">
+            // line 37
+            echo "            <ul class=\"errorMsg\">
             ";
-            // line 36
+            // line 38
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["errorList"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-                // line 37
+                // line 39
                 echo "                <li>";
                 echo twig_escape_filter($this->env, $context["error"], "html", null, true);
                 echo "<li>
@@ -81,18 +109,19 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 39
+            // line 41
             echo "            </ul>
         ";
         }
-        // line 41
+        // line 43
         echo "    <div class=\"wrap\">
     <h4> Log in </h4>
     <div class=\"row\">
             <div class=\"col-md-4\">
-            <form method=\"POST\" id=\"myForm\">
+            <form method=\"POST\">
             <label for=\"email\" class=\"form-label\">Email address</label>
-            <input type=\"email\" class=\"form-control\" id=\"email\" name = \"email\" placeholder=\"name@example.com\">
+            <input type=\"email\" name=\"email\" id=\"email\" value=\"\" required=\"required\"></input>
+            <span class=\"errorMsg\" id=\"nothisemail\"></span><br>
             <label for=\"password\" class=\"form-label\">Password</label>
             <input type=\"password\" class=\"form-control\" id=\"password\" name = \"password\">
             <input type=\"submit\" name=\"login\" id=\"login\" value=\"Log in\" class=\"btn btn-primary\"/> <br><br>
@@ -122,7 +151,7 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
 
     public function getDebugInfo()
     {
-        return array (  89 => 41,  85 => 39,  76 => 37,  72 => 36,  69 => 35,  67 => 34,  58 => 27,  54 => 26,  47 => 3,  36 => 1,);
+        return array (  117 => 43,  113 => 41,  104 => 39,  100 => 38,  97 => 37,  95 => 36,  86 => 29,  82 => 28,  59 => 8,  55 => 7,  48 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -131,16 +160,16 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
 
 {% block title %}Login{% endblock %}
 
-{#{% block head %}
-<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\" integrity=\"sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN\" crossorigin=\"anonymous\">
-<link rel=\"stylesheet\" href=\"../css/loginregister.css\" />
-<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>
-<script src=\"js/jquery-2.2.0.min.js\"></script>
-<script>
+
+
+{% block head %}
+    {{ parent() }}
+ <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>  <!-- include jquery -->
+    <script>
 \$(document).ready(function() {
     \$('input[name=email]').on('paste, blur change', function() {
         var email = \$('input[name=email]').val();
-        \$(\"#emaildoesnotexist\").load(\"/emaildoesnotexist/\" + email);
+        \$(\"#nothisemail\").load(\"/nothisemail/\" + email);
     });
     
     \$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
@@ -150,7 +179,9 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
 });
 
 </script>
-{% endblock %} #}
+
+{% endblock %}
+
 
 {% block content %}
 <br>
@@ -161,7 +192,7 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
 <br>
 <br>
     {% if errorList %}
-            <ul class=\"errorMessage\">
+            <ul class=\"errorMsg\">
             {% for error in errorList %}
                 <li>{{error}}<li>
             {% endfor %}
@@ -171,9 +202,10 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
     <h4> Log in </h4>
     <div class=\"row\">
             <div class=\"col-md-4\">
-            <form method=\"POST\" id=\"myForm\">
+            <form method=\"POST\">
             <label for=\"email\" class=\"form-label\">Email address</label>
-            <input type=\"email\" class=\"form-control\" id=\"email\" name = \"email\" placeholder=\"name@example.com\">
+            <input type=\"email\" name=\"email\" id=\"email\" value=\"\" required=\"required\"></input>
+            <span class=\"errorMsg\" id=\"nothisemail\"></span><br>
             <label for=\"password\" class=\"form-label\">Password</label>
             <input type=\"password\" class=\"form-control\" id=\"password\" name = \"password\">
             <input type=\"submit\" name=\"login\" id=\"login\" value=\"Log in\" class=\"btn btn-primary\"/> <br><br>

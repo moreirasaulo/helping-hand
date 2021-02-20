@@ -28,7 +28,7 @@ if (strpos($_SERVER['HTTP_HOST'], "ipd23.com") !== false) {
 else {
     DB::$dbName = 'helpinghand';
     DB::$user = 'helpinghand';
-    DB::$password = 'mHMnToqkLNc8c5LI';   
+    DB::$password = '3gRTDYFDKtlX99ok';   //3gRTDYFDKtlX99ok   //mHMnToqkLNc8c5LI
     DB::$host = 'localhost';
     DB::$port = 3333;
 }

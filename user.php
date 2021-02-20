@@ -41,6 +41,20 @@ $app->post('/login', function ($request, $response, $args) use ($log) {
     }
 });
 
+//check if email exists in db (login)  AJAX
+$app->get('/doesemailexist/[{email}]', function ($request, $response, $args) {
+    $email = isset($args['email']) ? $args['email'] : "";
+
+    $record = DB::queryFirstRow("SELECT id FROM users WHERE email=%s", $email);
+    if (!$record) {
+        return $response->write("This email is not registered");
+    } else {
+        return $response->write("");
+    }
+});
+
+
+
 //Logout
 $app->get('/logout', function ($request, $response, $args) use ($log) {
     unset($_SESSION['user']);
