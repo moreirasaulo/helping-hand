@@ -69,3 +69,25 @@ DAILY SCRUM
 - implement 'book caregiver' section
 3. Need assistance / figure things out
 
+
+
+2021/02/21 Ksenia
+1. Done since last scrum:
+- finalized wizard fro registration page
+- implemented caregivers page
+2. To do until next Scrum:
+- add ajax verification for email
+- implement google and facebook login
+- implement 'rating' for caregivers
+3. Need assistance / figure things out
+
+2021/02/21 Saulo
+1. Done since last scrum:
+- implemented 'my account' section
+- implemented photo upload for user
+2. To do until next Scrum:
+- implement admin page
+- implement 'schedule' section for caregivers
+- implement 'book caregiver' section
+3. Need assistance / figure things out
+
