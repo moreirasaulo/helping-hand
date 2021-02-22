@@ -1,0 +1,158 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Caregiver account{% endblock %}
+
+{% block head %}
+{{ parent() }}
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+
+     $("form input[type=text],form input[type=checkbox], form textarea").prop("disabled",true);
+     $("input[name=update]").hide();
+     $("input[name=photo]").hide();
+
+
+     $("button[name=enableupdate]").on("click",function(){
+
+             $("input[type=text],input[type=checkbox], textarea").removeAttr("disabled");
+             $(this).hide();
+             $("input[name=update]").show();
+              $("input[name=photo]").show();
+     })
+
+     $("input[name=save]").on("click",function(){
+
+         $("input[type=text],input[type=checkbox]").prop("disabled",true);
+     })
+
+
+ })
+</script>
+ 
+	
+{% endblock %}
+
+{% block user %}
+  {% if userSession %}
+  <br><br><br>
+		<p>Logged in as {{userSession.firstName}} {{userSession.lastName}} </p>                                                                 
+		{% endif %}
+{% endblock %}
+
+{% block content %}
+<br><br><br><br><br>
+{% if errorList %}
+            <ul class="errorMsg">
+            {% for error in errorList %}
+                <li>{{error}}</li>
+            {% endfor %}
+            </ul>
+    {% endif %}
+{% if success %}
+            <p>{{success}}</p>
+    {% endif %}
+
+
+<div class="container-fluid user-select-none">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" name="personaldata" aria-current="page"  href="accountcaregiver">
+              <span data-feather="home"></span>
+              Personal data
+
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"  href="caregiverbookings">
+              <span data-feather="file"></span>
+              Bookings
+            </a>
+          </li>
+          {% if userSession.role == "caregiver" %}
+            <li class="nav-item">
+            <a class="nav-link"  href="#">
+              <span data-feather="shopping-cart"></span>
+              Manage schedule
+            </a>
+          </li>                                                        
+		{% endif %}
+        </ul>
+
+       
+      </div>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2 user-select-none">{% if userSession.role == "client" %}
+            Client account
+            {% else %}
+			Caregiver account                                                           
+		{% endif %}</h1>
+        
+      </div>
+
+    <div id="changingcontent" class="container user-select-none">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="row">
+                 <div class="col-md-5">
+                            <img class="img-fluid img-thumbnail rounded" src="images/caregiver1.jpg" alt="caregiver">
+                             <input type="file" class="form-control" name="photo" id="image">
+                    </div>
+                    <div class="col-md-5">
+                    <label for="firstName"  class="form-label user-select-none">First name</label>
+                    <input type="text" disabled class="form-control user-select-none" name="firstName" value = "{{userSession.firstName}}" id="firstName">
+                    <label for="lastName" class="form-label user-select-none">Last name</label>
+                    <input type="text" disabled class="form-control user-select-none" name="lastName" value = "{{userSession.lastName}}" id="lastName">
+                    <label for="description" class="form-label user-select-none">About me</label>
+                    <textarea class="form-control user-select-none" id="description" name="description" disabled rows="8">{{userSession.description}}</textarea>
+                </div>    
+            </div>
+
+            <hr class="featurette-divider">
+
+            <div class="row">
+            {% if services %}
+                    <div class="col-md-10">
+                    <span>My services</span>
+                {% for service in services %}
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="{{service.description}}" checked disabled>
+                        <label class="form-check-label" for="{{service.description}}">{{service.description}}</label>
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+                    
+                </div>
+
+                <hr class="featurette-divider">
+                <div class="row">
+                    <div class="col-md-5">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" disabled class="form-control" name="address" value = "{{ userSession.address }}" id="address">
+                            <label for="postal" class="form-label">Postal code</label>
+                            <input type="text" disabled class="form-control" name="postal" id="postal" value = "{{ userSession.postalCode }}" placeholder="H1A1H1">
+                            <label for="phone" class="form-label">Phone number</label>
+                            <input type="text" disabled class="form-control" name="phone" id="phone" value = "{{userSession.phoneNo }}" placeholder="000-000-00-00">  
+                    </div>
+                    <div class="col-md-5">
+                        <button type="button" name="enableupdate" class="btn btn-primary">Update my information</button><br><br>
+                        <input type="submit" name="update" id="update" value="Confirm changes" class="btn btn-primary"/>
+          
+                    </div>
+                   
+                </div>
+            
+        </form>
+    </div>
+
+      
+    </main>
+  </div>
+</div>
+{% endblock %}
