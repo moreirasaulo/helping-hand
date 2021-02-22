@@ -9,6 +9,16 @@
 	
 {% endblock %} #}
 
+{% block user %}
+  {% if userSession %}
+  <br><br><br>
+		<p>Logged in as {{userSession.firstName}} {{userSession.lastName}} </p>                                                                 
+			{% else %}
+			Please log in or register first
+			<a href="/login"><input type="submit" name="login" value="Login"></input></a>
+			{% endif %}
+{% endblock %}
+
 {% block banner %}
 {% include ('banner.html.twig') %}
 {% endblock %}

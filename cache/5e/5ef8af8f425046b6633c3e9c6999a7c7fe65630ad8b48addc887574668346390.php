@@ -59,21 +59,21 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
         echo "    ";
         $this->displayParentBlock("head", $context, $blocks);
         echo "
- <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>  <!-- include jquery -->
-    <script>
-\$(document).ready(function() {
-    \$('input[name=email]').on('paste, blur change', function() {
-        var email = \$('input[name=email]').val();
-        \$(\"#nothisemail\").load(\"/nothisemail/\" + email);
-    });
+ <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>
     
-    \$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
-        console.log(\"Ajax error occured on \" + settings.url);
-        alert(\"Ajax error occured\");
-    });
-});
-
-</script>
+    <script>
+        \$(document).ready(function() {
+            \$('input[name=email]').on('paste blur change input', function() {
+                var email = \$('input[name=email]').val();
+                \$(\"#userNameTaken\").load(\"/isuserNametaken/\" + email);
+            });
+           
+            \$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+                console.log(\"Ajax error occured on \" + settings.url);
+                alert(\"Ajax error occured\");
+            });
+        });
+    </script>
 
 ";
     }
@@ -121,7 +121,7 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
             <form method=\"POST\">
             <label for=\"email\" class=\"form-label\">Email address</label>
             <input type=\"email\" name=\"email\" id=\"email\" value=\"\" required=\"required\"></input>
-            <span class=\"errorMsg\" id=\"nothisemail\"></span><br>
+            <span class=\"errorMsg\" id=\"#userNameTaken\"></span><br>
             <label for=\"password\" class=\"form-label\">Password</label>
             <input type=\"password\" class=\"form-control\" id=\"password\" name = \"password\">
             <input type=\"submit\" name=\"login\" id=\"login\" value=\"Log in\" class=\"btn btn-primary\"/> <br><br>
@@ -164,21 +164,21 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
 
 {% block head %}
     {{ parent() }}
- <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>  <!-- include jquery -->
-    <script>
-\$(document).ready(function() {
-    \$('input[name=email]').on('paste, blur change', function() {
-        var email = \$('input[name=email]').val();
-        \$(\"#nothisemail\").load(\"/nothisemail/\" + email);
-    });
+ <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>
     
-    \$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
-        console.log(\"Ajax error occured on \" + settings.url);
-        alert(\"Ajax error occured\");
-    });
-});
-
-</script>
+    <script>
+        \$(document).ready(function() {
+            \$('input[name=email]').on('paste blur change input', function() {
+                var email = \$('input[name=email]').val();
+                \$(\"#userNameTaken\").load(\"/isuserNametaken/\" + email);
+            });
+           
+            \$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+                console.log(\"Ajax error occured on \" + settings.url);
+                alert(\"Ajax error occured\");
+            });
+        });
+    </script>
 
 {% endblock %}
 
@@ -205,7 +205,7 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
             <form method=\"POST\">
             <label for=\"email\" class=\"form-label\">Email address</label>
             <input type=\"email\" name=\"email\" id=\"email\" value=\"\" required=\"required\"></input>
-            <span class=\"errorMsg\" id=\"nothisemail\"></span><br>
+            <span class=\"errorMsg\" id=\"#userNameTaken\"></span><br>
             <label for=\"password\" class=\"form-label\">Password</label>
             <input type=\"password\" class=\"form-control\" id=\"password\" name = \"password\">
             <input type=\"submit\" name=\"login\" id=\"login\" value=\"Log in\" class=\"btn btn-primary\"/> <br><br>
