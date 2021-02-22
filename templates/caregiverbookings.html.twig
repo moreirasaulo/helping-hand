@@ -1,0 +1,146 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Caregiver account{% endblock %}
+
+{% block head %}
+{{ parent() }}
+
+
+
+
+ 
+	
+{% endblock %}
+
+{% block user %}
+  {% if userSession %}
+  <br><br><br>
+		<p>Logged in as {{userSession.firstName}} {{userSession.lastName}} </p>                                                                 
+		{% endif %}
+{% endblock %}
+
+{% block content %}
+<br><br><br><br><br>
+{% if errorList %}
+            <ul class="errorMsg">
+            {% for error in errorList %}
+                <li>{{error}}</li>
+            {% endfor %}
+            </ul>
+    {% endif %}
+{% if success %}
+            <p>{{success}}</p>
+    {% endif %}
+
+
+<div class="container-fluid user-select-none">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" name="personaldata" aria-current="page"  href="accountcaregiver">
+              <span data-feather="home"></span>
+              Personal data
+
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"  href="caregiverbookings">
+              <span data-feather="file"></span>
+              Bookings
+            </a>
+          </li>
+          {% if userSession.role == "caregiver" %}
+            <li class="nav-item">
+            <a class="nav-link"  href="#">
+              <span data-feather="shopping-cart"></span>
+              Manage schedule
+            </a>
+          </li>                                                        
+		{% endif %}
+        </ul>
+
+       
+      </div>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2 user-select-none">{% if userSession.role == "client" %}
+            Client account
+            {% else %}
+			Caregiver account                                                           
+		{% endif %}</h1>
+        
+      </div>
+
+    <div id="changingcontent" class="container user-select-none">
+        {% if bookings %}
+        <p id="confirmed"></p>
+            <table class="table">
+            <thead class="table-primary">
+                <th>Client name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Fulfillment</th>
+                <th>Confirmation</th>
+                </thead>
+                <tbody>
+    
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{booking.firstName}} {{booking.lastName}} 
+                      <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+
+                    </td>
+                    <td>{{booking.dateTime}}</td>
+                    <td></td>
+                    <td>{% if booking.isFullfiled == 0 %} &mdash; {% else %} &check; {% endif %} </td>
+                    <td>
+                        {% if booking.isConfirmed == false %}
+                        <button type="button"  name="confirm" class="btn btn-success">Confirm</button>
+                        <button type="button" onclick="window.location='bookingconfirm/{{booking.clientID}}/{{booking.availabilityID}}'" name="decline" class="btn btn-danger">Decline</button>
+                        
+                         {% else %} 
+                            {% if booking.isAccepted == 0 %} Declined {% else %} Accepted  {% endif %}
+                         
+                          {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+    
+        {% else %}
+        <p> You do not have any reservations at this moment </p>
+          {% endif %}
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    </main>
+  </div>
+</div>
+{% endblock %}
