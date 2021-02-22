@@ -6,22 +6,33 @@
 
 {% block head %}
     {{ parent() }}
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  <!-- include jquery -->
-    <script>
-$(document).ready(function() {
-    $('input[name=email]').on('paste, blur change', function() {
-        var email = $('input[name=email]').val();
-        $("#nothisemail").load("/nothisemail/" + email);
-    });
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
-    $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
-        console.log("Ajax error occured on " + settings.url);
-        alert("Ajax error occured");
-    });
-});
+    <script>
+        $(document).ready(function() {
 
-</script>
+           $('input[name=email]').on('paste blur change input', function() {
+                var email = $('input[name=email]').val();
+                $("#emailexists").load("emailexists/" + email);
+            }); 
+           
+            $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+                console.log("Ajax error occured on " + settings.url);
+                alert("Ajax error occured");
+            });
+        });
+    </script>
 
+{% endblock %}
+
+{% block user %}
+  {% if userSession %}
+  <br><br><br>
+		<p>Logged in as {{userSession.firstName}} {{userSession.lastName}} </p>                                                                 
+			{% else %}
+			Please log in or register first
+			<a href="/login"><input type="submit" name="login" value="Login"></input></a>
+			{% endif %}
 {% endblock %}
 
 
@@ -36,18 +47,20 @@ $(document).ready(function() {
     {% if errorList %}
             <ul class="errorMsg">
             {% for error in errorList %}
-                <li>{{error}}<li>
+                <li>{{error}}</li>
             {% endfor %}
             </ul>
-        {% endif %}
+    {% endif %}
+
     <div class="wrap">
     <h4> Log in </h4>
     <div class="row">
             <div class="col-md-4">
             <form method="POST">
+
             <label for="email" class="form-label">Email address</label>
-            <input type="email" name="email" id="email" value="" required="required"></input>
-            <span class="errorMsg" id="nothisemail"></span><br>
+            <input type="email" class="form-control" name="email" id="email" value="" required="required"></input>
+            <span class="errorMsg" id="emailexists"></span><br>
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name = "password">
             <input type="submit" name="login" id="login" value="Log in" class="btn btn-primary"/> <br><br>
