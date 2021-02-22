@@ -91,3 +91,26 @@ DAILY SCRUM
 - implement 'book caregiver' section
 3. Need assistance / figure things out
 
+
+2021/02/22 Ksenia
+1. Done since last scrum:
+- added ajax for email verification
+- implemented client profile section
+- implemented google and facebook login
+2. To do until next Scrum:
+- implement reservations section for clients
+- implement 'rating' for caregivers
+3. Need assistance / figure things out
+- how to display blob from database
+2021/02/22 Saulo
+1. Done since last scrum:
+- implemented 'schedule' section for caregivers
+- implemented admin main page
+2. To do until next Scrum:
+- implement admin 'view all caregivers' section
+- implement 'book caregiver' section
+- implement admin scrud for caregivers/clients
+3. Need assistance / figure things out
+- find out how to addd event onclick to button that will 
+redirect to page with {caregiverID}
+
