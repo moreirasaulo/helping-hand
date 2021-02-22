@@ -28,7 +28,7 @@ if (strpos($_SERVER['HTTP_HOST'], "ipd23.com") !== false) {
 else {
     DB::$dbName = 'helpinghand';
     DB::$user = 'helpinghand';
-    DB::$password = '3gRTDYFDKtlX99ok';   //3gRTDYFDKtlX99ok   //mHMnToqkLNc8c5LI
+    DB::$password = 'mHMnToqkLNc8c5LI';   //3gRTDYFDKtlX99ok   //mHMnToqkLNc8c5LI
     DB::$host = 'localhost';
     DB::$port = 3333;
 }
@@ -48,8 +48,8 @@ function db_error_handler($params) {
     die;
 }
 
-/* getting access to twig rendering directly, without PHP Slim
-http_response_code(500); // internal server error
+//getting access to twig rendering directly, without PHP Slim
+/*http_response_code(500); // internal server error
 $twig = $container['view']->getEnvironment();
 die($twig->render('error_internal.html.twig')); */
 

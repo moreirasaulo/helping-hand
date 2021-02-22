@@ -8,6 +8,11 @@ $app->get('/login', function ($request, $response, $args) {
     return $this->view->render($response, 'login.html.twig');
 });
 
+$app->get('/test', function ($request, $response, $args) {
+    return $this->view->render($response, 'error_404.html.twig');
+});
+
+/*
 $app->post('/login', function ($request, $response, $args) use ($log) {
     $email = $request->getParam('email');
     $password = $request->getParam('password'); 
@@ -40,20 +45,21 @@ $app->post('/login', function ($request, $response, $args) use ($log) {
         return $this->view->render($response, 'index.html.twig', ['userSession' => $_SESSION['user']]);    
     }
 });
-
+*/
 //check if email exists in db (login)  AJAX
-$app->get('/doesemailexist/[{email}]', function ($request, $response, $args) {
+$app->get('/nothisemail/[{email}]', function ($request, $response, $args) {
+    return "hi hi ";
     $email = isset($args['email']) ? $args['email'] : "";
 
     $record = DB::queryFirstRow("SELECT id FROM users WHERE email=%s", $email);
-    if (!$record) {
-        return $response->write("This email is not registered");
-    } else {
+    if ($record) {
         return $response->write("");
+    } else {
+        return $response->write("This email is not registered");
     }
 });
 
-
+/*
 
 //Logout
 $app->get('/logout', function ($request, $response, $args) use ($log) {
@@ -144,3 +150,4 @@ $app->get('/uniqueemail/[{email}]', function ($request, $response, $args) {
 
 
 //password reset through email
+*/

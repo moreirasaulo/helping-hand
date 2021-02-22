@@ -7,16 +7,18 @@
 {% block head %}
     {{ parent() }}
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  <!-- include jquery -->
+ <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script>
 $(document).ready(function() {
     $('input[name=email]').on('paste, blur change', function() {
         var email = $('input[name=email]').val();
-        $("#nothisemail").load("/nothisemail/" + email);
+       // $("#nothisemail").load("/nothisemail/" + email);
+       $("#nothisemail").load("/test");
     });
     
     $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
         console.log("Ajax error occured on " + settings.url);
-        alert("Ajax error occured");
+        alert("Ajax error occured" + event + " " + jqxhr +" " + thrownError + " " + settings.url);
     });
 });
 
