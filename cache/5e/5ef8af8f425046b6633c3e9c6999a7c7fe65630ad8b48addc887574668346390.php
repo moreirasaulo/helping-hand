@@ -59,32 +59,30 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
         echo "    ";
         $this->displayParentBlock("head", $context, $blocks);
         echo "
- <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>  <!-- include jquery -->
- <script src=\"https://code.jquery.com/jquery-3.5.1.min.js\" integrity=\"sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=\" crossorigin=\"anonymous\"></script>
-    <script>
-\$(document).ready(function() {
-    \$('input[name=email]').on('paste, blur change', function() {
-        var email = \$('input[name=email]').val();
-       // \$(\"#nothisemail\").load(\"/nothisemail/\" + email);
-       \$(\"#nothisemail\").load(\"/test\");
-    });
+ <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>
     
-    \$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
-        console.log(\"Ajax error occured on \" + settings.url);
-        alert(\"Ajax error occured\" + event + \" \" + jqxhr +\" \" + thrownError + \" \" + settings.url);
-    });
-});
-
-</script>
+    <script>
+        \$(document).ready(function() {
+            \$('input[name=email]').on('paste blur change input', function() {
+                var email = \$('input[name=email]').val();
+                \$(\"#userNameTaken\").load(\"/isuserNametaken/\" + email);
+            });
+           
+            \$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+                console.log(\"Ajax error occured on \" + settings.url);
+                alert(\"Ajax error occured\");
+            });
+        });
+    </script>
 
 ";
     }
 
-    // line 30
+    // line 28
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 31
+        // line 29
         echo "<br>
 <br>
 <br>
@@ -93,16 +91,16 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
 <br>
 <br>
     ";
-        // line 38
+        // line 36
         if (($context["errorList"] ?? null)) {
-            // line 39
+            // line 37
             echo "            <ul class=\"errorMsg\">
             ";
-            // line 40
+            // line 38
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["errorList"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-                // line 41
+                // line 39
                 echo "                <li>";
                 echo twig_escape_filter($this->env, $context["error"], "html", null, true);
                 echo "<li>
@@ -111,11 +109,11 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 43
+            // line 41
             echo "            </ul>
         ";
         }
-        // line 45
+        // line 43
         echo "    <div class=\"wrap\">
     <h4> Log in </h4>
     <div class=\"row\">
@@ -123,7 +121,7 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
             <form method=\"POST\">
             <label for=\"email\" class=\"form-label\">Email address</label>
             <input type=\"email\" name=\"email\" id=\"email\" value=\"\" required=\"required\"></input>
-            <span class=\"errorMsg\" id=\"nothisemail\"></span><br>
+            <span class=\"errorMsg\" id=\"#userNameTaken\"></span><br>
             <label for=\"password\" class=\"form-label\">Password</label>
             <input type=\"password\" class=\"form-control\" id=\"password\" name = \"password\">
             <input type=\"submit\" name=\"login\" id=\"login\" value=\"Log in\" class=\"btn btn-primary\"/> <br><br>
@@ -153,7 +151,7 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
 
     public function getDebugInfo()
     {
-        return array (  119 => 45,  115 => 43,  106 => 41,  102 => 40,  99 => 39,  97 => 38,  88 => 31,  84 => 30,  59 => 8,  55 => 7,  48 => 3,  37 => 1,);
+        return array (  117 => 43,  113 => 41,  104 => 39,  100 => 38,  97 => 37,  95 => 36,  86 => 29,  82 => 28,  59 => 8,  55 => 7,  48 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -166,23 +164,21 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
 
 {% block head %}
     {{ parent() }}
- <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>  <!-- include jquery -->
- <script src=\"https://code.jquery.com/jquery-3.5.1.min.js\" integrity=\"sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=\" crossorigin=\"anonymous\"></script>
-    <script>
-\$(document).ready(function() {
-    \$('input[name=email]').on('paste, blur change', function() {
-        var email = \$('input[name=email]').val();
-       // \$(\"#nothisemail\").load(\"/nothisemail/\" + email);
-       \$(\"#nothisemail\").load(\"/test\");
-    });
+ <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>
     
-    \$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
-        console.log(\"Ajax error occured on \" + settings.url);
-        alert(\"Ajax error occured\" + event + \" \" + jqxhr +\" \" + thrownError + \" \" + settings.url);
-    });
-});
-
-</script>
+    <script>
+        \$(document).ready(function() {
+            \$('input[name=email]').on('paste blur change input', function() {
+                var email = \$('input[name=email]').val();
+                \$(\"#userNameTaken\").load(\"/isuserNametaken/\" + email);
+            });
+           
+            \$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+                console.log(\"Ajax error occured on \" + settings.url);
+                alert(\"Ajax error occured\");
+            });
+        });
+    </script>
 
 {% endblock %}
 
@@ -209,7 +205,7 @@ class __TwigTemplate_4688e56358dfdde59c699a97ab67dfaad87b0316d842971af52c750cf40
             <form method=\"POST\">
             <label for=\"email\" class=\"form-label\">Email address</label>
             <input type=\"email\" name=\"email\" id=\"email\" value=\"\" required=\"required\"></input>
-            <span class=\"errorMsg\" id=\"nothisemail\"></span><br>
+            <span class=\"errorMsg\" id=\"#userNameTaken\"></span><br>
             <label for=\"password\" class=\"form-label\">Password</label>
             <input type=\"password\" class=\"form-control\" id=\"password\" name = \"password\">
             <input type=\"submit\" name=\"login\" id=\"login\" value=\"Log in\" class=\"btn btn-primary\"/> <br><br>

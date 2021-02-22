@@ -27,3 +27,8 @@
       background-color: antiquewhite;
       color: tomato;
   }
+
+  textarea {
+    resize: none;
+ }
+

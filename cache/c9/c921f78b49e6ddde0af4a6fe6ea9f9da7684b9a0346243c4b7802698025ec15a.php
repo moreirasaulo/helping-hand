@@ -54,7 +54,7 @@ class __TwigTemplate_71ed29176bf365557879fd6ee542ebd5aa43b662b47867c07cc44c80dd4
                         <a href=\"/helpinghand#aboutUs\" class=\"nav-link\">About us</a>
                     </li>
                     <li class=\"nav-item\">
-                        <a href=\"#\" class=\"nav-link\">Our caregivers</a>
+                        <a href=\"caregivers\" class=\"nav-link\">Our caregivers</a>
                     </li>
                     <li class=\"nav-item\">
                       <a href=\"#\" class=\"nav-link\">Find caregiver near you</a>
@@ -65,9 +65,7 @@ class __TwigTemplate_71ed29176bf365557879fd6ee542ebd5aa43b662b47867c07cc44c80dd4
                     <li class=\"nav-item\">
                         <a href=\"register\" class=\"nav-link\">Register</a>
                     </li>
-                    <li class=\"nav-item\">  
-                      <a href=\"index-fr.html\" class=\"nav-link language\"><img src=\"images/french_small.png\" alt=\"\"></a>
-                    </li>
+                    
                 </ul>
             </div>
         </nav>
@@ -107,7 +105,7 @@ class __TwigTemplate_71ed29176bf365557879fd6ee542ebd5aa43b662b47867c07cc44c80dd4
                         <a href=\"/helpinghand#aboutUs\" class=\"nav-link\">About us</a>
                     </li>
                     <li class=\"nav-item\">
-                        <a href=\"#\" class=\"nav-link\">Our caregivers</a>
+                        <a href=\"caregivers\" class=\"nav-link\">Our caregivers</a>
                     </li>
                     <li class=\"nav-item\">
                       <a href=\"#\" class=\"nav-link\">Find caregiver near you</a>
@@ -118,9 +116,7 @@ class __TwigTemplate_71ed29176bf365557879fd6ee542ebd5aa43b662b47867c07cc44c80dd4
                     <li class=\"nav-item\">
                         <a href=\"register\" class=\"nav-link\">Register</a>
                     </li>
-                    <li class=\"nav-item\">  
-                      <a href=\"index-fr.html\" class=\"nav-link language\"><img src=\"images/french_small.png\" alt=\"\"></a>
-                    </li>
+                    
                 </ul>
             </div>
         </nav>
