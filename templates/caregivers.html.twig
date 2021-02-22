@@ -1,0 +1,33 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Caregivers{% endblock %}
+
+{% block head %}
+{{ parent() }}
+	
+{% endblock %}
+
+{% block user %}
+  {% if userSession %}
+  <br><br><br>
+		<p>Logged in as {{userSession.firstName}} {{userSession.lastName}} </p>                                                                 
+		{% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+    <br><br><br>
+        <div class="row">
+        
+         {% for c in list %}
+         <div class="col-sm">
+      
+      <img src="data:image/png;base64,'{{c.photo}}'" alt="caregiver image" /> 
+        <p class="card-text">{{c.firstName}} {{c.lastName}}</p>
+        <p><a class="btn btn-secondary custom-button" href="#" role="button">View</a></p>
+        </div>
+    {% endfor %}
+    </div>
+    </div>
+{% endblock %}
