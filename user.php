@@ -195,7 +195,7 @@ $app->post('/register', function ($request, $response, $args) {
         $photoData = file_get_contents($photo->file);
         DB::insert('users', [ 'firstName' => $firstName, 'lastName' => $lastName, 'gender' => $gender,
         'dateOfBirth' => $dateOfBirth, 'phoneNo' => $phone, 'address' => $address, 'postalCode' => $postalCode,
-        'email' => $email, 'password' => $password, 'role' => $role, 'photo' => $photoData, 'description' => $description]);
+        'email' => $email, 'password' => $password, 'role' => $role, 'photo' => $photoData, 'imageMimeType' => $mimeType,'description' => $description]);
         return $this->view->render($response, 'login.html.twig');
     }
 });

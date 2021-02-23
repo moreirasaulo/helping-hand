@@ -13,20 +13,48 @@ $app->get('/internalerror', function ($request, $response, $args) {
 
 
 
-
+/*
 //confirm booking
-$app->get('bookingconfirm/{clientID}/{availabilityID}', function ($request, $response, $args) {
+$app->get('/bookingconfirm/{clientID}/{availabilityID}/{action:(confirm|refuse)}', function ($request, $response, $args) {
     $clientID = $args['clientID'];
     $availabilityID = $args['availabilityID'];
     DB::query("UPDATE reservations SET isDeclined=%d, isAccepted=%d, WHERE clientID=%d AND availabilityID=%d",
      0, 1, $clientID, $availabilityID);
+
      $user = $_SESSION['user'];
+
+    // use flash message to confirm deletion / confirmation
+
+    // redirect back to /caregiverbookings
+
     $bookings = DB::query("SELECT reservations.clientID, reservations.availabilityID, users.id, users.firstName, users.lastName,
+    users.description,
     availabilities.dateTime, reservations.isFullfiled, reservations.isDeclined FROM reservations
      INNER JOIN availabilities ON reservations.availabilityID = availabilities.id INNER JOIN users ON reservations.clientID = users.id
      WHERE availabilities.caregiverID = %d ORDER BY id DESC", $user['id']);
-     return $this->view->render($response, 'caregiverbookings.html.twig', ['bookingConfirmed' => "Booking successfully confirmed"],['bookings' => $bookings]);
-}); 
+     return $this->view->render($response, 'caregiverbookings.html.twig',
+      ['bookingConfirmed' => "Booking successfully confirmed"],['bookings' => $bookings]);
+});// translate->condition(array('action' => 'confirm|refuse')); 
+
+*/
+
+
+
+//display blob
+$app->get('/imageview/{id}', function ($request, $response, $args) {
+    $id= $args['id'];
+    
+    $record = DB::queryFirstRow("SELECT photo,imageMimeType  FROM users WHERE id=%d", $id);
+    if ($record) {
+        $response->headers->set('Content-Type', $record['imageMimeType']);
+        echo $record['photo'];
+    } else {
+        return $response->write("");
+    }
+});
+
+
+
 
 $app->get('/accountcaregiver', function ($request, $response, $args) {
     $user = $_SESSION['user'];
@@ -34,10 +62,17 @@ $app->get('/accountcaregiver', function ($request, $response, $args) {
     return $this->view->render($response, 'accountcaregiver.html.twig', ['services' => $services]);
 });
 
+//caregiver schedule
+$app->get('/caregiverschedule', function ($request, $response, $args) {
+    $user = $_SESSION['user'];
+    $availabilities = DB::query("SELECT * FROM availabilities LEFT OUTER JOIN reservations ON availabilities.id = reservations.availabilityID WHERE caregiverID = %d ORDER BY id DESC", $user['id']);
+    return $this->view->render($response, 'caregiverschedule.html.twig', ['availabilities' => $availabilities]);
+});
+
 $app->get('/caregiverbookings', function ($request, $response, $args) {
     $user = $_SESSION['user'];
     $bookings = DB::query("SELECT reservations.clientID, reservations.availabilityID, users.id, users.firstName, users.lastName,
-    availabilities.dateTime, reservations.isFullfiled, reservations.isDeclined FROM reservations
+    users.description, availabilities.dateTime, reservations.isFullfiled, reservations.isDeclined FROM reservations
      INNER JOIN availabilities ON reservations.availabilityID = availabilities.id INNER JOIN users ON reservations.clientID = users.id
      WHERE availabilities.caregiverID = %d ORDER BY id DESC", $user['id']);
   //   $clients = DB::query("SELECT * FROM users WHERE id = %d ", $bookings['users.id']);
@@ -53,10 +88,8 @@ $app->get('/personaldata', function ($request, $response, $args) {
 
 
 
-
-
 $app->get('/caregivers', function ($request, $response, $args) {
-    $caregiversList = DB::query("SELECT * FROM users ORDER BY id DESC");
+    $caregiversList = DB::query("SELECT * FROM users WHERE role=%s ORDER BY id DESC", "caregiver");
     foreach ($caregiversList as &$caregiver) {
     
         $fullName = $caregiver['firstName'] . " " . $caregiver['lastName'];
