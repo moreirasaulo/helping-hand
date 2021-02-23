@@ -8,7 +8,9 @@ use Respect\Validation\Validator as Validator;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
-use Slim\Http\UploadedFile; 
+use Slim\Http\Request;
+use Slim\Http\Response;
+use Slim\Http\UploadedFile;
 
 
 // create a log channel
@@ -69,6 +71,8 @@ $app = new \Slim\App($config);
 
 // Fetch DI Container
 $container = $app->getContainer();
+//File upload directory
+$container['upload_directory'] = __DIR__ . '/uploads';
 
 // Register Twig View helper
 $container['view'] = function ($c) {

@@ -170,13 +170,12 @@ $app->post('/register', function ($request, $response, $args) {
     }
 
     // verify photo
-    $hasPhoto = false;
-    $mimeType = "";
-    if ($photo->getError() != UPLOAD_ERR_NO_FILE) { // was image uploaded?
-        // print_r($uploadedImage->getError());
-        $hasPhoto = true;
-        $result = verifyUploadedPhoto($photo, $mimeType);
-        if ($result !== TRUE) {
+    $uploadedPhotoPath = null;
+    $uploadedPhoto = $request->getUploadedFiles()['photo'];
+    //if image is uploaded
+    if($uploadedPhoto->getError() != UPLOAD_ERR_NO_FILE) {
+        $result = verifyUploadedPhoto($uploadedPhotoPath, $uploadedPhoto);
+        if($result !== TRUE) {
             $errorList[] = $result;
         }
     }
@@ -192,13 +191,53 @@ $app->post('/register', function ($request, $response, $args) {
         'email' => $email] ]);
     }
     else {
-        $photoData = file_get_contents($photo->file);
+        $directory = $this->get('upload_directory');
+        $uploadedPhotoPath = moveUploadedFile($directory, $uploadedPhoto);
         DB::insert('users', [ 'firstName' => $firstName, 'lastName' => $lastName, 'gender' => $gender,
         'dateOfBirth' => $dateOfBirth, 'phoneNo' => $phone, 'address' => $address, 'postalCode' => $postalCode,
-        'email' => $email, 'password' => $password, 'role' => $role, 'photo' => $photoData, 'imageMimeType' => $mimeType,'description' => $description]);
+        'email' => $email, 'password' => $password, 'role' => $role, 'imagePath' => $uploadedPhotoPath, 'description' => $description]);
         return $this->view->render($response, 'login.html.twig');
     }
 });
+
+function verifyUploadedPhoto(&$photoFilepath, $uploadedPhoto) {
+    if ($uploadedPhoto->getError() != 0) {
+        return "Error uploading photo " . $uploadedPhoto->getError();
+    } 
+    if ($uploadedPhoto->getSize() > 1024*1024) { // 1MB
+        return "Photo file too big. 1MB max is allowed.";
+    }
+    $info = getimagesize($uploadedPhoto->file);
+    if (!$info) {
+        return "File is not an image";
+    }
+    if ($info[0] < 200 || $info[0] > 1000 || $info[1] < 200 || $info[1] > 1000) {
+        return "Width and height of photo must be within 200-1000 pixels range";
+    }
+    $ext = "";
+    switch ($info['mime']) {
+        case 'image/jpeg': $ext = "jpg"; break;
+        case 'image/gif': $ext = "gif"; break;
+        case 'image/png': $ext = "png"; break;
+        default:
+            return "Only JPG, GIF and PNG  photofile types are allowed";
+    } 
+    
+    $name = "aaa";
+    $photoFilePath = "uploads/" . $name . "." . $ext;
+    return TRUE;
+}
+
+function moveUploadedFile($directory, $uploadedPhoto)
+{
+    $extension = pathinfo($uploadedPhoto->getClientFilename(), PATHINFO_EXTENSION);
+    $basename = bin2hex(random_bytes(8)); 
+    $filename = sprintf('%s.%0.8s', $basename, $extension);
+
+    $uploadedPhoto->moveTo($directory . DIRECTORY_SEPARATOR . $filename);
+
+    return $filename;
+}
 
 
 // user updates account
@@ -250,20 +289,19 @@ $app->post('/accountcaregiver', function ($request, $response, $args) {
         $description = "";
     }
 
-/*    // verify photo
-    $hasPhoto = false;
-    $mimeType = "";
-    if ($photo->getError() != UPLOAD_ERR_NO_FILE) { // was image uploaded?
-        // print_r($uploadedImage->getError());
-        $hasPhoto = true;
-        $result = verifyUploadedPhoto($photo, $mimeType);
-        if ($result !== TRUE) {
+    // verify photo
+    $uploadedPhotoPath = null;
+    $uploadedPhoto = $request->getUploadedFiles()['photo'];
+    //if image is uploaded
+    if($uploadedPhoto->getError() != UPLOAD_ERR_NO_FILE) {
+        $result = verifyUploadedPhoto($uploadedPhotoPath, $uploadedPhoto);
+        if($result !== TRUE) {
             $errorList[] = $result;
         }
     }
     else {
         $errorList[] = "Photo must be uploaded";
-    } */
+    }
 
     if ($errorList) {
         return $this->view->render($response, 'accountcaregiver.html.twig', ['errorList' => $errorList,
@@ -271,10 +309,11 @@ $app->post('/accountcaregiver', function ($request, $response, $args) {
          'firstName' => $firstName, 'lastName' => $lastName, 'description' => $description] ]);
     }
     else {
-        $photoData = file_get_contents($photo->file);
+        $directory = $this->get('upload_directory');
+        $uploadedPhotoPath = moveUploadedFile($directory, $uploadedPhoto);
         DB::query("UPDATE users SET address=%s, postalCode=%s, phoneNo=%s, firstName=%s,
-        lastName=%s, description=%s  WHERE id=%d", $address, $postalCode, $phone, $firstName,
-        $lastName, $description, $_SESSION['user']['id']);
+        lastName=%s, description=%s, imagePath=%s WHERE id=%d", $address, $postalCode, $phone, $firstName,
+        $lastName, $description, $uploadedPhotoPath, $_SESSION['user']['id']);
 
         $user = DB::queryFirstRow("SELECT * FROM users WHERE id = %d LIMIT 1", $_SESSION['user']['id']);
         $_SESSION['user'] = $user;
@@ -283,38 +322,6 @@ $app->post('/accountcaregiver', function ($request, $response, $args) {
     }
 });
 
-//function to verify photo
-// returns TRUE on success
-// returns a string with error message on failure
-function verifyUploadedPhoto($photo, &$mime = null) {
-    if ($photo->getError() != 0) {
-        return "Error uploading photo " . $photo->getError();
-    }
-    if ($photo->getSize() > 1024*1024) { // 1MB
-        return "File too big. 1MB max is allowed.";
-    }
-    $info = getimagesize($photo->file);
-    if (!$info) {
-        return "File is not an image";
-    }
-    // echo "\n\nimage info\n";
-    // print_r($info);
-    if ($info[0] < 200 || $info[0] > 1000 || $info[1] < 200 || $info[1] > 1000) {
-        return "Width and height must be within 200-1000 pixels range";
-    }
-    $ext = "";
-    switch ($info['mime']) {
-        case 'image/jpeg': $ext = "jpg"; break;
-        case 'image/gif': $ext = "gif"; break;
-        case 'image/png': $ext = "png"; break;
-        default:
-            return "Only JPG, GIF and PNG file types are allowed";
-    }
-    if (!is_null($mime)) {
-        $mime = $info['mime'];
-    }
-    return TRUE;
-}
 
 
 
