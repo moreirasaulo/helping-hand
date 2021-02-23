@@ -1,0 +1,102 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Caregiver account{% endblock %}
+
+{% block head %}
+{{ parent() }}
+
+
+
+
+ 
+	
+{% endblock %}
+
+{% block user %}
+  {% if userSession %}
+  <br><br><br>
+		<p>Logged in as {{userSession.firstName}} {{userSession.lastName}} </p>                                                                 
+		{% endif %}
+{% endblock %}
+
+{% block content %}
+<br><br><br><br><br>
+{% if success %}
+            <p>{{success}}</p>
+    {% endif %}
+
+
+<div class="container-fluid user-select-none">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" name="personaldata" aria-current="page"  href="accountcaregiver">
+              <span data-feather="home"></span>
+              Personal data
+
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"  href="caregiverbookings">
+              <span data-feather="file"></span>
+              Bookings
+            </a>
+          </li>
+          {% if userSession.role == "caregiver" %}
+            <li class="nav-item">
+            <a class="nav-link"  href="caregiverschedule">
+              <span data-feather="shopping-cart"></span>
+              Manage schedule
+            </a>
+          </li>                                                        
+		{% endif %}
+        </ul>
+
+       
+      </div>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2 user-select-none">{% if userSession.role == "client" %}
+            Client account
+            {% else %}
+			Caregiver account                                                           
+		{% endif %}</h1>
+        
+      </div>
+
+    <div id="changingcontent" class="container user-select-none">
+        {% if availabilities %}
+            <table class="table">
+            <thead class="table-primary">
+                <th>Date</th>
+                <th>Time</th>
+                <th>isBooked</th>
+                </thead>
+                <tbody>
+    
+            {% for a in availabilities %}
+                <tr>
+                    <td>{{a.dateTime|date("m/d/Y")}}</td>
+                    <td>{{a.dateTime|date("g:ia")}}</td>
+                    <td>isBooked</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+    
+        {% else %}
+        <p> You do not have any availabilities yet, add them now </p>
+          {% endif %}
+        <button type="button"  name="addavail" class="btn btn-primary">Add new availability</button>
+    </div>
+
+
+      
+    </main>
+  </div>
+</div>
+{% endblock %}

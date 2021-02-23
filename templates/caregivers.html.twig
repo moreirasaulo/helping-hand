@@ -23,7 +23,7 @@
          {% for c in list %}
          <div class="col-sm">
       
-      <img src="data:image/png;base64,'{{c.photo}}'" alt="caregiver image" /> 
+        <img src="imageview/" + {{c.id}}> 
         <p class="card-text">{{c.firstName}} {{c.lastName}}</p>
         <p><a class="btn btn-secondary custom-button" href="#" role="button">View</a></p>
         </div>
