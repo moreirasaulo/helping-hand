@@ -30,7 +30,6 @@ $app->post('/caregiverbookings', function ($request, $response, $args) use ($log
 });
 
 
-
 /*
 //confirm booking
 $app->get('/bookingconfirm/{clientID}/{availabilityID}/{action:(confirm|refuse)}', function ($request, $response, $args) {

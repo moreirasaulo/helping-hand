@@ -114,3 +114,25 @@ DAILY SCRUM
 - find out how to addd event onclick to button that will 
 redirect to page with {caregiverID}
 
+
+
+2021/02/23 Ksenia
+1. Done since last scrum:
+- implemented reservations section for clients
+- implemented 'rating' for caregivers
+2. To do until next Scrum:
+- implement sorting for caregivers
+- add images to profile section
+3. Need assistance / figure things out
+- images
+
+2021/02/23 Saulo
+1. Done since last scrum:
+- implement admin 'view all caregivers' section
+- implement 'book caregiver' section
+2. To do until next Scrum:
+- implement admin scrud for caregivers/clients
+3. Need assistance / figure things out
+
+
+
