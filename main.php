@@ -9,7 +9,25 @@ $app->get('/internalerror', function ($request, $response, $args) {
 });
 
 
+//confirm booking (by caregiver)
+$app->post('/caregiverbookings', function ($request, $response, $args) use ($log) {
+    $confirm = $request->getParam('confirm');
+    $decline = $request->getParam('decline');
+    $availID = $request->getParam('availID');
+    $clientID = $request->getParam('clientID');
 
+    if(isset($confirm)) {
+        DB::query("UPDATE reservations SET isDeclined=%d, isAccepted=%d, WHERE clientID=%d AND availabilityID=%d",
+     0, 1, $clientID, $availID);
+    }
+    else{
+        DB::query("UPDATE reservations SET isDeclined=%d, isAccepted=%d, WHERE clientID=%d AND availabilityID=%d",
+     1, 0, $clientID, $availID);
+    }
+    $user = $_SESSION['user'];
+    
+    return $this->view->render($response, '/teste.php');
+});
 
 
 
