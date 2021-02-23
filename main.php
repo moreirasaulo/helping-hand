@@ -86,6 +86,19 @@ $app->get('/caregiverschedule', function ($request, $response, $args) {
     return $this->view->render($response, 'caregiverschedule.html.twig', ['availabilities' => $availabilities]);
 });
 
+//caregiver schedule (add new availability)
+$app->post('/caregiverschedule', function ($request, $response, $args) {
+    $user = $_SESSION['user'];
+    $date = $request->getParam('date');
+    $time = $request->getParam('time');
+    $combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
+
+    DB::insert('availabilities', [ 'dateTime' => $combinedDT, 'caregiverID' => $user['id']]);
+
+    $availabilities = DB::query("SELECT * FROM availabilities LEFT OUTER JOIN reservations ON availabilities.id = reservations.availabilityID WHERE caregiverID = %d ORDER BY id DESC", $user['id']);
+    return $this->view->render($response, 'caregiverschedule.html.twig', ['availabilities' => $availabilities]);
+});
+
 $app->get('/caregiverbookings', function ($request, $response, $args) {
     $user = $_SESSION['user'];
     $bookings = DB::query("SELECT reservations.clientID, reservations.availabilityID, users.id, users.firstName, users.lastName,
@@ -107,13 +120,6 @@ $app->get('/personaldata', function ($request, $response, $args) {
 
 $app->get('/caregivers', function ($request, $response, $args) {
     $caregiversList = DB::query("SELECT * FROM users WHERE role=%s ORDER BY id DESC", "caregiver");
-    foreach ($caregiversList as &$caregiver) {
-    
-        $fullName = $caregiver['firstName'] . " " . $caregiver['lastName'];
-        $description = $caregiver['description'];
-        $photo = $caregiver['photo'];
-    }
-
     return $this->view->render($response, 'caregivers.html.twig', ['list' => $caregiversList]);
 });
 

@@ -253,40 +253,72 @@ $app->post('/accountcaregiver', function ($request, $response, $args) {
 
     $errorList = array();
 
+    $user = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $_SESSION['user']['email']);
+
     //verify address
-    if ((strlen($address) < 5) || (strlen($address) > 200)) {
-            $errorList[] = "Address must be between 5 and 200 characters";
-            $address="";
+    if(isset($address)) {
+        if ((strlen($address) < 5) || (strlen($address) > 200)) {
+                $errorList[] = "Address must be between 5 and 200 characters";
+                $address="";
+        }
+    }
+    else {
+        $address = $_SESSION['user']['address'];
     }
 
     //verify postal code
-    if (preg_match('/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/', $postalCode) != 1) {
-        $errorList[] = "Postal code must be in the A1A1A1 or A1A 1A1 format";
-        $postalCode = "";
+    if(isset($postalCode)) {
+        if (preg_match('/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/', $postalCode) != 1) {
+            $errorList[] = "Postal code must be in the A1A1A1 or A1A 1A1 format";
+            $postalCode = "";
+        }
+    }
+    else {
+        $postalCode = $_SESSION['user']['postalCode'];
     }
 
     //verify phone number
-    if (preg_match('/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/', $phone) != 1) {
-        $errorList[] = "Phone must be in 000-000-00-00 format";
-        $phone = "";
+    if(isset($phone)) {
+        if (preg_match('/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/', $phone) != 1) {
+            $errorList[] = "Phone must be in 000-000-00-00 format";
+            $phone = "";
+        }
+    }
+    else {
+        $phone = $_SESSION['user']['phoneNo'];
     }
 
     //verify first name
-    if ((strlen($firstName) < 1) || (strlen($firstName) > 20)) {
-        $errorList[] = "First name must be between 1 and 20 characters";
-        $firstName = "";
+    if(isset($firstName)) {
+        if ((strlen($firstName) < 1) || (strlen($firstName) > 20)) {
+            $errorList[] = "First name must be between 1 and 20 characters";
+            $firstName = "";
+        }
+    }
+    else {
+        $firstName = $_SESSION['user']['firstName'];
     }
 
     //verify last name
-    if ((strlen($lastName) < 1) || (strlen($lastName) > 20)) {
-        $errorList[] = "Last name must be between 1 and 20 characters";
-        $lastName = "";
+    if(isset($lastName)) {
+        if ((strlen($lastName) < 1) || (strlen($lastName) > 20)) {
+            $errorList[] = "Last name must be between 1 and 20 characters";
+            $lastName = "";
+        }
+    }
+    else {
+        $lastName = $_SESSION['user']['lastName'];
     }
 
     //verify description
-    if ((strlen($description) < 10) || (strlen($description) > 500)) {
-        $errorList[] = "Description must be between 10 and 500 characters";
-        $description = "";
+    if(isset($description)) {
+        if ((strlen($description) < 10) || (strlen($description) > 500)) {
+            $errorList[] = "Description must be between 10 and 500 characters";
+            $description = "";
+        }
+    }
+    else {
+        $description = $_SESSION['user']['description'];
     }
 
     // verify photo
@@ -300,7 +332,7 @@ $app->post('/accountcaregiver', function ($request, $response, $args) {
         }
     }
     else {
-        $errorList[] = "Photo must be uploaded";
+        $uploadedPhotoPath =$_SESSION['user']['imagePath'];
     }
 
     if ($errorList) {
@@ -309,16 +341,27 @@ $app->post('/accountcaregiver', function ($request, $response, $args) {
          'firstName' => $firstName, 'lastName' => $lastName, 'description' => $description] ]);
     }
     else {
-        $directory = $this->get('upload_directory');
-        $uploadedPhotoPath = moveUploadedFile($directory, $uploadedPhoto);
-        DB::query("UPDATE users SET address=%s, postalCode=%s, phoneNo=%s, firstName=%s,
-        lastName=%s, description=%s, imagePath=%s WHERE id=%d", $address, $postalCode, $phone, $firstName,
-        $lastName, $description, $uploadedPhotoPath, $_SESSION['user']['id']);
+        if($uploadedPhoto->getError() != UPLOAD_ERR_NO_FILE)
+        {
+            $directory = $this->get('upload_directory');
+            $uploadedPhotoPath = moveUploadedFile($directory, $uploadedPhoto);
+            DB::query("UPDATE users SET address=%s, postalCode=%s, phoneNo=%s, firstName=%s,
+            lastName=%s, description=%s, imagePath=%s WHERE id=%d", $address, $postalCode, $phone, $firstName,
+            $lastName, $description, $uploadedPhotoPath, $_SESSION['user']['id']);
+        }
+        else {
+            DB::query("UPDATE users SET address=%s, postalCode=%s, phoneNo=%s, firstName=%s,
+            lastName=%s, description=%s WHERE id=%d", $address, $postalCode, $phone, $firstName,
+            $lastName, $description, $_SESSION['user']['id']);
+        }
+
 
         $user = DB::queryFirstRow("SELECT * FROM users WHERE id = %d LIMIT 1", $_SESSION['user']['id']);
         $_SESSION['user'] = $user;
+        $user = $_SESSION['user'];
+        $services = DB::query("SELECT * FROM services WHERE caregiverID = %d ORDER BY id DESC", $user['id']);
         return $this->view->render($response, 'accountcaregiver.html.twig', ['success' => "Account was successfully updated",
-        'userSession' => $user]);
+        'userSession' => $user], ['services' => $services]);
     }
 });
 

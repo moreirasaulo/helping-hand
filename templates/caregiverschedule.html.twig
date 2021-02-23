@@ -5,6 +5,36 @@
 {% block head %}
 {{ parent() }}
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+
+      $("#availForm").hide();
+
+      $("button[name=addavail]").on("click",function(){
+
+              $("#availForm").show();
+              $(this).hide();
+      })
+
+      $("button[name=cancel]").on("click",function(){
+
+        $("input[name=date]").val("");
+        $("input[name=time]").val("");
+        $("#availForm").hide();
+
+     })
+
+      $("input[name=add]").on("click",function(){
+
+        $("input[name=date]").val("");
+        $("input[name=time]").val("");
+        $("#availForm").hide();
+
+     })
+    })
+</script>
+
 
 
 
@@ -91,10 +121,20 @@
         {% else %}
         <p> You do not have any availabilities yet, add them now </p>
           {% endif %}
-        <button type="button"  name="addavail" class="btn btn-primary">Add new availability</button>
+        
     </div>
 
+    <button type="button" name="addavail" class="btn btn-primary">Add new availability</button>
 
+    <div id="availForm">
+      <form method="POST">
+         <label for="datetime" class="form-label">Date of availability</label>
+         <input type="date" class="form-control" name="date" id="date">
+         <input type="time" step="3600" class="form-control" name="time" id="time">
+         <input type="submit" name="add" id="form" value="Save" class="btn btn-primary"/> 
+         <button type="button" name="cancel" class="btn btn-primary">Cancel</button>
+      </form>
+    </div>
       
     </main>
   </div>

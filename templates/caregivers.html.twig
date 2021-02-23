@@ -15,15 +15,15 @@
 {% endblock %}
 
 {% block content %}
-
+     <br><br><br><br><br>
     <div class="container">
-    <br><br><br>
+   
         <div class="row">
         
          {% for c in list %}
          <div class="col-sm">
       
-        <img src="imageview/" + {{c.id}}> 
+        <img src="/uploads/{{c.imagePath}}"> 
         <p class="card-text">{{c.firstName}} {{c.lastName}}</p>
         <p><a class="btn btn-secondary custom-button" href="#" role="button">View</a></p>
         </div>

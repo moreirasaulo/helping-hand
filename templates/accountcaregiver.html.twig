@@ -11,6 +11,7 @@
      $("form input[type=text],form input[type=checkbox], form textarea").prop("disabled",true);
      $("input[name=update]").hide();
      $("input[name=photo]").hide();
+     $("button[name=cancel]").hide();
 
 
      $("button[name=enableupdate]").on("click",function(){
@@ -18,12 +19,31 @@
              $("input[type=text],input[type=checkbox], textarea").removeAttr("disabled");
              $(this).hide();
              $("input[name=update]").show();
-              $("input[name=photo]").show();
+             $("input[name=photo]").show();
+             $("button[name=cancel]").show();
      })
 
-     $("input[name=save]").on("click",function(){
+     $("input[name=update]").on("click",function(){
 
          $("input[type=text],input[type=checkbox]").prop("disabled",true);
+     })
+
+     $("button[name=cancel]").on("click",function(){
+
+        $("input[name=firstName]").val("{{userSession.firstName}}");
+        $("input[name=lastName]").val("{{userSession.lastName}}");
+        $("textarea[name=description]").val("{{userSession.description}}");
+        $("input[name=address]").val("{{userSession.address}}");
+        $("input[name=postal]").val("{{userSession.postalCode}}");
+        $("input[name=phone]").val("{{userSession.PhoneNo}}");
+
+
+        $("input[type=text],input[type=checkbox]").prop("disabled",true);
+        $("input[name=update]").hide();
+        $("input[name=photo]").hide();
+        $(this).hide();
+        $("button[name=enableupdate]").show();
+
      })
 
 
@@ -100,7 +120,7 @@
         <form method="POST" enctype="multipart/form-data">
             <div class="row">
                  <div class="col-md-5">
-                            <img class="img-fluid img-thumbnail rounded" src="images/caregiver1.jpg" alt="caregiver">
+                            <img src="/uploads/{{userSession.imagePath}}"> 
                              <input type="file" class="form-control" name="photo" id="image">
                     </div>
                     <div class="col-md-5">
@@ -121,7 +141,7 @@
                     <span>My services</span>
                 {% for service in services %}
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="{{service.description}}" checked disabled>
+                        <input class="form-check-input" name="serv[]" type="checkbox" id="{{service.description}}" checked disabled>
                         <label class="form-check-label" for="{{service.description}}">{{service.description}}</label>
                     </div>
                 {% endfor %}
@@ -143,6 +163,7 @@
                     <div class="col-md-5">
                         <button type="button" name="enableupdate" class="btn btn-primary">Update my information</button><br><br>
                         <input type="submit" name="update" id="update" value="Confirm changes" class="btn btn-primary"/>
+                        <button type="button" name="cancel" class="btn btn-primary">Cancel</button>
           
                     </div>
                    
