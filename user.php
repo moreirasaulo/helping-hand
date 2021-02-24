@@ -93,7 +93,7 @@ $app->post('/register', function ($request, $response, $args) {
     $firstName = $request->getParam('firstName');
     $lastName = $request->getParam('lastName');
     $description = $request->getParam('description');
-    $photo = $request->getUploadedFiles()['photo'];
+   // $photo = $request->getUploadedFiles()['photo'];
     $email = $request->getParam('email');
     $password = $request->getParam('pass1');
     $passwordRep = $request->getParam('pass2');
