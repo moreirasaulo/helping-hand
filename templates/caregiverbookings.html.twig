@@ -12,12 +12,7 @@
 	
 {% endblock %}
 
-{% block user %}
-  {% if userSession %}
-  <br><br><br>
-		<p>Logged in as {{userSession.firstName}} {{userSession.lastName}} </p>                                                                 
-		{% endif %}
-{% endblock %}
+
 
 {% block content %}
 <br><br><br><br><br>
@@ -32,21 +27,21 @@
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" name="personaldata" aria-current="page"  href="accountcaregiver">
+            <a class="nav-link active" name="personaldata" aria-current="page"  href="/accountcaregiver">
               <span data-feather="home"></span>
               Personal data
 
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link"  href="caregiverbookings">
+            <a class="nav-link"  href="/caregiverbookings">
               <span data-feather="file"></span>
               Bookings
             </a>
           </li>
           {% if userSession.role == "caregiver" %}
             <li class="nav-item">
-            <a class="nav-link"  href="caregiverschedule">
+            <a class="nav-link"  href="/caregiverschedule">
               <span data-feather="shopping-cart"></span>
               Manage schedule
             </a>
@@ -71,18 +66,19 @@
     <div id="changingcontent" class="container user-select-none">
         {% if bookings %}
         <p id="confirmed"></p>
-            <table class="table">
+            <div class="table-responsive">
+            <table class="table align-middle">
             <thead class="table-primary">
-                <th>Client name</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Fulfillment</th>
-                <th>Confirmation</th>
+                <th scope="col">Client name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Fulfillment</th>
+                <th scope="col">Confirmation</th>
                 </thead>
                 <tbody>
     
             {% for booking in bookings %}
-                <tr>
+                <tr scope="row">
                     <td>{{booking.firstName}} {{booking.lastName}} 
                       <!-- Button trigger modal -->
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#clientprofile">
@@ -99,6 +95,7 @@
                         <div class="modal-body">
                         <p>About client</p>
                         <p> {{booking.description}} </p>
+                        <img src="/uploads/{{booking.imagePath}}" class="img-thumbnail"> 
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -107,33 +104,36 @@
                     </div>
                   </div>
                     </td>
-                    <td>{{booking.dateTime}}</td>
-                    <td></td>
+                    <td>{{booking.dateTime|date("m/d/Y")}}</td>
+                    <td>{{booking.dateTime|date("g:00")}}</td>
                     <td>{% if booking.isFullfiled == 0 %} &mdash; {% else %} &check; {% endif %} </td>
                     <td>
-                        {% if booking.isConfirmed == false %}
-                        
+                        {% if booking.isAccepted == 0 and booking.isDeclined == 0 %}
+                          <form method="POST">
+                            <input type="submit" name="confirm" id="confirm" value="Confirm" class="btn btn-success"/>
+                            <textarea class="form-control visually-hidden" name="clientID" >{{booking.clientID}}</textarea>
+                            <textarea class="form-control visually-hidden"  name="availabilityID" >{{booking.availabilityID}}</textarea>
+                            <input type="submit" name="decline" id="decline" value="Decline" class="btn btn-danger"/>
+                        </form>
                          {% else %} 
-                            {% if booking.isAccepted == 0 %} Declined {% else %} Accepted  {% endif %}
+                            {% if booking.isAccepted != 0 or booking.isDeclined == 0 %} Accepted {% else %} Declined  {% endif %}
                          
                           {% endif %}
+                          
                     </td>
+              
                 </tr>
             {% endfor %}
             </tbody>
             </table>
+            </div>
     
         {% else %}
         <p> You do not have any reservations at this moment </p>
           {% endif %}
     </div>
 
-<form method="POST">
-                        <input type="text" name="clientID" disabled class="visually-hidden" value="{{booking.clientID}}"/>
-                        <input type="text" name="availID" disabled class="visually-hidden" value="{{booking.availabilityID}}"/>
-                        <input type="submit" name="confirm" id="confirm" value="Confirm" class="btn btn-success"/>
-                       <!-- <input type="submit" name="decline" id="decline" value="Decline" class="btn btn-danger"/> -->
-                        </form>
+                      
       
     </main>
   </div>

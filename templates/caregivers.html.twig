@@ -4,28 +4,25 @@
 
 {% block head %}
 {{ parent() }}
+
 	
 {% endblock %}
 
-{% block user %}
-  {% if userSession %}
-  <br><br><br>
-		<p>Logged in as {{userSession.firstName}} {{userSession.lastName}} </p>                                                                 
-		{% endif %}
-{% endblock %}
 
 {% block content %}
      <br><br><br><br><br>
     <div class="container">
-   
+    <h1 class="top-page-title text-center">Caregivers</h1>
         <div class="row">
         
          {% for c in list %}
          <div class="col-sm">
       
-        <img src="/uploads/{{c.imagePath}}"> 
+        <img src="/uploads/{{c.imagePath}}" class=" img-fluid img-thumbnail"> 
         <p class="card-text">{{c.firstName}} {{c.lastName}}</p>
-        <p><a class="btn btn-secondary custom-button" href="#" role="button">View</a></p>
+        
+        <textarea class="form-control visually-hidden" id="caregiverId" >{{c.id}}</textarea>
+        <p><a class="btn btn-secondary custom-button" name="viewCare" href="/viewcaregiver/{{c.id}}" id="viewCaregiver" role="button">View</a></p>
         </div>
     {% endfor %}
     </div>

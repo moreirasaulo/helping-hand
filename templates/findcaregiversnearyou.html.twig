@@ -1,0 +1,92 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Caregivers near you{% endblock %}
+
+{% block head %}
+{{ parent() }}
+	<script>
+
+        $(document).ready(function(){
+		function initMap() {
+			var latitude = document.getElementById("lat").value;
+			var longitude = document.getElementById("log").value;
+			lat = parseFloat(latitude);
+			long = parseFloat(longitude);			
+			if(isNaN(lat) == true || isNaN(long) == true) {
+				var location = {lat: 45.508888, lng: -73.561668};
+			} else {
+				var location = {lat: lat, lng: long};
+			}			
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 12,
+				center: location		
+			});
+			setMarkers(map);
+		}
+		function setMarkers(map) {
+			var image = {
+				url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+				size: new google.maps.Size(20, 32),
+				origin: new google.maps.Point(0, 0),
+				anchor: new google.maps.Point(0, 32)
+			};
+			var shape = {
+				coords: [1, 1, 1, 20, 18, 20, 18, 1],
+				type: 'poly'
+			};
+			
+			for (var i = 0; i < codes.length; i++) {
+				var code = codes[i];
+				var marker = new google.maps.Marker({
+					position: {lat: beach[2], lng: beach[3]},
+					map: map,
+					icon: image,
+					shape: shape,
+					title: beach[0] + "\n" + beach[1] + "  " + beach[5] + "  " + beach[6],
+					zIndex: beach[3]
+				});
+			}
+		}
+    });
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBON6db-E8cIzVii1TuqKult0KLq9zvrDE&callback=initMap">
+    </script>
+
+	
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+<br><br><br><br><br>
+			<form method="POST">
+			<input type="hidden" id="lat" name="" value="{{latitude}}">
+			<input type="hidden" id="log" name="" value="{{longitude}}">
+			<h4> Search for caregivers near you </h4>
+            <input type="text" class="form-control" name="postalcode" id="postalcode" placeholder="Enter your postal code here"></input>
+            <br>
+			<input type="submit" name="search" value="Search" class="btn btn-primary">
+			</form>
+		</div>
+        <br>
+		<div class="row">
+			<div class="col">
+				<div id="google_map">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d178730.94507039897!2d-73.65287032460937!3d45.577053949134225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sca!4v1614154094751!5m2!1sen!2sca"
+                     width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>										
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div id="google_map">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
