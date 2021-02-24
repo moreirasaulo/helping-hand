@@ -12,63 +12,75 @@ $app->get('/internalerror', function ($request, $response, $args) {
 //confirm booking (by caregiver)
 $app->post('/caregiverbookings', function ($request, $response, $args) use ($log) {
     $confirm = $request->getParam('confirm');
-    $decline = $request->getParam('decline');
-    $availID = $request->getParam('availID');
+   // $decline = $request->getParam('decline');
+    $availID = $request->getParam('availabilityID');
     $clientID = $request->getParam('clientID');
 
     if(isset($confirm)) {
-        DB::query("UPDATE reservations SET isDeclined=%d, isAccepted=%d, WHERE clientID=%d AND availabilityID=%d",
+        DB::query("UPDATE reservations SET isDeclined=%i, isAccepted=%i WHERE clientID=%i AND availabilityID=%i",
      0, 1, $clientID, $availID);
     }
     else{
-        DB::query("UPDATE reservations SET isDeclined=%d, isAccepted=%d, WHERE clientID=%d AND availabilityID=%d",
+        DB::query("UPDATE reservations SET isDeclined=%i, isAccepted=%i WHERE clientID=%i AND availabilityID=%i",
      1, 0, $clientID, $availID);
     }
     $user = $_SESSION['user'];
-    
-    return $this->view->render($response, '/teste.php');
-});
-
-
-/*
-//confirm booking
-$app->get('/bookingconfirm/{clientID}/{availabilityID}/{action:(confirm|refuse)}', function ($request, $response, $args) {
-    $clientID = $args['clientID'];
-    $availabilityID = $args['availabilityID'];
-    DB::query("UPDATE reservations SET isDeclined=%d, isAccepted=%d, WHERE clientID=%d AND availabilityID=%d",
-     0, 1, $clientID, $availabilityID);
-
-     $user = $_SESSION['user'];
-
-    // use flash message to confirm deletion / confirmation
-
-    // redirect back to /caregiverbookings
-
     $bookings = DB::query("SELECT reservations.clientID, reservations.availabilityID, users.id, users.firstName, users.lastName,
-    users.description,
-    availabilities.dateTime, reservations.isFullfiled, reservations.isDeclined FROM reservations
+    users.description, users.imagePath, availabilities.dateTime, reservations.isFullfiled, reservations.isAccepted, reservations.isDeclined FROM reservations
      INNER JOIN availabilities ON reservations.availabilityID = availabilities.id INNER JOIN users ON reservations.clientID = users.id
      WHERE availabilities.caregiverID = %d ORDER BY id DESC", $user['id']);
-     return $this->view->render($response, 'caregiverbookings.html.twig',
-      ['bookingConfirmed' => "Booking successfully confirmed"],['bookings' => $bookings]);
-});// translate->condition(array('action' => 'confirm|refuse')); 
-
-*/
-
-
-
-//display blob
-$app->get('/imageview/{id}', function ($request, $response, $args) {
-    $id= $args['id'];
+    return $this->view->render($response, 'caregiverbookings.html.twig', ['bookings' => $bookings]);
     
-    $record = DB::queryFirstRow("SELECT photo,imageMimeType  FROM users WHERE id=%d", $id);
-    if ($record) {
-        $response->headers->set('Content-Type', $record['imageMimeType']);
-        echo $record['photo'];
-    } else {
-        return $response->write("");
-    }
 });
+
+
+//confirm service fulfillment by client
+$app->post('/clientbookings', function ($request, $response, $args) use ($log) {
+    $confirm = $request->getParam('confirm');
+    $user = $_SESSION['user'];
+    $clientID = $user['id'];
+    if(isset($confirm)) {
+        $user = $_SESSION['user'];
+        $clientID = $user['id'];
+        $availID = $request->getParam('availabilityID');
+
+    
+        DB::query("UPDATE reservations SET isFullfiled=%i WHERE clientID=%i AND availabilityID=%i",
+        1, $clientID, $availID);
+    }
+    else {
+        $user = $_SESSION['user'];
+        $clientID = $user['id'];
+        $availabilityID = $request->getParam('availabilityID');
+        $body = $request->getParam('body');
+        $isPositive = $request->getParam('isPositive');
+
+        DB::insert('reviews', [
+            'clientID' => $user['id'],
+            'availabilityID' => $availabilityID,
+            'body' => $body,
+            'isPositive' => $isPositive
+          ]);
+    }
+    $reviews = DB::query("SELECT * FROM reviews WHERE clientID=%i", $clientID);
+    if($reviews) {
+        $bookings = DB::query("SELECT reservations.*, availabilities.*,users.*, r1.body FROM reservations INNER JOIN availabilities ON reservations.availabilityID = availabilities.id 
+        INNER JOIN users ON availabilities.caregiverID = users.id INNER JOIN 
+        reviews as r1 ON reservations.availabilityID = r1.availabilityID  INNER JOIN 
+        reviews as r2 ON reservations.clientID = r2.clientID WHERE reservations.clientID=%i", $clientID);
+    }
+    else {
+        $bookings = DB::query("SELECT reservations.*, availabilities.*,users.* FROM reservations INNER JOIN availabilities ON reservations.availabilityID = availabilities.id 
+        INNER JOIN users ON availabilities.caregiverID = users.id  WHERE reservations.clientID=%i", $clientID);
+    }
+   
+    return $this->view->render($response, 'clientbookings.html.twig', ['bookings' => $bookings]);
+    
+});
+
+
+
+
 
 
 
@@ -93,24 +105,68 @@ $app->get('/caregiverschedule', function ($request, $response, $args) {
 //caregiver schedule (add new availability)
 $app->post('/caregiverschedule', function ($request, $response, $args) {
     $user = $_SESSION['user'];
-   $datetime = $request->getParam('datetime');
-    DB::insert('availabilities', [ 'dateTime' => $datetime, 'caregiverID' => $user['id']]);
+    $date = $request->getParam('date');
+    $time = $request->getParam('time');
+    $strDateTime = $date . " " . $time;
+    $dateTime = new DateTime($strDateTime);
 
-    $availabilities = DB::query("SELECT * FROM availabilities LEFT OUTER JOIN reservations
-     ON availabilities.id = reservations.availabilityID WHERE caregiverID = %d ORDER BY id DESC", $user['id']);
-    return $this->view->render($response, 'caregiverschedule.html.twig', ['availabilities' => $availabilities]);
+    $now = date("Y-m-d H:i:s");
+    $currentDateTime = new DateTime($now);
+    $currentDateTime->modify('-6 hours');
+
+    $errorList = array();
+
+    if($dateTime < $currentDateTime) {
+        $errorList[] = "Your availability must be later than current date and time";
+    }
+
+    if ($errorList) {
+        $user = $_SESSION['user'];
+        $availabilities = DB::query("SELECT * FROM availabilities LEFT OUTER JOIN reservations ON 
+        availabilities.id = reservations.availabilityID WHERE caregiverID = %d ORDER BY id DESC", $user['id']);
+        return $this->view->render($response, 'caregiverschedule.html.twig', ['errorList' => $errorList, 'availabilities' => $availabilities]);
+    }
+    else {
+
+        DB::insert('availabilities', [ 'dateTime' => $dateTime, 'caregiverID' => $user['id']]);
+        $availabilities = DB::query("SELECT * FROM availabilities LEFT OUTER JOIN reservations
+        ON availabilities.id = reservations.availabilityID WHERE caregiverID = %d ORDER BY id DESC", $user['id']);
+        return $this->view->render($response, 'caregiverschedule.html.twig', ['availabilities' => $availabilities, 
+        'success' => "Availability was added successfully"]);
+    }
 });
 
 
-
+//caregiver bookings
 $app->get('/caregiverbookings', function ($request, $response, $args) {
     $user = $_SESSION['user'];
     $bookings = DB::query("SELECT reservations.clientID, reservations.availabilityID, users.id, users.firstName, users.lastName,
-    users.description, availabilities.dateTime, reservations.isFullfiled, reservations.isDeclined FROM reservations
+    users.description, users.imagePath, availabilities.dateTime,reservations.isAccepted, reservations.isFullfiled, reservations.isDeclined FROM reservations
      INNER JOIN availabilities ON reservations.availabilityID = availabilities.id INNER JOIN users ON reservations.clientID = users.id
      WHERE availabilities.caregiverID = %d ORDER BY id DESC", $user['id']);
   //   $clients = DB::query("SELECT * FROM users WHERE id = %d ", $bookings['users.id']);
     return $this->view->render($response, 'caregiverbookings.html.twig', ['bookings' => $bookings]);
+});
+
+
+
+//client bookings
+$app->get('/clientbookings', function ($request, $response, $args) {
+    $user = $_SESSION['user'];
+    $reviews = DB::query("SELECT * FROM reviews WHERE clientID=%i", $user['id']);
+    if($reviews) {
+        $bookings = DB::query("SELECT reservations.*, availabilities.*,users.*, r1.body FROM reservations INNER JOIN availabilities ON reservations.availabilityID = availabilities.id 
+        INNER JOIN users ON availabilities.caregiverID = users.id INNER JOIN 
+        reviews as r1 ON reservations.availabilityID = r1.availabilityID  INNER JOIN 
+        reviews as r2 ON reservations.clientID = r2.clientID WHERE reservations.clientID=%i", $user['id']);
+    }
+    else {
+        $bookings = DB::query("SELECT reservations.*, availabilities.*, users.* FROM reservations INNER JOIN availabilities ON reservations.availabilityID = availabilities.id 
+        INNER JOIN users ON availabilities.caregiverID = users.id  WHERE reservations.clientID=%i", $user['id']);
+    }
+    
+  //   $clients = DB::query("SELECT * FROM users WHERE id = %d ", $bookings['users.id']);
+    return $this->view->render($response, 'clientbookings.html.twig', ['bookings' => $bookings]);
 });
 
 
@@ -127,6 +183,85 @@ $app->get('/caregivers', function ($request, $response, $args) {
     return $this->view->render($response, 'caregivers.html.twig', ['list' => $caregiversList]);
 });
 
+//caregivers near you
+$app->get('/caregiversnearyou', function ($request, $response, $args) {
+    return $this->view->render($response, 'findcaregiversnearyou.html.twig');
+});
+
+$app->post('/caregiversnearyou', function ($request, $response, $args) {
+    $postalcode = $request->getParam('postalcode');
+    $latLong = getLatLong($postalcode);
+    $latitude = $latLong['latitude'] ? $latLong['latitude'] : 'Not found';
+    $longitude = $latLong['longitude'] ? $latLong['longitude'] : 'Not found';
+    if ($postalcode) {
+        $codes = DB::query("SELECT postalCode FROM users");
+        $index = 1;
+        foreach ($codes as &$code) {
+            $arrLatLong = getLatLong($code);
+            $latitude = $arrLatLong['latitude'];
+            $longitude = $arrLatLong['longitude'];          
+        }
+        return $this->view->render($response, 'findcaregiversnearyou.html.twig', ['codes' => $codes, 'latitude' => $latitude , 'longitude' => $longitude]);
+    }
+    return $this->view->render($response, 'findcaregiversnearyou.html.twig', ['latitude' => $latitude , 'logitude' => $longitude]);
+});
+
+
+function getLatLong($code)
+{
+    $mapsApiKey = 'AIzaSyBON6db-E8cIzVii1TuqKult0KLq9zvrDE';
+    $query = "https://maps.googleapis.com/maps/api/geocode/json?&address=".urlencode($code)."&key=".$mapsApiKey;
+    $geocodeFromCode = file_get_contents($query);
+    $output = json_decode($geocodeFromCode);
+    $data['latitude'] = $output->results[0]->geometry->location->lat;
+    $data['longitude'] = $output->results[0]->geometry->location->lng;
+    if(!empty($data)){
+        return $data;
+    }else{
+        return false;
+    }
+}
+
+
+//view caregiver
+$app->get('/viewcaregiver/{id}', function ($request, $response, $args) {
+    $id= $args['id'];
+    $caregiver = DB::queryFirstRow("SELECT * FROM users WHERE id=%i", $id);
+    $services = DB::query("SELECT * FROM services WHERE caregiverID = %d ORDER BY id DESC", $id);
+    $availabilities = DB::query("SELECT * FROM availabilities LEFT OUTER JOIN reservations
+        ON availabilities.id = reservations.availabilityID WHERE caregiverID = %d AND reservationNo IS NULL ORDER BY id DESC", $id);
+    $reviews = DB::query("SELECT * FROM reviews INNER JOIN availabilities ON reviews.availabilityID = availabilities.id
+     WHERE caregiverID = %d", $id);    
+    return $this->view->render($response, 'viewcaregiver.html.twig', ['caregiver' => $caregiver, 'services' => $services,
+    'a' => $availabilities, 'reviews' => $reviews]);
+});
+
+
+//book caregiver (by client)
+$app->post('/viewcaregiver/{id}', function ($request, $response, $args) {
+    $user = $_SESSION['user'];
+    $availId = $request->getParam('availId');
+    $lastReservNo = DB::query(" SELECT * FROM reservations ORDER BY reservationNo DESC LIMIT 1");
+    $reservNoInt = intval($lastReservNo);
+    $reservNo = $lastReservNo++;
+
+
+        DB::insert('reservations', [ 'clientID' => $user['id'], 'availabilityID' => $availId, 'isAccepted' => 0,
+        'isFullfiled' => 0, 'reservationNo' => $reservNo, 'isDeclined' => 0]);
+
+        $id= $args['id'];
+    $caregiver = DB::queryFirstRow("SELECT * FROM users WHERE id=%i", $id);
+    $services = DB::query("SELECT * FROM services WHERE caregiverID = %d ORDER BY id DESC", $id);
+    $availabilities = DB::query("SELECT * FROM availabilities LEFT OUTER JOIN reservations
+        ON availabilities.id = reservations.availabilityID WHERE caregiverID = %d AND reservationNo IS NULL ORDER BY id DESC", $id);
+
+        return $this->view->render($response, 'viewcaregiver.html.twig', [ 
+        'success' => "You successfully booked time slot",'caregiver' => $caregiver, 'services' => $services,
+        'a' => $availabilities]);
+
+});
+
+
 
 
 //test
@@ -142,14 +277,12 @@ $app->get('/isitok/[{email}]', function ($request, $response, $args) {
 }); 
 
 
-
-
-
-
-// Define app routes
 // index (home page)
 $app->get('/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.html.twig');
+
+    $caregivers = DB::query("SELECT * FROM users WHERE role = %s ORDER BY id DESC LIMIT 3", "caregiver");
+    return $this->view->render($response, 'index.html.twig', [ 
+        'caregivers' => $caregivers]);
 });
 
 
