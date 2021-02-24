@@ -2,22 +2,8 @@
 
 {% block title %}Home Page{% endblock %}
 
-{#{% block head %}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
-	
-{% endblock %} #}
 
-{% block user %}
-  {% if userSession %}
-  <br><br><br>
-		<p>Logged in as {{userSession.firstName}} {{userSession.lastName}} </p>                                                                 
-			{% else %}
-			Please log in or register first
-			<a href="/login"><input type="submit" name="login" value="Login"></input></a>
-			{% endif %}
-{% endblock %}
+
 
 {% block banner %}
 {% include ('banner.html.twig') %}
@@ -50,27 +36,23 @@
 	<!-- Caregivers -->
     <h1 class="top-page-title text-center">Featured caregivers</h1>
 
-
+  {% if caregivers %}
   <div class="container">
   <div class="row">
+  {% for c in caregivers %}
     <div class="col-sm">
-      <img class="img-fluid img-thumbnail rounded" src="images/caregiver1.jpg" alt="caregiver">
-      <p class="card-text">Lucy Thompson</p>
-      <p><a class="btn btn-secondary custom-button" href="#" role="button">View</a></p>
+      <img src="/uploads/{{c.imagePath}}" class=" img-fluid img-thumbnail"> 
+      <p class="card-text">{{c.firstName}} {{c.lastName}}</p>
+      <p><a class="btn btn-secondary custom-button" href="/viewcaregiver/{{c.id}}" role="button">View</a></p>
     </div>
-    <div class="col-sm">
-      <img class="img-fluid img-thumbnail rounded" src="images/caregiver2.jpg" alt="caregiver">
-      <p class="card-text">John Arry</p>
-      <p><a class="btn btn-secondary custom-button" href="#" role="button">View</a></p>
-    </div>
-    <div class="col-sm">
-      <img class="img-fluid img-thumbnail rounded" src="images/caregiver3.jpg" alt="caregiver">
-      <p class="card-text">Alberto Derrec</p>
-      <p><a class="btn btn-secondary custom-button" href="#" role="button">View</a></p>
-    </div>
-  </div>
+ 
+  {% endfor %}
+   </div>
 </div>
 </div>
-          
+{% else %}
+<p> There are no caregivers to show at the moment </p>
+{% endif %}
+ <hr class="featurette-divider">         
 {% endblock %}
 

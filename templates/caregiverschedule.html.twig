@@ -21,39 +21,41 @@
 
       $("button[name=cancel]").on("click",function(){
 
-        $("input[name=datetime]").val("");
+        $("input[name=date]").val("");
+        $("input[name=time]").val("");
         $("#availForm").hide();
 
      })
 
       $("input[name=add]").on("click",function(){
 
-        $("input[name=datetime]").val("");
+        $("input[name=date]").val("");
+        $("input[name=time]").val("");
         $("#availForm").hide();
 
      })
     })
 </script>
 
-
-
-
  
 	
 {% endblock %}
 
-{% block user %}
-  {% if userSession %}
-  <br><br><br>
-		<p>Logged in as {{userSession.firstName}} {{userSession.lastName}} </p>                                                                 
-		{% endif %}
-{% endblock %}
 
 {% block content %}
 <br><br><br><br><br>
 {% if success %}
             <p>{{success}}</p>
     {% endif %}
+    <div>
+{% if errorList %}
+            <ul class="errorMsg">
+            {% for error in errorList %}
+                <li>{{error}}</li>
+            {% endfor %}
+            </ul>
+    {% endif %}
+</div>
 
 
 <div class="container-fluid user-select-none">
@@ -113,8 +115,8 @@
             {% for a in availabilities %}
                 <tr>
                     <td>{{a.dateTime|date("m/d/Y")}}</td>
-                    <td>{{a.dateTime|date("g:ia")}}</td>
-                    <td>{% if not "{{a.availabilityID}}" %} &check; {% else %} &mdash; {% end if %}</td>
+                    <td>{{a.dateTime|date("g:00")}}</td>
+                    <td>{% if not a.availabilityID %} &mdash; {% else %} &check;  {% endif %}</td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -131,9 +133,11 @@
     <button type="button" name="addavail" class="btn btn-primary">Add new availability</button>
 
     <div id="availForm">
-      <form method="POST">
-         <label for="datetime" class="form-label">Date and time of availability</label>
-         <input type="datetime-local" class="form-control" name="datetime" id="datetime">
+      <form method="POST" enctype="multipart/form-data">
+         <label for="date" class="form-label">Date of availability</label>
+         <input type="date" class="form-control" name="date" id="date"/>
+         <label for="time" class="form-label">Time of availability</label>
+         <input type="time" step="3600" name="time" class="form-control" id="time"/>
          <input type="submit" name="add" id="form" value="Save" class="btn btn-primary"/> 
          <button type="button" name="cancel" class="btn btn-primary">Cancel</button>
       </form>

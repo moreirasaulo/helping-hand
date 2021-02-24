@@ -1,0 +1,80 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Caregiver{% endblock %}
+
+{% block head %}
+{{ parent() }}
+	
+{% endblock %}
+
+
+{% block content %}
+     <br><br><br><br><br>
+    <div class="container">
+    <div id="success">
+         {% if success %}
+		<p>{{success}} </p>
+        <a href="/clientbookings">Click here to view booking in your profile</a>                                                               
+		{% endif %}
+    </div>
+    <h4 >About caregiver</h4>
+        {% if caregiver %}
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="/uploads/{{caregiver.imagePath}}" alt="caregiver">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{caregiver.firstName}} {{caregiver.lastName}}</h5>
+                        <p class="card-text">{{caregiver.description}}</p>
+                        <div class="row">
+                            {% if services %}
+                                    <div class="col-md-5">
+                                        <span>Offered services</span>
+                                        {% for service in services %}
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" name="serv[]" type="checkbox" id="{{service.description}}" checked disabled>
+                                            <label class="form-check-label" for="{{service.description}}">{{service.description}}</label>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            
+                            {% endif %}
+                            {% if a and userSession %}
+                                <div class="col-md-5">
+                                <p>Availabilities</p>
+                                <table>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    {% for avail in a %}
+                                        <tr>
+                                            <td>{{avail.dateTime|date("m/d/Y")}}</td>
+                                            <td>{{avail.dateTime|date("g:00")}}</td>
+                                            <td><form method="POST"><input type="submit" name="bookSlot" id="bookSlot" value="Book slot" class="btn btn-success"/>
+                                        <textarea class="form-control visually-hidden" name="availId" >{{avail.id}}</textarea></form></td>
+
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div>Some problem occured, try again later </div>
+         {% endif %}
+         <div class="container">
+            {% if reviews %}
+                <h4>Reviews</h4>
+                {% for r in reviews %}
+                <div>{{r.body}}</div>
+            {% endfor %}
+            {% endif %}
+         </div>
+    </div>
+   
+{% endblock %}

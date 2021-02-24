@@ -53,12 +53,6 @@
 	
 {% endblock %}
 
-{% block user %}
-  {% if userSession %}
-  <br><br><br>
-		<p>Logged in as {{userSession.firstName}} {{userSession.lastName}} </p>                                                                 
-		{% endif %}
-{% endblock %}
 
 {% block content %}
 <br><br><br><br><br>
@@ -80,17 +74,24 @@
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" name="personaldata" aria-current="page"  href="accountcaregiver">
+            <a class="nav-link active" name="personaldata" aria-current="page"  href="/accountcaregiver">
               <span data-feather="home"></span>
               Personal data
 
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link"  href="caregiverbookings">
+           {% if userSession.role == "caregiver" %}
+            <a class="nav-link"  href="/caregiverbookings">
               <span data-feather="file"></span>
               Bookings
             </a>
+            {% elseif userSession.role == "client" %}
+            <a class="nav-link"  href="/clientbookings">
+              <span data-feather="file"></span>
+              Bookings
+            </a>
+            {% endif %}
           </li>
           {% if userSession.role == "caregiver" %}
             <li class="nav-item">
