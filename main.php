@@ -87,19 +87,21 @@ $app->get('/caregiverschedule', function ($request, $response, $args) {
     return $this->view->render($response, 'caregiverschedule.html.twig', ['availabilities' => $availabilities]);
 });
 
+
+
+
 //caregiver schedule (add new availability)
 $app->post('/caregiverschedule', function ($request, $response, $args) {
     $user = $_SESSION['user'];
-    $date = $request->getParam('date');
-    $time = $request->getParam('time');
-    $combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
-
-    DB::insert('availabilities', [ 'dateTime' => $combinedDT, 'caregiverID' => $user['id']]);
+   $datetime = $request->getParam('datetime');
+    DB::insert('availabilities', [ 'dateTime' => $datetime, 'caregiverID' => $user['id']]);
 
     $availabilities = DB::query("SELECT * FROM availabilities LEFT OUTER JOIN reservations
      ON availabilities.id = reservations.availabilityID WHERE caregiverID = %d ORDER BY id DESC", $user['id']);
     return $this->view->render($response, 'caregiverschedule.html.twig', ['availabilities' => $availabilities]);
 });
+
+
 
 $app->get('/caregiverbookings', function ($request, $response, $args) {
     $user = $_SESSION['user'];

@@ -21,16 +21,14 @@
 
       $("button[name=cancel]").on("click",function(){
 
-        $("input[name=date]").val("");
-        $("input[name=time]").val("");
+        $("input[name=datetime]").val("");
         $("#availForm").hide();
 
      })
 
       $("input[name=add]").on("click",function(){
 
-        $("input[name=date]").val("");
-        $("input[name=time]").val("");
+        $("input[name=datetime]").val("");
         $("#availForm").hide();
 
      })
@@ -91,6 +89,8 @@
     </nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2 user-select-none">{% if userSession.role == "client" %}
             Client account
@@ -125,14 +125,15 @@
           {% endif %}
         
     </div>
+         
+   
 
     <button type="button" name="addavail" class="btn btn-primary">Add new availability</button>
 
     <div id="availForm">
       <form method="POST">
-         <label for="datetime" class="form-label">Date of availability</label>
-         <input type="date" class="form-control" name="date" id="date">
-         <input type="time" step="3600" class="form-control" name="time" id="time">
+         <label for="datetime" class="form-label">Date and time of availability</label>
+         <input type="datetime-local" class="form-control" name="datetime" id="datetime">
          <input type="submit" name="add" id="form" value="Save" class="btn btn-primary"/> 
          <button type="button" name="cancel" class="btn btn-primary">Cancel</button>
       </form>
