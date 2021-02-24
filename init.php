@@ -28,14 +28,14 @@ $log->pushProcessor(function ($record) {
 
 
 if (strpos($_SERVER['HTTP_HOST'], "ipd23.com") !== false) {
-    DB::$dbName = 'cp4976_helpinghand';
-    DB::$user = 'cp4976_helpinghand';
-    DB::$password = 'mHMnToqkLNc8c5LI';
+    DB::$dbName = 'cp4996_helpinghand';
+    DB::$user = 'cp4996_helpinghand';
+    DB::$password = '3gRTDYFDKtlX99ok';
 }
 else {
     DB::$dbName = 'helpinghand';
-    DB::$user = 'helpinghand'; //helpinHand
-    DB::$password = 'mHMnToqkLNc8c5LI';   //3gRTDYFDKtlX99ok   //mHMnToqkLNc8c5LI
+    DB::$user = 'helpingHand'; //helpinHand
+    DB::$password = '3gRTDYFDKtlX99ok';   //3gRTDYFDKtlX99ok   //mHMnToqkLNc8c5LI
     DB::$host = 'localhost';
     DB::$port = 3333;
 }
