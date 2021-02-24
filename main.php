@@ -82,7 +82,8 @@ $app->get('/accountcaregiver', function ($request, $response, $args) {
 //caregiver schedule
 $app->get('/caregiverschedule', function ($request, $response, $args) {
     $user = $_SESSION['user'];
-    $availabilities = DB::query("SELECT * FROM availabilities LEFT OUTER JOIN reservations ON availabilities.id = reservations.availabilityID WHERE caregiverID = %d ORDER BY id DESC", $user['id']);
+    $availabilities = DB::query("SELECT * FROM availabilities LEFT OUTER JOIN reservations ON 
+    availabilities.id = reservations.availabilityID WHERE caregiverID = %d ORDER BY id DESC", $user['id']);
     return $this->view->render($response, 'caregiverschedule.html.twig', ['availabilities' => $availabilities]);
 });
 
@@ -95,7 +96,8 @@ $app->post('/caregiverschedule', function ($request, $response, $args) {
 
     DB::insert('availabilities', [ 'dateTime' => $combinedDT, 'caregiverID' => $user['id']]);
 
-    $availabilities = DB::query("SELECT * FROM availabilities LEFT OUTER JOIN reservations ON availabilities.id = reservations.availabilityID WHERE caregiverID = %d ORDER BY id DESC", $user['id']);
+    $availabilities = DB::query("SELECT * FROM availabilities LEFT OUTER JOIN reservations
+     ON availabilities.id = reservations.availabilityID WHERE caregiverID = %d ORDER BY id DESC", $user['id']);
     return $this->view->render($response, 'caregiverschedule.html.twig', ['availabilities' => $availabilities]);
 });
 

@@ -7,6 +7,8 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+
+
     $(document).ready(function(){
 
       $("#availForm").hide();
@@ -112,7 +114,7 @@
                 <tr>
                     <td>{{a.dateTime|date("m/d/Y")}}</td>
                     <td>{{a.dateTime|date("g:ia")}}</td>
-                    <td>isBooked</td>
+                    <td>{% if not "{{a.availabilityID}}" %} &check; {% else %} &mdash; {% end if %}</td>
                 </tr>
             {% endfor %}
             </tbody>
