@@ -25,15 +25,6 @@
 
 {% endblock %}
 
-{% block user %}
-  {% if userSession %}
-  <br><br><br>
-		<p>Logged in as {{userSession.firstName}} {{userSession.lastName}} </p>                                                                 
-			{% else %}
-			Please log in or register first
-			<a href="/login"><input type="submit" name="login" value="Login"></input></a>
-			{% endif %}
-{% endblock %}
 
 
 {% block content %}
@@ -53,6 +44,9 @@
     {% endif %}
 
     <div class="wrap">
+    {% if  success %}
+    <p>{{success}}</p>
+    {% endif %}
     <h4> Log in </h4>
     <div class="row">
             <div class="col-md-4">
@@ -64,10 +58,6 @@
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name = "password">
             <input type="submit" name="login" id="login" value="Log in" class="btn btn-primary"/> <br><br>
-            <button type="button" onclick="window.location='/logingoogle.php'" name="logingmail" class="btn btn-primary">Log in with Google</button><br><br>
-            <button type="button" onclick="window.location='/loginfacebook.php'" name="loginfacebook" class="btn btn-primary">Log in with Facebook</button><br><br>
-
-		    <h5><a href="/forgotpassword">Forgot Password?</a></h5>
             <h5><a>Not a member yet?<a href="register"> Register now!</a></h5>      
             </form>
             </div>

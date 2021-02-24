@@ -1,27 +1,6 @@
 {% extends "master.html.twig" %}
 
 {% block title %}Registration page{% endblock %}
-{#}
-{% block head %}
-    <link rel="stylesheet" href="./css/loginregister.css" />
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
-    <script>
-        $(document).ready(function() {
-            $('input[name=email]').on('paste blur change input', function() {
-                var email = $('input[name=email]').val();
-                $("#emailTaken").load("isemailtaken/" + email);
-            });
-
-           
-            $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
-                console.log("Ajax error occured on " + settings.url);
-                alert("Ajax error occured");
-            });
-        });
-    </script>
-{% endblock %} #}
 
 
 {% block head %}
@@ -29,8 +8,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
      <link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />
      <link href="styles/smart_wizard_dots.css" rel="stylesheet" type="text/css" /> 
-  <!--   <script src="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/js/jquery.smartWizard.min.js" type="text/javascript"></script>
-     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
      <script>
     
 
@@ -107,11 +84,6 @@
 });
     });
 
-//validation
-
-
-
-
 
 </script>
 {% endblock %}  
@@ -129,7 +101,6 @@
 
 {% block content %} 
 
-{#<img src="images/register.jpg" class="d-block w-100 myImg" alt="..."> #}
 <br>
 <br>
 <br>
@@ -325,12 +296,6 @@
                 </div>
             </div>
         
-
-            
-            
-
-
-       
         
     </div>
     </div>

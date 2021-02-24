@@ -196,7 +196,7 @@ $app->post('/register', function ($request, $response, $args) {
         DB::insert('users', [ 'firstName' => $firstName, 'lastName' => $lastName, 'gender' => $gender,
         'dateOfBirth' => $dateOfBirth, 'phoneNo' => $phone, 'address' => $address, 'postalCode' => $postalCode,
         'email' => $email, 'password' => $password, 'role' => $role, 'imagePath' => $uploadedPhotoPath, 'description' => $description]);
-        return $this->view->render($response, 'login.html.twig');
+        return $this->view->render($response, 'login.html.twig', ['success' => "You registered successfully. Now log into your account" ]);
     }
 });
 
@@ -369,7 +369,6 @@ $app->post('/accountcaregiver', function ($request, $response, $args) {
 
 
 //is email uqnique
-
 $app->get('/isemailunique/[{email}]', function ($request, $response, $args) {
     $email = isset($args['email']) ? $args['email'] : "";
     $record = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
@@ -390,6 +389,3 @@ $app->get('/uniqueemail/[{email}]', function ($request, $response, $args) {
     }
 });
 
-
-
-//password reset through email

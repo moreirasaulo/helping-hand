@@ -2,7 +2,7 @@
         <!--Navigation-->
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top user-select-none">
             <a class="navbar-brand" href="">
-                <img src="images/logo.png" alt="hand icon">
+                <img src="/images/logo.png" alt="hand icon">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
             <span class="navbar-toggler-icon"></span>
@@ -10,7 +10,6 @@
 
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                 <!--   ml auto is to align list(menu) to left, mr would be to right-->
                     <li class="nav-item">
                         <a href="/" class="nav-link">Home</a>
                     </li>
@@ -18,10 +17,10 @@
                         <a href="/#aboutUs" class="nav-link">About us</a>
                     </li>
                     <li class="nav-item">
-                        <a href="caregivers" class="nav-link">Our caregivers</a>
+                        <a href="/caregivers" class="nav-link">Our caregivers</a>
                     </li>
                     <li class="nav-item">
-                      <a href="#" class="nav-link">Find caregiver near you</a>
+                      <a href="/caregiversnearyou" class="nav-link">Find caregiver near you</a>
                   </li>
                     
                 </ul>
@@ -30,21 +29,31 @@
                 <ul class="navbar-nav mr-auto">
                     
                     <li class="nav-item">
-                        <a href="register" class="nav-link">Register</a>
+                        <a href="/register" class="nav-link">Register</a>
                     </li>
                     {% if userSession %}
                     <li class="nav-item">
-                        <a href="accountcaregiver" class="nav-link">My account</a>
+                        <a href="/accountcaregiver" class="nav-link">My account</a>
                     </li> 
 		                   <li class="nav-item">
-                        <a href="logout" class="nav-link">Logout</a>
+                        <a href="/logout" class="nav-link">Logout</a>
                     </li>                                           
                     {% else %}
                         <li class="nav-item">
-                        <a href="login" class="nav-link">Log in</a>
+                        <a href="/login" class="nav-link">Log in</a>
                     </li>
                     {% endif %}
                     
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav mr-auto">
+                    
+                    {% if userSession %}
+                    <li class="nav-item">
+                        <p style="color:white;">Logged as {{userSession.firstName}} {{userSession.lastName}}</p>
+                    </li> 
+                    {% endif %}
                     
                 </ul>
             </div>
